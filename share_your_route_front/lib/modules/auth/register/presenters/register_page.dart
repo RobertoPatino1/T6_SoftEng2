@@ -72,8 +72,10 @@ class RegisterState extends State<Register> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Nombres',
                         hintText: 'Elliot Sam',
                       ),
@@ -92,8 +94,10 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Apellidos',
                         hintText: 'Alderson Sepiol',
                       ),
@@ -112,8 +116,10 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Email',
                         hintText: 'samsepiol@example.com',
                       ),
@@ -135,8 +141,10 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Nombre de usuario',
                         hintText: 'mr_robot007',
                       ),
@@ -158,7 +166,9 @@ class RegisterState extends State<Register> {
                       controller: passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Contraseña',
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -215,7 +225,9 @@ class RegisterState extends State<Register> {
                       controller: confirmPasswordController,
                       obscureText: _obscureConfirmPassword,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                         labelText: 'Confirmar contraseña',
                         suffixIcon: IconButton(
                           icon: Icon(

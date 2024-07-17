@@ -40,27 +40,35 @@ class LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       labelText: 'Nombre de usuario o Email',
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     left: 15.0,
                     right: 15.0,
                     top: 15,
                   ),
                   child: TextField(
-                    obscureText: true,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       labelText: 'Contraseña',
                     ),
+                    obscureText: true,
+                    // decoration: const InputDecoration(
+                    //   border: OutlineInputBorder(),
+                    //   labelText: 'Contraseña',
+                    // ),
                   ),
                 ),
                 TextButton(
