@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
+import 'package:share_your_route_front/models/place.dart';
 
 class RouteStep4 extends StatelessWidget {
   final String routeName;
@@ -16,7 +17,7 @@ class RouteStep4 extends StatelessWidget {
   final LatLng? meetingPoint;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
-  final List<Map<String, dynamic>> stops;
+  final List<Place> stops;
 
   const RouteStep4({
     super.key,
@@ -214,9 +215,9 @@ class RouteStep4 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(stops.length, (index) {
               final stop = stops[index];
-              final stopName = stop['name'];
-              final stopStartTime = stop['startTime'] as TimeOfDay;
-              final stopEndTime = stop['endTime'] as TimeOfDay;
+              final stopName = stop.name;
+              final stopStartTime = stop.startTime as TimeOfDay;
+              final stopEndTime = stop.endTime as TimeOfDay;
               return RichText(
                 text: TextSpan(
                   children: [

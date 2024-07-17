@@ -8,9 +8,12 @@ String formatDuration(TimeOfDay startTime, TimeOfDay endTime) {
 
   final int hours = differenceInMinutes ~/ 60;
   final int minutes = differenceInMinutes % 60;
+  String formattedDuration = '';
 
-  final String formattedDuration =
-      '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
-
+  if (minutes > 0) {
+    formattedDuration = '$hours horas con $minutes minutos';
+  } else {
+    formattedDuration = '$hours horas';
+  }
   return formattedDuration;
 }

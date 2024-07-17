@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/models/place.dart';
 
 class ViewStopsMapScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> stops;
+  final List<Place> stops;
 
   const ViewStopsMapScreen({super.key, required this.stops});
 
@@ -32,7 +33,7 @@ class ViewStopsMapScreen extends StatelessWidget {
       body: FlutterMap(
         options: MapOptions(
           center: stops.isNotEmpty
-              ? stops[0]['location'] as LatLng
+              ? stops[0].ubication as LatLng
               : const LatLng(0, 0),
           minZoom: 5,
           maxZoom: 25,
@@ -53,7 +54,7 @@ class ViewStopsMapScreen extends StatelessWidget {
                   (stop) => Marker(
                     width: 80.0,
                     height: 80.0,
-                    point: stop['location'] as LatLng,
+                    point: stop.ubication as LatLng,
                     builder: (ctx) => const Icon(
                       Icons.location_pin,
                       size: 40,

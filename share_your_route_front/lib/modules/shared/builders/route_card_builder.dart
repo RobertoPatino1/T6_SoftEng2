@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/utils/formats/format_duration.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
@@ -82,10 +83,20 @@ class RouteCardBuilder {
                       Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 5,
-                          vertical: 5,
+                          vertical: 1,
                         ),
                         child: Text(
-                          "${touristRoute.startTime.format(context)}H",
+                          "Fecha: ${DateFormat('dd-MM-2024').format(touristRoute.routeDate)}",
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 5,
+                          vertical: 2,
+                        ),
+                        child: Text(
+                          "Hora de Inicio: ${touristRoute.startTime.format(context)}H",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ),
@@ -93,7 +104,7 @@ class RouteCardBuilder {
                         height: 20,
                         margin: const EdgeInsets.symmetric(
                           horizontal: 5,
-                          vertical: 2,
+                          vertical: 5,
                         ),
                         child: SingleChildScrollView(
                           child: Text(
@@ -103,10 +114,10 @@ class RouteCardBuilder {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 5),
                         child: Text(
-                          formatDuration(
-                              touristRoute.startTime, touristRoute.endTime),
+                          "Duración: ${formatDuration(touristRoute.startTime, touristRoute.endTime)}",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ),

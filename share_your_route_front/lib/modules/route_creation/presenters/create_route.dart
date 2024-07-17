@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/route_type.dart';
+import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step3.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step4.dart';
+import 'package:share_your_route_front/models/place.dart';
+import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/home/home_page/presenters/home_page.dart';
+import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});
@@ -15,17 +20,51 @@ class CreateRoute extends StatefulWidget {
 
 class _CreateRouteState extends State<CreateRoute> {
   int _currentStep = 0;
-  String routeName = '';
-  String routeDescription = '';
-  DateTime routeDate = DateTime.now();
-  int numberOfPeople = 2;
-  int numberOfGuides = 1;
-  double rangeAlert = 2;
-  bool showPlaceInfo = false;
-  String alertSound = 'Sonido 1';
-  bool publicRoute = false;
-  LatLng? meetingPoint;
-  List<Map<String, dynamic>> stops = [];
+  String routeNameInput = '';
+  String routeDescriptionInput = '';
+  DateTime routeDateInput = DateTime.now();
+  int numberOfPeopleInput = 2;
+  int numberOfGuidesInput = 1;
+  double rangeAlertInput = 2;
+  bool showPlaceInfoInput = false;
+  String alertSoundInput = 'Sonido 1';
+  bool publicRouteInput = false;
+  LatLng? meetingPointInput;
+  List<Place> stopsInput = [];
+
+  void createRoute() {
+    // Aquí puedes procesar los datos capturados y crear la nueva ruta
+    TouristRoute newRoute = TouristRoute(
+      name: routeNameInput,
+      description: routeDescriptionInput,
+      routeDate: routeDateInput,
+      routeType: [RouteType.city],
+      startTime: stopsInput.first.startTime,
+      endTime: stopsInput.last.endTime,
+      hasStarted: false,
+      image: 'no_image',
+      startingPoint: meetingPointInput!,
+      currentPlaceIndex: 0,
+      placesList: stopsInput,
+    );
+
+    if (publicRouteInput == true) {
+      addPublicRoute(newRoute);
+    } else {
+      addPrivateRoute(newRoute);
+    }
+
+    print('Nueva ruta creada: $newRoute');
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Ruta creada')),
+    );
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,240 +89,145 @@ class _CreateRouteState extends State<CreateRoute> {
             primary: Color.fromRGBO(191, 141, 48, 1),
           ),
         ),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
+        child: Stepper(
+          currentStep: _currentStep,
+          onStepContinue: () {
+            setState(() {
+              if (_currentStep < 3) {
+                _currentStep++;
+              } else {
+                createRoute();
+              }
+            });
           },
-          child: Stepper(
-            key: ValueKey<int>(_currentStep),
-            currentStep: _currentStep,
-            onStepContinue: () {
-              setState(() {
-                if (_currentStep < 3) {
-                  _currentStep++;
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Ruta creada')),
-                  );
-                  Future.delayed(const Duration(seconds: 1), () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const HomePage()),
-                    );
+          onStepCancel: () {
+            setState(() {
+              if (_currentStep > 0) {
+                _currentStep--;
+              }
+            });
+          },
+          steps: [
+            Step(
+              title: const Text(
+                'Información Inicial',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              content: RouteStep1(
+                routeName: routeNameInput,
+                routeDescription: routeDescriptionInput,
+                routeDate: routeDateInput,
+                numberOfPeople: numberOfPeopleInput,
+                numberOfGuides: numberOfGuidesInput,
+                rangeAlert: rangeAlertInput,
+                showPlaceInfo: showPlaceInfoInput,
+                alertSound: alertSoundInput,
+                publicRoute: publicRouteInput,
+                onRouteNameChanged: (value) => setState(() {
+                  routeNameInput = value;
+                }),
+                onRouteDescriptionChanged: (value) => setState(() {
+                  routeDescriptionInput = value;
+                }),
+                onRouteDateChanged: (date) => setState(() {
+                  routeDateInput = date;
+                }),
+                onNumberOfPeopleChanged: (value) => setState(() {
+                  numberOfPeopleInput = value;
+                  if (numberOfPeopleInput < 1) {
+                    numberOfPeopleInput = 1;
+                  } else if (numberOfPeopleInput > 30) {
+                    numberOfPeopleInput = 30;
+                  }
+                }),
+                onNumberOfGuidesChanged: (value) => setState(() {
+                  numberOfGuidesInput = value;
+                  if (numberOfGuidesInput < 0) {
+                    numberOfGuidesInput = 0;
+                  } else if (numberOfGuidesInput > 5) {
+                    numberOfGuidesInput = 5;
+                  }
+                }),
+                onRangeAlertChanged: (value) => setState(() {
+                  rangeAlertInput = value;
+                }),
+                onShowPlaceInfoChanged: (value) => setState(() {
+                  showPlaceInfoInput = value;
+                }),
+                onAlertSoundChanged: (value) => setState(() {
+                  alertSoundInput = value;
+                }),
+                onPublicRouteChanged: (value) => setState(() {
+                  publicRouteInput = value;
+                }),
+              ),
+              isActive: _currentStep >= 0,
+            ),
+            Step(
+              title: const Text(
+                'Agregar Paradas',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              content: RouteStep2(
+                stops: stopsInput,
+                onStopsChanged: (value) => setState(() {
+                  stopsInput = value;
+                }),
+              ),
+              isActive: _currentStep >= 1,
+            ),
+            Step(
+              title: const Text(
+                'Seleccionar Punto de Encuentro',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              content: RouteStep3(
+                meetingPoint: meetingPointInput,
+                onMeetingPointChanged: (value) => setState(() {
+                  meetingPointInput = value;
+                }),
+              ),
+              isActive: _currentStep >= 2,
+            ),
+            Step(
+              title: const Text(
+                'Confirmación',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              content: RouteStep4(
+                routeName: routeNameInput,
+                routeDescription: routeDescriptionInput,
+                routeDate: routeDateInput,
+                numberOfPeople: numberOfPeopleInput,
+                numberOfGuides: numberOfGuidesInput,
+                rangeAlert: rangeAlertInput,
+                showPlaceInfo: showPlaceInfoInput,
+                alertSound: alertSoundInput,
+                publicRoute: publicRouteInput,
+                meetingPoint: meetingPointInput,
+                stops: stopsInput,
+                onConfirm: createRoute,
+                onCancel: () {
+                  setState(() {
+                    _currentStep = 0;
                   });
-                }
-              });
-            },
-            onStepCancel: () {
-              setState(() {
-                if (_currentStep > 0) {
-                  _currentStep--;
-                }
-              });
-            },
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              final isLastStep = _currentStep == 3;
-              final isFirstStep = _currentStep == 0;
-              return Padding(
-                padding: const EdgeInsets.only(
-                  top: 16.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    if (!isFirstStep)
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: details.onStepCancel,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromRGBO(45, 75, 115, 1),
-                          ),
-                          child: const Text(
-                            'Atrás',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                    const SizedBox(width: 10),
-                    if (isFirstStep)
-                      SizedBox(
-                        width: 200,
-                        child: ElevatedButton(
-                          onPressed: details.onStepContinue,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromRGBO(45, 75, 115, 1),
-                          ),
-                          child: const Text(
-                            'Siguiente',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      )
-                    else
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: details.onStepContinue,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromRGBO(45, 75, 115, 1),
-                          ),
-                          child: Text(
-                            isLastStep ? 'Crear ruta' : 'Siguiente',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      )
-                  ],
-                ),
-              );
-            },
-            steps: [
-              Step(
-                title: const Text(
-                  'Información Inicial',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                content: RouteStep1(
-                  routeName: routeName,
-                  routeDescription: routeDescription,
-                  routeDate: routeDate,
-                  numberOfPeople: numberOfPeople,
-                  numberOfGuides: numberOfGuides,
-                  rangeAlert: rangeAlert,
-                  showPlaceInfo: showPlaceInfo,
-                  alertSound: alertSound,
-                  publicRoute: publicRoute,
-                  onRouteNameChanged: (value) => setState(() {
-                    routeName = value;
-                  }),
-                  onRouteDescriptionChanged: (value) => setState(() {
-                    routeDescription = value;
-                  }),
-                  onRouteDateChanged: (date) => setState(() {
-                    routeDate = date;
-                  }),
-                  onNumberOfPeopleChanged: (value) => setState(() {
-                    numberOfPeople = value;
-                    if (numberOfPeople < 1) {
-                      numberOfPeople = 1;
-                    } else if (numberOfPeople > 30) {
-                      numberOfPeople = 30;
-                    }
-                  }),
-                  onNumberOfGuidesChanged: (value) => setState(() {
-                    numberOfGuides = value;
-                    if (numberOfGuides < 0) {
-                      numberOfGuides = 0;
-                    } else if (numberOfGuides > 5) {
-                      numberOfGuides = 5;
-                    }
-                  }),
-                  onRangeAlertChanged: (value) => setState(() {
-                    rangeAlert = value;
-                  }),
-                  onShowPlaceInfoChanged: (value) => setState(() {
-                    showPlaceInfo = value;
-                  }),
-                  onAlertSoundChanged: (value) => setState(() {
-                    alertSound = value;
-                  }),
-                  onPublicRouteChanged: (value) => setState(() {
-                    publicRoute = value;
-                  }),
-                ),
-                isActive: _currentStep >= 0,
+                },
               ),
-              Step(
-                title: const Text(
-                  'Agregar Paradas',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                content: RouteStep2(
-                  stops: stops,
-                  onStopsChanged: (value) => setState(() {
-                    stops = value;
-                  }),
-                ),
-                isActive: _currentStep >= 1,
-              ),
-              Step(
-                title: const Text(
-                  'Seleccionar Punto de Encuentro',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                content: RouteStep3(
-                  meetingPoint: meetingPoint,
-                  onMeetingPointChanged: (value) => setState(() {
-                    meetingPoint = value;
-                  }),
-                ),
-                isActive: _currentStep >= 2,
-              ),
-              Step(
-                title: const Text(
-                  'Confirmación',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                content: RouteStep4(
-                  routeName: routeName,
-                  routeDescription: routeDescription,
-                  routeDate: routeDate,
-                  numberOfPeople: numberOfPeople,
-                  numberOfGuides: numberOfGuides,
-                  rangeAlert: rangeAlert,
-                  showPlaceInfo: showPlaceInfo,
-                  alertSound: alertSound,
-                  publicRoute: publicRoute,
-                  meetingPoint: meetingPoint,
-                  stops: stops,
-                  onConfirm: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Ruta creada')),
-                    );
-                    Future.delayed(const Duration(seconds: 1), () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const HomePage()),
-                      );
-                    });
-                  },
-                  onCancel: () {
-                    setState(() {
-                      _currentStep = 0;
-                    });
-                  },
-                ),
-                isActive: _currentStep >= 3,
-              ),
-            ],
-          ),
+              isActive: _currentStep >= 3,
+            ),
+          ],
         ),
       ),
     );

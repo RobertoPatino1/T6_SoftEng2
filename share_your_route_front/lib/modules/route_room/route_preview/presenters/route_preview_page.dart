@@ -80,13 +80,18 @@ class RouteItineraryPage extends StatelessWidget {
                     itemCount: touristRoute.placesList.length,
                     itemBuilder: (context, index) {
                       final Place place = touristRoute.placesList[index];
-                      final String startTime =
-                          touristRoute.startTime.format(context);
+                      final String startTime = touristRoute
+                          .placesList[index].startTime
+                          .format(context);
+                      final String endTime = touristRoute
+                          .placesList[index].endTime
+                          .format(context);
                       return SizedBox(
                         width: 100,
                         height: 50,
                         child: ItineraryItem(
-                          time: startTime,
+                          timeStart: startTime,
+                          timeEnd: endTime,
                           description: place.name,
                         ),
                       );
@@ -158,11 +163,13 @@ class RouteItineraryPage extends StatelessWidget {
 }
 
 class ItineraryItem extends StatelessWidget {
-  final String time;
+  final String timeStart;
+  final String timeEnd;
   final String description;
 
   const ItineraryItem({
-    required this.time,
+    required this.timeStart,
+    required this.timeEnd,
     required this.description,
   });
 
@@ -175,7 +182,7 @@ class ItineraryItem extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            time,
+            "${timeStart}-${timeEnd}",
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           const SizedBox(width: 20),

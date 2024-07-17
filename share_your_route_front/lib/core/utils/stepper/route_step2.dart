@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/add_stop_screen.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/view_stops_map_screen.dart';
 
 class RouteStep2 extends StatefulWidget {
-  final List<Map<String, dynamic>> stops;
-  final Function(List<Map<String, dynamic>>) onStopsChanged;
+  final List<Place> stops;
+  final Function(List<Place>) onStopsChanged;
 
   const RouteStep2({
-    super.key,
+    Key? key,
     required this.stops,
     required this.onStopsChanged,
-  });
+  }) : super(key: key);
 
   @override
   State<RouteStep2> createState() => _RouteStep2State();
 }
 
 class _RouteStep2State extends State<RouteStep2> {
-  List<Map<String, dynamic>> stops = [];
+  List<Place> stops = [];
 
   @override
   void initState() {
@@ -28,23 +29,23 @@ class _RouteStep2State extends State<RouteStep2> {
 
   void _addStop(
     String name,
-    LatLng location,
+    LatLng ubication,
     TimeOfDay startTime,
     TimeOfDay endTime,
   ) {
-    final newStop = {
-      'name': name,
-      'location': location,
-      'startTime': startTime,
-      'endTime': endTime,
-    };
+    final newStop = Place(
+      name: name,
+      ubication: ubication,
+      startTime: startTime,
+      endTime: endTime,
+    );
     setState(() {
       if (!stops.any(
         (stop) =>
-            stop['name'] == name &&
-            stop['location'] == location &&
-            stop['startTime'] == startTime &&
-            stop['endTime'] == endTime,
+            stop.name == name &&
+            stop.ubication == ubication &&
+            stop.startTime == startTime &&
+            stop.endTime == endTime,
       )) {
         stops.add(newStop);
       }
@@ -67,18 +68,8 @@ class _RouteStep2State extends State<RouteStep2> {
       ),
     );
 
-    if (result != null && result is Map<String, dynamic>) {
-      final name = result['name'] as String?;
-      final location = result['location'] as LatLng?;
-      final startTime = result['startTime'] as TimeOfDay?;
-      final endTime = result['endTime'] as TimeOfDay?;
-
-      if (name != null &&
-          location != null &&
-          startTime != null &&
-          endTime != null) {
-        _addStop(name, location, startTime, endTime);
-      }
+    if (result != null && result is Place) {
+      _addStop(result.name, result.ubication, result.startTime, result.endTime);
     }
   }
 
@@ -119,9 +110,9 @@ class _RouteStep2State extends State<RouteStep2> {
                 itemCount: stops.length,
                 itemBuilder: (context, index) {
                   final stop = stops[index];
-                  final startTime = stop['startTime'] as TimeOfDay?;
-                  final endTime = stop['endTime'] as TimeOfDay?;
-                  final name = stop['name'] as String?;
+                  final startTime = stop.startTime;
+                  final endTime = stop.endTime;
+                  final name = stop.name;
 
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 2.0),
@@ -139,7 +130,7 @@ class _RouteStep2State extends State<RouteStep2> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${startTime?.format(context) ?? ''} - ${endTime?.format(context) ?? ''}    $name',
+                          '${startTime.format(context)} - ${endTime.format(context)}    $name',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

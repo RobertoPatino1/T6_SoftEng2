@@ -29,24 +29,19 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     _touristRouteService = TouristRouteService();
-    // Add listener to currentTouristRouteNotifier
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
   }
 
   @override
   void dispose() {
-    // Remove listener when not needed
     _touristRouteService.currentTouristRouteNotifier
         .removeListener(_onTouristRouteChange);
     super.dispose();
   }
 
-  // Listener function to update UI when tourist route changes
   void _onTouristRouteChange() {
-    setState(() {
-      // Update UI based on new tourist route state
-    });
+    setState(() {});
   }
 
   @override
@@ -55,6 +50,9 @@ class HomeState extends State<Home> {
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
 
+    print(listFromJson(
+      getPublicRoutes(),
+    ).length);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         height: 60,
@@ -67,29 +65,17 @@ class HomeState extends State<Home> {
         selectedIndex: currentPageIndex,
         destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(
-              Icons.explore,
-              size: 20,
-              color: theme.colorScheme.primary,
-            ),
-            icon: const Icon(
-              Icons.explore_outlined,
-              size: 20,
-              color: Colors.grey,
-            ),
+            selectedIcon:
+                Icon(Icons.explore, size: 20, color: theme.colorScheme.primary),
+            icon: const Icon(Icons.explore_outlined,
+                size: 20, color: Colors.grey),
             label: 'Explorar',
           ),
           NavigationDestination(
-            selectedIcon: Icon(
-              Icons.notifications,
-              size: 20,
-              color: theme.colorScheme.primary,
-            ),
-            icon: const Icon(
-              Icons.notifications_outlined,
-              size: 20,
-              color: Colors.grey,
-            ),
+            selectedIcon: Icon(Icons.notifications,
+                size: 20, color: theme.colorScheme.primary),
+            icon: const Icon(Icons.notifications_outlined,
+                size: 20, color: Colors.grey),
             label: 'Notificaciones',
           ),
           NavigationDestination(
@@ -103,54 +89,47 @@ class HomeState extends State<Home> {
       body: IndexedStack(
         index: currentPageIndex,
         children: <Widget>[
-          // Home page
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               if (currentRoute == null) ...[
                 Container(
-                  margin: const EdgeInsets.only(
-                    top: 50,
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                  ),
-                  child: Text(
-                    "Es hora de una nueva aventura!",
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(5),
-                  child: Text(
-                    "¿Deseas crear una ruta?",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Modular.to.pushNamed('/auth/home/creation');
-                  },
-                  child: const IntrinsicWidth(
-                    child: Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Empezar una ruta',
-                          ),
-                          SizedBox(
-                            width: 2.1,
-                          ),
-                          Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                        ],
+                  height: 250,
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 5),
+                      Text(
+                        "Es hora de una nueva aventura!",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
-                    ),
+                      const SizedBox(height: 30),
+                      Text(
+                        "¿Deseas crear una ruta?",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      ElevatedButton(
+                        onPressed: () {
+                          Modular.to.pushNamed('/auth/home/creation');
+                        },
+                        child: const IntrinsicWidth(
+                          child: Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Empezar una ruta'),
+                                SizedBox(width: 2.1),
+                                Icon(Icons.play_arrow,
+                                    color: Colors.white, size: 15),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ] else ...[
@@ -170,7 +149,7 @@ class HomeState extends State<Home> {
                       Text(
                         currentRoute.name,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),
                       ElevatedButton(
@@ -184,9 +163,7 @@ class HomeState extends State<Home> {
                           children: [
                             BlinkingDot(),
                             SizedBox(width: 8),
-                            Text(
-                              "Seguir ruta",
-                            ),
+                            Text("Seguir ruta"),
                           ],
                         ),
                       ),
@@ -194,71 +171,80 @@ class HomeState extends State<Home> {
                   ),
                 ),
               ],
-              Container(
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.only(left: 10, right: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 4,
-                      height:
-                          Theme.of(context).textTheme.headlineMedium!.fontSize,
-                      color: const Color.fromRGBO(191, 141, 48, 1),
-                      margin: const EdgeInsets.only(
-                        right: 5,
-                      ),
-                    ),
-                    Text(
-                      "Rutas privadas",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ],
-                ),
-              ),
               Expanded(
-                child: RouteCardBuilder().buildRouteCard(
-                  context,
-                  listFromJson(
-                    getPrivateRoutes(),
-                  ), // Replace with your data source
-                ),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.only(left: 10, right: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 4,
-                      height:
-                          Theme.of(context).textTheme.headlineMedium!.fontSize,
-                      color: const Color.fromRGBO(191, 141, 48, 1),
-                      margin: const EdgeInsets.only(
-                        right: 5,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.topLeft,
+                        margin: const EdgeInsets.only(left: 10, right: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 4,
+                              height: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .fontSize,
+                              color: const Color.fromRGBO(191, 141, 48, 1),
+                              margin: const EdgeInsets.only(right: 5),
+                            ),
+                            Text(
+                              "Rutas privadas",
+                              textAlign: TextAlign.left,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Rutas públicas",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: RouteCardBuilder().buildRouteCard(
-                  context,
-                  listFromJson(
-                    getPublicRoutes(),
-                  ), // Replace with your data source
+                      SizedBox(
+                        height: 250,
+                        child: RouteCardBuilder().buildRouteCard(
+                          context,
+                          listFromJson(
+                            getPrivateRoutes(),
+                          ), // Replace with your data source
+                        ), // Color added for testing scroll
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        margin: const EdgeInsets.only(left: 10, right: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 4,
+                              height: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .fontSize,
+                              color: const Color.fromRGBO(191, 141, 48, 1),
+                              margin: const EdgeInsets.only(right: 5),
+                            ),
+                            Text(
+                              "Rutas publicas",
+                              textAlign: TextAlign.left,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 250,
+                        child: RouteCardBuilder().buildRouteCard(
+                          context,
+                          listFromJson(
+                            getPublicRoutes(),
+                          ), // Replace with your data source
+                        ), // Color added for testing scroll
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-
           // Messages page
           Container(
             alignment: Alignment.center,
@@ -267,7 +253,6 @@ class HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-
           //Profile page
           Container(
             alignment: Alignment.center,
