@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
@@ -137,7 +140,9 @@ class _CreateRouteState extends State<CreateRoute> {
                 }),
                 onNumberOfPeopleChanged: (value) => setState(() {
                   numberOfPeople = value;
+                  printToConsole("CACACACA");
                   if (numberOfPeople < 1) {
+                    printToConsole("CACACACA");
                     numberOfPeople = 1;
                   } else if (numberOfPeople > 30) {
                     numberOfPeople = 30;
