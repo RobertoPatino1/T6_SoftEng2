@@ -5,6 +5,7 @@ import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step3.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step4.dart';
 import 'package:share_your_route_front/modules/home/home_page/presenters/home_page.dart';
+import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});
@@ -64,9 +65,7 @@ class _CreateRouteState extends State<CreateRoute> {
                 if (_currentStep < 3) {
                   _currentStep++;
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Ruta creada')),
-                  );
+                  showSnackbar(context, "Ruta creada", "confirmation");
                   Future.delayed(const Duration(seconds: 1), () {
                     Navigator.push(
                       context,
@@ -252,9 +251,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   meetingPoint: meetingPoint,
                   stops: stops,
                   onConfirm: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Ruta creada')),
-                    );
+                    showSnackbar(context, "Ruta creada", "confirmation");
                     Future.delayed(const Duration(seconds: 1), () {
                       Navigator.push(
                         context,
