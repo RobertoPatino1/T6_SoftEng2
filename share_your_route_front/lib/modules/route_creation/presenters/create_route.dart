@@ -114,7 +114,18 @@ class _CreateRouteState extends State<CreateRoute> {
                       SizedBox(
                         width: 200,
                         child: ElevatedButton(
-                          onPressed: details.onStepContinue,
+                          onPressed: () {
+                            if (routeName.isNotEmpty) {
+                              details.onStepContinue!();
+                            } else {
+                              // Mostrar un mensaje o Snackbar indicando que el campo está vacío
+                              showSnackbar(
+                                context,
+                                "Debe ingresar el nombre de la ruta",
+                                "error",
+                              );
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(45, 75, 115, 1),
