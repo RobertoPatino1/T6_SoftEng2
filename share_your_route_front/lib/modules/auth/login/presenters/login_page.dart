@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -43,10 +44,7 @@ class LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
+                    decoration: buildInputDecoration(
                       labelText: 'Nombre de usuario o Email',
                     ),
                   ),
@@ -58,17 +56,8 @@ class LoginState extends State<Login> {
                     top: 15,
                   ),
                   child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      labelText: 'Contraseña',
-                    ),
+                    decoration: buildInputDecoration(labelText: "Contraseña"),
                     obscureText: true,
-                    // decoration: const InputDecoration(
-                    //   border: OutlineInputBorder(),
-                    //   labelText: 'Contraseña',
-                    // ),
                   ),
                 ),
                 TextButton(

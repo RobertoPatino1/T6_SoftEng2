@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 
 const TextStyle labelTextStyle = TextStyle(
   fontSize: 16,
@@ -28,10 +29,8 @@ Widget buildRouteNameField(
       const Text('Nombre de la Ruta', style: titlelabelTextStyle),
       const SizedBox(height: 8),
       TextField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: 'Ingrese el nombre de la ruta',
-        ),
+        decoration:
+            buildInputDecoration(hintText: "Ingrese el nombre de la ruta"),
         onChanged: onRouteNameChanged,
       ),
     ],
