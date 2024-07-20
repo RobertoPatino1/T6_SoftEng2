@@ -62,7 +62,16 @@ class _CreateRouteState extends State<CreateRoute> {
             currentStep: _currentStep,
             onStepContinue: () {
               setState(() {
-                if (_currentStep < 3) {
+                if (_currentStep == 0 && routeName.isEmpty) {
+                  showSnackbar(
+                      context, "Debe ingresar el nombre de la ruta", "error");
+                } else if (_currentStep == 1 && stops.isEmpty) {
+                  showSnackbar(
+                      context, "Debe agregar al menos una parada", "error");
+                } else if (_currentStep == 2 && meetingPoint == null) {
+                  showSnackbar(context,
+                      "Debe seleccionar un punto de encuentro", "error");
+                } else if (_currentStep < 3) {
                   _currentStep++;
                 } else {
                   showSnackbar(context, "Ruta creada", "confirmation");
@@ -118,7 +127,6 @@ class _CreateRouteState extends State<CreateRoute> {
                             if (routeName.isNotEmpty) {
                               details.onStepContinue!();
                             } else {
-                              // Mostrar un mensaje o Snackbar indicando que el campo está vacío
                               showSnackbar(
                                 context,
                                 "Debe ingresar el nombre de la ruta",
@@ -142,7 +150,24 @@ class _CreateRouteState extends State<CreateRoute> {
                     else
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: details.onStepContinue,
+                          onPressed: () {
+                            if (_currentStep == 1 && stops.isEmpty) {
+                              showSnackbar(
+                                context,
+                                "Debe agregar al menos una parada",
+                                "error",
+                              );
+                            } else if (_currentStep == 2 &&
+                                meetingPoint == null) {
+                              showSnackbar(
+                                context,
+                                "Debe seleccionar un punto de encuentro",
+                                "error",
+                              );
+                            } else {
+                              details.onStepContinue!();
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(45, 75, 115, 1),
