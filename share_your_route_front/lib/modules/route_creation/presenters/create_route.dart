@@ -9,7 +9,6 @@ import 'package:share_your_route_front/core/utils/stepper/route_step4.dart';
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/home/home_page/presenters/home_page.dart';
-import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});

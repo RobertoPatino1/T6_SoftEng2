@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
+import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
+import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,12 +25,23 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  late final RouteService routeService;
+  List<TouristRoute> routeList = [];
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
+
+  Future<void> _loadData() async {
+    routeService = await RouteService.create();
+    final routes = await routeService.fetchRouteData();
+    setState(() {
+      routeList = routes;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _loadData();
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
@@ -202,9 +216,10 @@ class HomeState extends State<Home> {
                         height: 250,
                         child: RouteCardBuilder().buildRouteCard(
                           context,
-                          listFromJson(
-                            getPrivateRoutes(),
-                          ), // Replace with your data source
+                          routeList
+                              .where((ruta) =>
+                                  ruta.routeType.contains(RouteType.city))
+                              .toList(),
                         ), // Color added for testing scroll
                       ),
                       Container(
@@ -234,9 +249,7 @@ class HomeState extends State<Home> {
                         height: 250,
                         child: RouteCardBuilder().buildRouteCard(
                           context,
-                          listFromJson(
-                            getPublicRoutes(),
-                          ), // Replace with your data source
+                          routeList, // Replace with your data source
                         ), // Color added for testing scroll
                       ),
                     ],
