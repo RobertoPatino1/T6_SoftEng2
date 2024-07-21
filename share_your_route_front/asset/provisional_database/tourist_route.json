@@ -1,0 +1,203 @@
+[
+  {
+    "name": "Centro de artístico",
+    "placesList": [
+      {
+        "name": "Lugar1",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 11, "minute": 0},
+        "endTime": {"hour": 11, "minute": 30}
+      },
+      {
+        "name": "Lugar2",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 11, "minute": 30},
+        "endTime": {"hour": 13, "minute": 0}
+      },
+      {
+        "name": "Lugar3",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 13, "minute": 0},
+        "endTime": {"hour": 14, "minute": 0}
+      },
+      {
+        "name": "Lugar4",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 14, "minute": 0},
+        "endTime": {"hour": 16, "minute": 0}
+      },
+      {
+        "name": "Lugar5",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 16, "minute": 0},
+        "endTime": {"hour": 17, "minute": 15}
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "routeDate": "2023-06-09T00:00:00.000",
+    "startingPoint": {"latitude": -2.144785, "longitude": -79.9664887},
+    "startTime": {"hour": 11, "minute": 0},
+    "endTime": {"hour": 17, "minute": 15},
+    "image": "centro_artistico",
+    "description": "Descubre las maravillas artísticas",
+    "hasStarted": false,
+    "routeType": ["culture", "city"]
+  },
+  {
+    "name": "Fauna silvestre",
+    "placesList": [
+      {
+        "name": "Lugar1",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 12, "minute": 0},
+        "endTime": {"hour": 14, "minute": 0}
+      },
+      {
+        "name": "Lugar2",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 14, "minute": 0},
+        "endTime": {"hour": 18, "minute": 0}
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "routeDate": "2023-06-09T00:00:00.000",
+    "startingPoint": {"latitude": -2.144785, "longitude": -79.9664887},
+    "startTime": {"hour": 12, "minute": 0},
+    "endTime": {"hour": 18, "minute": 0},
+    "image": "fauna_silvestre",
+    "description": "Descubre la fauna del lugar",
+    "hasStarted": false,
+    "routeType": ["nature"]
+  },
+  {
+    "name": "Ruta gastronómica",
+    "placesList": [
+      {
+        "name": "Lugar1",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 10, "minute": 0},
+        "endTime": {"hour": 12, "minute": 0}
+      },
+      {
+        "name": "Lugar2",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 12, "minute": 0},
+        "endTime": {"hour": 14, "minute": 0}
+      },
+      {
+        "name": "Lugar3",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 14, "minute": 0},
+        "endTime": {"hour": 15, "minute": 0}
+      },
+      {
+        "name": "Lugar4",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 15, "minute": 0},
+        "endTime": {"hour": 16, "minute": 45}
+      },
+      {
+        "name": "Lugar5",
+        "ubication": {"latitude": -2.144785, "longitude": -79.9664887},
+        "startTime": {"hour": 16, "minute": 45},
+        "endTime": {"hour": 17, "minute": 15}
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "routeDate": "2023-06-09T00:00:00.000",
+    "startingPoint": {"latitude": -2.144785, "longitude": -79.9664887},
+    "startTime": {"hour": 10, "minute": 0},
+    "endTime": {"hour": 17, "minute": 15},
+    "image": "ruta_gastronomica",
+    "description": "Encuentra los mejores platos típicos",
+    "hasStarted": false,
+    "routeType": ["gastronomic", "city"]
+  },
+  {
+    "name": "Tarde con amigos",
+    "placesList": [
+      {
+        "name": "Lugar1",
+        "ubication": {
+          "latitude": -2.144785,
+          "longitude": -79.9664887
+        },
+        "startTime": {
+          "hour": 12,
+          "minute": 0
+        },
+        "endTime": {
+          "hour": 14,
+          "minute": 0
+        }
+      },
+      {
+        "name": "Lugar2",
+        "ubication": {
+          "latitude": -2.144785,
+          "longitude": -79.9664887
+        },
+        "startTime": {
+          "hour": 14,
+          "minute": 0
+        },
+        "endTime": {
+          "hour": 16,
+          "minute": 0
+        }
+      },
+      {
+        "name": "Lugar3",
+        "ubication": {
+          "latitude": -2.144785,
+          "longitude": -79.9664887
+        },
+        "startTime": {
+          "hour": 16,
+          "minute": 0
+        },
+        "endTime": {
+          "hour": 18,
+          "minute": 0
+        }
+      },
+      {
+        "name": "Lugar4",
+        "ubication": {
+          "latitude": -2.144785,
+          "longitude": -79.9664887
+        },
+        "startTime": {
+          "hour": 18,
+          "minute": 0
+        },
+        "endTime": {
+          "hour": 20,
+          "minute": 0
+        }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "routeDate": "2023-06-09T00:00:00.000",
+    "startingPoint": {
+      "latitude": -2.144785,
+      "longitude": -79.9664887
+    },
+    "startTime": {
+      "hour": 12,
+      "minute": 0
+    },
+    "endTime": {
+      "hour": 20,
+      "minute": 0
+    },
+    "image": "no_image",
+    "description": "Paseo privado con amigos",
+    "hasStarted": false,
+    "routeType": [
+      "gastronomic",
+      "adventure",
+      "city"
+    ]
+  }  
+]
