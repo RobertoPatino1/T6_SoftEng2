@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 
 const TextStyle labelTextStyle = TextStyle(
   fontSize: 16,
@@ -13,22 +14,23 @@ const TextStyle boldlabelTextStyle = TextStyle(
 );
 
 const TextStyle titlelabelTextStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: Color.fromRGBO(47, 77, 114, 1));
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+  color: Color.fromRGBO(47, 77, 114, 1),
+);
 
 Widget buildRouteNameField(
-    String routeName, Function(String) onRouteNameChanged) {
+  String routeName,
+  Function(String) onRouteNameChanged,
+) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       const Text('Nombre de la Ruta', style: titlelabelTextStyle),
       const SizedBox(height: 8),
       TextField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: 'Ingrese el nombre de la ruta',
-        ),
+        decoration:
+            buildInputDecoration(hintText: "Ingrese el nombre de la ruta"),
         onChanged: onRouteNameChanged,
       ),
     ],
@@ -81,16 +83,17 @@ Widget buildNumberChanger(int value, Function(int) onChanged) {
 
 Widget buildRangeSlider(double value, Function(double) onChanged) {
   return Slider(
-      value: value,
-      min: 1,
-      max: 10,
-      divisions: 9,
-      label: value.round().toString(),
-      onChanged: onChanged,
-      thumbColor: const Color.fromRGBO(191, 141, 48, 1),
-      secondaryActiveColor: const Color.fromRGBO(45, 75, 115, 1),
-      activeColor: const Color.fromRGBO(191, 141, 48, 1),
-      inactiveColor: const Color.fromARGB(255, 137, 137, 137));
+    value: value,
+    min: 1,
+    max: 10,
+    divisions: 9,
+    label: value.round().toString(),
+    onChanged: onChanged,
+    thumbColor: const Color.fromRGBO(191, 141, 48, 1),
+    secondaryActiveColor: const Color.fromRGBO(45, 75, 115, 1),
+    activeColor: const Color.fromRGBO(191, 141, 48, 1),
+    inactiveColor: const Color.fromARGB(255, 137, 137, 137),
+  );
 }
 
 Widget buildDropdown(String value, Function(String) onChanged) {

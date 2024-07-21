@@ -23,8 +23,10 @@ class ViewStopsMapScreen extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromRGBO(45, 75, 115, 1)),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color.fromRGBO(45, 75, 115, 1),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

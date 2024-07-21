@@ -120,6 +120,9 @@ class _RouteStep2State extends State<RouteStep2> {
                       vertical: 4.0,
                       horizontal: 8.0,
                     ),
+                      vertical: 4.0,
+                      horizontal: 8.0,
+                    ),
                     decoration: BoxDecoration(
                       color: index.isEven
                           ? const Color.fromRGBO(45, 75, 115, 1)
@@ -130,7 +133,8 @@ class _RouteStep2State extends State<RouteStep2> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${startTime.format(context)} - ${endTime.format(context)}    $name',
+                          // ignore: avoid_dynamic_calls
+                          '${stop['time'].format(context)}    ${stop['name']}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

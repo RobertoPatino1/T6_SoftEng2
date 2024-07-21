@@ -88,3 +88,6 @@ FIREBASE_DATABASE_URL=https://share-your-route-ff4ad-default-rtdb.firebaseio.com
 - [Firebase](https://firebase.google.com/): Real-Time database used to store relevant data regarding the project like users, routes and coordinates.
 - [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript): Default programming language used by Express.js.
 - [Render](https://render.com/): Deployment service used to deploy the back-end.
+
+## Additional documentation
+- [Coding Standard Documentation](https://github.com/RobertoPatino1/T6_SoftEng2/blob/main/Resources/coding_standard_documentation.md)

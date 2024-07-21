@@ -21,6 +21,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Share your route',
       themeMode: ThemeMode.light,
       theme: GlobalThemeData.lightThemeData,

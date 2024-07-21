@@ -37,6 +37,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error searching location: $e');
     }
   }
@@ -61,8 +62,10 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: Color.fromRGBO(45, 75, 115, 1)),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color.fromRGBO(45, 75, 115, 1),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

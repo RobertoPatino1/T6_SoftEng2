@@ -15,86 +15,88 @@ class GlobalThemeData {
       scaffoldBackgroundColor: colorScheme.surface,
       highlightColor: Colors.transparent,
       focusColor: focusColor,
-      textTheme: GoogleFonts.poppinsTextTheme(TextTheme(
-        headlineLarge: GoogleFonts.poppins(
-          fontSize: 25.0,
-          color: lightColorScheme.primary,
-          fontWeight: FontWeight.bold,
-          height: 1,
+      textTheme: GoogleFonts.poppinsTextTheme(
+        TextTheme(
+          headlineLarge: GoogleFonts.poppins(
+            fontSize: 25.0,
+            color: lightColorScheme.primary,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          headlineMedium: GoogleFonts.poppins(
+            fontSize: 20.0,
+            color: lightColorScheme.primary,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          headlineSmall: GoogleFonts.poppins(
+            fontSize: 15.0,
+            color: lightColorScheme.primary,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          bodyLarge: GoogleFonts.poppins(
+            fontSize: 15.0,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            height: 1,
+          ),
+          bodyMedium: GoogleFonts.poppins(
+            fontSize: 10.0,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            height: 1,
+          ),
+          bodySmall: GoogleFonts.poppins(
+            fontSize: 8.0,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            height: 1,
+          ),
+          labelLarge: GoogleFonts.poppins(
+            fontSize: 15.0,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          labelMedium: GoogleFonts.poppins(
+            fontSize: 10.0,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          labelSmall: GoogleFonts.poppins(
+            fontSize: 8.0,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            height: 1.5,
+          ),
+          displayLarge: GoogleFonts.poppins(
+            fontSize: 15.0,
+            color: lightColorScheme.secondary,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+          displayMedium: GoogleFonts.poppins(
+            fontSize: 12.0,
+            color: lightColorScheme.secondary,
+            fontWeight: FontWeight.bold,
+            height: 1.5,
+          ),
+          displaySmall: GoogleFonts.poppins(
+            fontSize: 8.0,
+            color: lightColorScheme.secondary,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
         ),
-        headlineMedium: GoogleFonts.poppins(
-          fontSize: 20.0,
-          color: lightColorScheme.primary,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-        headlineSmall: GoogleFonts.poppins(
-          fontSize: 15.0,
-          color: lightColorScheme.primary,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-        bodyLarge: GoogleFonts.poppins(
-          fontSize: 15.0,
-          color: Colors.black,
-          fontWeight: FontWeight.normal,
-          height: 1,
-        ),
-        bodyMedium: GoogleFonts.poppins(
-          fontSize: 10.0,
-          color: Colors.black,
-          fontWeight: FontWeight.normal,
-          height: 1,
-        ),
-        bodySmall: GoogleFonts.poppins(
-          fontSize: 8.0,
-          color: Colors.black,
-          fontWeight: FontWeight.normal,
-          height: 1,
-        ),
-        labelLarge: GoogleFonts.poppins(
-          fontSize: 15.0,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-        labelMedium: GoogleFonts.poppins(
-          fontSize: 10.0,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-        labelSmall: GoogleFonts.poppins(
-          fontSize: 8.0,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          height: 1.5,
-        ),
-        displayLarge: GoogleFonts.poppins(
-          fontSize: 15.0,
-          color: lightColorScheme.secondary,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-        displayMedium: GoogleFonts.poppins(
-          fontSize: 12.0,
-          color: lightColorScheme.secondary,
-          fontWeight: FontWeight.bold,
-          height: 1.5,
-        ),
-        displaySmall: GoogleFonts.poppins(
-          fontSize: 8.0,
-          color: lightColorScheme.secondary,
-          fontWeight: FontWeight.bold,
-          height: 1,
-        ),
-      )),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor:
               // ignore: deprecated_member_use
               MaterialStateProperty.all<Color>(lightColorScheme.primary),
-          textStyle: MaterialStateProperty.all<TextStyle>(
+          textStyle: WidgetStateProperty.all<TextStyle>(
             GoogleFonts.poppins(
               fontSize: 15.0,
               fontWeight: FontWeight.bold,
@@ -106,29 +108,29 @@ class GlobalThemeData {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all<Color>(lightColorScheme.secondary),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          textStyle: MaterialStateProperty.all<TextStyle>(
+              WidgetStateProperty.all<Color>(lightColorScheme.secondary),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          textStyle: WidgetStateProperty.all<TextStyle>(
             GoogleFonts.poppins(
               fontSize: 15.0,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          minimumSize: MaterialStateProperty.all<Size>(
-            Size(150, 50),
+          minimumSize: WidgetStateProperty.all<Size>(
+            const Size(150, 50),
           ),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-            EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          padding: WidgetStateProperty.all<EdgeInsets>(
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           ),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all<Color>(lightColorScheme.secondary),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          textStyle: MaterialStateProperty.all<TextStyle>(
+              WidgetStateProperty.all<Color>(lightColorScheme.secondary),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          textStyle: WidgetStateProperty.all<TextStyle>(
             GoogleFonts.poppins(
               fontSize: 12.0,
               fontWeight: FontWeight.bold,
