@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
 import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 
@@ -12,6 +13,7 @@ class RouteStep1 extends StatefulWidget {
   final bool showPlaceInfo;
   final String alertSound;
   final bool publicRoute;
+  final List<RouteType> selectedRouteTypes; // Changed to a list of route types
   final Function(String) onRouteNameChanged;
   final Function(String) onRouteDescriptionChanged;
   final Function(DateTime) onRouteDateChanged;
@@ -21,6 +23,8 @@ class RouteStep1 extends StatefulWidget {
   final Function(bool) onShowPlaceInfoChanged;
   final Function(String) onAlertSoundChanged;
   final Function(bool) onPublicRouteChanged;
+  final Function(List<RouteType>)
+      onRouteTypesChanged; // New callback for list of route types
 
   const RouteStep1({
     super.key,
@@ -33,6 +37,7 @@ class RouteStep1 extends StatefulWidget {
     required this.showPlaceInfo,
     required this.alertSound,
     required this.publicRoute,
+    required this.selectedRouteTypes, // New parameter
     required this.onRouteNameChanged,
     required this.onRouteDescriptionChanged,
     required this.onRouteDateChanged,
@@ -42,6 +47,7 @@ class RouteStep1 extends StatefulWidget {
     required this.onShowPlaceInfoChanged,
     required this.onAlertSoundChanged,
     required this.onPublicRouteChanged,
+    required this.onRouteTypesChanged, // New parameter
   });
 
   @override
@@ -51,6 +57,9 @@ class RouteStep1 extends StatefulWidget {
 class _RouteStep1State extends State<RouteStep1> {
   late double currentRangeAlert;
   late DateTime selectedDate;
+
+  // Define route types
+  final List<RouteType> routeTypes = RouteType.values;
 
   @override
   void initState() {
@@ -84,6 +93,17 @@ class _RouteStep1State extends State<RouteStep1> {
     } else {
       widget.onNumberOfGuidesChanged(value);
     }
+  }
+
+  void _handleRouteTypeChanged(RouteType type, bool isSelected) {
+    setState(() {
+      if (isSelected) {
+        widget.selectedRouteTypes.add(type);
+      } else {
+        widget.selectedRouteTypes.remove(type);
+      }
+      widget.onRouteTypesChanged(widget.selectedRouteTypes);
+    });
   }
 
   @override
@@ -165,6 +185,26 @@ class _RouteStep1State extends State<RouteStep1> {
             });
             widget.onRouteDateChanged(date);
           }),
+          const SizedBox(height: 15),
+          const Text('Tipo de ruta', style: titlelabelTextStyle),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8.0,
+            runSpacing: 4.0,
+            children: routeTypes.map((type) {
+              return ChoiceChip(
+                label: Text(type.toString().split('.').last),
+                selected: widget.selectedRouteTypes.contains(type),
+                onSelected: (selected) {
+                  _handleRouteTypeChanged(type, selected);
+                },
+                selectedColor: Color.fromRGBO(91, 125, 170, 1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+              );
+            }).toList(),
+          )
         ],
       ),
     );

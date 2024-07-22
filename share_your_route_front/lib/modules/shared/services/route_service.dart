@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 class RouteService {
   List<TouristRoute> touristRouteList = [];
@@ -42,30 +43,29 @@ class RouteService {
     return touristRouteList;
   }
 
-  /*Future<void> createData(TouristRoute newData) async {
-    _touristRouteList.add(newData);
+  Future<void> createData(TouristRoute newData) async {
+    touristRouteList.add(newData);
     await _updateLocalData();
   }
 
   Future<void> updateData(String name, TouristRoute updatedData) async {
-    int index = _touristRouteList.indexWhere((item) => item.name == name);
+    int index = touristRouteList.indexWhere((item) => item.name == name);
     if (index != -1) {
-      _touristRouteList[index] = updatedData;
+      touristRouteList[index] = updatedData;
       await _updateLocalData();
     }
   }
 
   Future<void> deleteData(String name) async {
-    _touristRouteList.removeWhere((item) => item.name == name);
+    touristRouteList.removeWhere((item) => item.name == name);
     await _updateLocalData();
   }
 
   Future<void> _updateLocalData() async {
     final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path;
-    final file = File('$path/data.txt');
+    final filePath = path.join(directory.path, 'tourist_route.json');
     List<Map<String, dynamic>> jsonData =
-        _touristRouteList.map((item) => item.toJson()).toList();
-    file.writeAsStringSync(jsonEncode(jsonData));
-  }*/
+        touristRouteList.map((item) => item.toJson()).toList();
+    File(filePath).writeAsStringSync(jsonEncode(jsonData));
+  }
 }

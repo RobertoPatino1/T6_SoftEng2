@@ -8,6 +8,8 @@ import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 
+List<TouristRoute> routeList = [];
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -26,7 +28,6 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   late final RouteService routeService;
-  List<TouristRoute> routeList = [];
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
 
@@ -189,6 +190,9 @@ class HomeState extends State<Home> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: const EdgeInsets.only(left: 10, right: 20),
@@ -205,7 +209,7 @@ class HomeState extends State<Home> {
                               margin: const EdgeInsets.only(right: 5),
                             ),
                             Text(
-                              "Rutas privadas",
+                              "Rutas dentro de la ciudad",
                               textAlign: TextAlign.left,
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
@@ -213,14 +217,17 @@ class HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(
-                        height: 250,
+                        height: 270,
                         child: RouteCardBuilder().buildRouteCard(
                           context,
                           routeList
                               .where((ruta) =>
-                                  ruta.routeType.contains(RouteType.city))
+                                  ruta.routeType.contains(RouteType.Ciudad))
                               .toList(),
                         ), // Color added for testing scroll
+                      ),
+                      const SizedBox(
+                        height: 30,
                       ),
                       Container(
                         alignment: Alignment.topLeft,
@@ -238,7 +245,7 @@ class HomeState extends State<Home> {
                               margin: const EdgeInsets.only(right: 5),
                             ),
                             Text(
-                              "Rutas publicas",
+                              "Rutas cercanas",
                               textAlign: TextAlign.left,
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
@@ -246,11 +253,12 @@ class HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(
-                        height: 250,
+                        height: 270,
                         child: RouteCardBuilder().buildRouteCard(
-                          context,
-                          routeList, // Replace with your data source
-                        ), // Color added for testing scroll
+                            context,
+                            listFromJson(
+                                getPublicRoutes()) // Replace with your data source
+                            ), // Color added for testing scroll
                       ),
                     ],
                   ),

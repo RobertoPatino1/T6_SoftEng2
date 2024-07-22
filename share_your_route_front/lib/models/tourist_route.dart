@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
@@ -9,6 +7,9 @@ class TouristRoute {
   final String name;
   final List<Place> placesList;
   final int currentPlaceIndex;
+  final int numberPeople;
+  final int numberGuides;
+  final bool routeIsPublic;
   final DateTime routeDate;
   final LatLng startingPoint;
   final TimeOfDay startTime;
@@ -22,6 +23,9 @@ class TouristRoute {
     required this.name,
     required this.placesList,
     required this.currentPlaceIndex,
+    required this.numberPeople,
+    required this.numberGuides,
+    required this.routeIsPublic,
     required this.routeDate,
     required this.startingPoint,
     required this.startTime,
@@ -43,6 +47,9 @@ class TouristRoute {
       name: json['name'] as String,
       placesList: placesList,
       currentPlaceIndex: json['currentPlaceIndex'] as int,
+      numberPeople: json['numberPeople'] as int,
+      numberGuides: json['numberGuides'] as int,
+      routeIsPublic: json['routeIsPublic'] as bool,
       routeDate: DateTime.parse(json['routeDate'] as String),
       startingPoint: LatLng(
         json['startingPoint']['latitude'] as double,
@@ -76,6 +83,9 @@ class TouristRoute {
       'name': name,
       'placesList': encodedPlacesList,
       'currentPlaceIndex': currentPlaceIndex,
+      'numberPeople': numberPeople,
+      'numberGuides': numberGuides,
+      'routeIsPublic': routeIsPublic,
       'routeDate': routeDate.toIso8601String(),
       'startingPoint': {
         'latitude': startingPoint.latitude,

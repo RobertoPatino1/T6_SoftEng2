@@ -24,7 +24,7 @@ class RouteCardBuilder {
                       .pushNamed('/auth/home/room/', arguments: touristRoute);
                 },
                 child: Container(
-                  width: 160,
+                  width: 250,
                   height: 600,
                   margin: const EdgeInsets.only(top: 12, bottom: 12),
                   decoration: BoxDecoration(
@@ -44,8 +44,8 @@ class RouteCardBuilder {
                     children: [
                       Center(
                         child: Container(
-                          width: 160,
-                          height: 90,
+                          width: 250,
+                          height: 100,
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20),
@@ -60,6 +60,7 @@ class RouteCardBuilder {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 10),
                       Center(
                         child: Text(
                           touristRoute.name,
@@ -74,13 +75,16 @@ class RouteCardBuilder {
                               padding: const EdgeInsets.all(2.0),
                               child: Icon(
                                 RouteTypeHelper.getIconData(routeType),
-                                size: 20.0,
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 22.0,
                               ),
                             );
                           }).toList(),
                         ),
                       ),
-                      Container(
+                      const SizedBox(height: 5),
+                      Center(
+                          child: Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 5,
                           vertical: 1,
@@ -89,19 +93,21 @@ class RouteCardBuilder {
                           "Fecha: ${DateFormat('dd-MM-2024').format(touristRoute.routeDate)}",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
-                      ),
-                      Container(
+                      )),
+                      Center(
+                          child: Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 5,
                           vertical: 2,
                         ),
                         child: Text(
-                          "Hora de Inicio: ${touristRoute.startTime.format(context)}H",
+                          "${touristRoute.startTime.format(context)} - ${touristRoute.endTime.format(context)}",
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
-                      ),
-                      Container(
-                        height: 20,
+                      )),
+                      Center(
+                          child: Container(
+                        height: 30,
                         margin: const EdgeInsets.symmetric(
                           horizontal: 5,
                           vertical: 5,
@@ -112,15 +118,7 @@ class RouteCardBuilder {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        child: Text(
-                          "Duración: ${formatDuration(touristRoute.startTime, touristRoute.endTime)}",
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
+                      )),
                     ],
                   ),
                 ),
