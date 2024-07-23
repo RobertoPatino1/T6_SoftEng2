@@ -176,13 +176,16 @@ class ItineraryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 37, 60, 89),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 37, 60, 89),
+        borderRadius: BorderRadius.circular(20), // Aquí redondeas los bordes
+      ),
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       margin: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
           Text(
-            "${timeStart}-${timeEnd}",
+            "$timeStart-$timeEnd",
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           const SizedBox(width: 20),

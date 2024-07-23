@@ -71,11 +71,17 @@ class _RouteStep1State extends State<RouteStep1> {
   void _handleNumberOfPeopleChange(int value) {
     if (value < 1) {
       showSnackbar(
-          context, 'Se alcanzó el número mínimo de personas', "warning");
+        context,
+        'Se alcanzó el número mínimo de personas',
+        "warning",
+      );
       widget.onNumberOfPeopleChanged(1);
     } else if (value > 30) {
       showSnackbar(
-          context, 'Se alcanzó el número máximo de personas', "warning");
+        context,
+        'Se alcanzó el número máximo de personas',
+        "warning",
+      );
       widget.onNumberOfPeopleChanged(30);
     } else {
       widget.onNumberOfPeopleChanged(value);
@@ -85,7 +91,10 @@ class _RouteStep1State extends State<RouteStep1> {
   void _handleNumberOfGuidesChange(int value) {
     if (value < 1) {
       showSnackbar(
-          context, 'Esta ruta no tendrá guías asignados', "information");
+        context,
+        'Esta ruta no tendrá guías asignados',
+        "information",
+      );
       widget.onNumberOfGuidesChanged(0);
     } else if (value > 5) {
       showSnackbar(context, 'Se alcanzó el número máximo de guías', "warning");
@@ -116,7 +125,9 @@ class _RouteStep1State extends State<RouteStep1> {
           buildRouteNameField(widget.routeName, widget.onRouteNameChanged),
           const SizedBox(height: 15),
           buildRouteDescriptionField(
-              widget.routeDescription, widget.onRouteDescriptionChanged),
+            widget.routeDescription,
+            widget.onRouteDescriptionChanged,
+          ),
           const SizedBox(height: 15),
           buildLabeledControl(
             'Cantidad de personas',
@@ -198,23 +209,25 @@ class _RouteStep1State extends State<RouteStep1> {
                 onSelected: (selected) {
                   _handleRouteTypeChanged(type, selected);
                 },
-                selectedColor: Color.fromRGBO(91, 125, 170, 1),
+                selectedColor: const Color.fromRGBO(91, 125, 170, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
               );
             }).toList(),
-          )
+          ),
         ],
       ),
     );
   }
 
   Widget buildDatePicker(
-      DateTime initialDate, Function(DateTime) onDateChanged) {
+    DateTime initialDate,
+    Function(DateTime) onDateChanged,
+  ) {
     return TextButton(
       onPressed: () async {
-        DateTime? pickedDate = await showDatePicker(
+        final DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: initialDate,
           firstDate: DateTime(2000),

@@ -37,7 +37,7 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (context) => MainPage());
+    r.child('/', child: (context) => const MainPage());
     r.module('/auth', module: AuthModule());
   }
 }
@@ -71,9 +71,10 @@ class _MainPageState extends State<MainPage> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Permiso de ubicación necesario'),
-        content: Text(
-            'Para utilizar esta aplicación, necesitas permitir el acceso a tu ubicación.'),
+        title: const Text('Permiso de ubicación necesario'),
+        content: const Text(
+          'Para utilizar esta aplicación, necesitas permitir el acceso a tu ubicación.',
+        ),
         actions: [
           TextButton(
             onPressed: () async {
@@ -85,11 +86,11 @@ class _MainPageState extends State<MainPage> {
                 await _showLocationDeniedDialog();
               }
             },
-            child: Text('Aceptar'),
+            child: const Text('Aceptar'),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
         ],
       ),
@@ -100,9 +101,10 @@ class _MainPageState extends State<MainPage> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Ubicación denegada'),
-        content: Text(
-            'No se puede acceder a la aplicación sin permiso de ubicación.'),
+        title: const Text('Ubicación denegada'),
+        content: const Text(
+          'No se puede acceder a la aplicación sin permiso de ubicación.',
+        ),
         actions: [
           TextButton(
             onPressed: () async {
@@ -112,7 +114,7 @@ class _MainPageState extends State<MainPage> {
                 await _determinePositionAndNavigate();
               }
             },
-            child: Text('Reintentar'),
+            child: const Text('Reintentar'),
           ),
         ],
       ),
@@ -122,11 +124,12 @@ class _MainPageState extends State<MainPage> {
   Future<void> _determinePositionAndNavigate() async {
     try {
       await determinePosition();
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         Modular.to.navigate('/auth/');
       });
     } catch (error) {
       // Manejo del error si la ubicación no se puede obtener
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al obtener la ubicación: $error')),
       );
@@ -156,6 +159,7 @@ class _MainPageState extends State<MainPage> {
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
+                // ignore: sized_box_for_whitespace
                 child: Container(
                   width: 200,
                   height: 150,
@@ -166,8 +170,8 @@ class _MainPageState extends State<MainPage> {
             CircularProgressIndicator(
               color: Theme.of(context).colorScheme.primary,
             ),
-            SizedBox(height: 20),
-            Text('Cargando...'),
+            const SizedBox(height: 20),
+            const Text('Cargando...'),
           ],
         ),
       ),

@@ -39,7 +39,7 @@ class _CreateRouteState extends State<CreateRoute> {
 
   void createRoute() {
     // Aquí puedes procesar los datos capturados y crear la nueva ruta
-    TouristRoute newRoute = TouristRoute(
+    final TouristRoute newRoute = TouristRoute(
       name: routeNameInput,
       placesList: stopsInput,
       currentPlaceIndex: 0,
@@ -60,15 +60,8 @@ class _CreateRouteState extends State<CreateRoute> {
 
     addPublicRoute(newRoute);
 
-    String mensaje = "";
-    if (newRoute != null) {
-      mensaje = "Ruta creada! ${newRoute.name}";
-    } else {
-      mensaje = "Ruta no creada";
-    }
-
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensaje)),
+      const SnackBar(content: Text("Ruta creada")),
     );
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.push(
@@ -121,13 +114,22 @@ class _CreateRouteState extends State<CreateRoute> {
               setState(() {
                 if (_currentStep == 0 && routeNameInput.isEmpty) {
                   showSnackbar(
-                      context, "Debe ingresar el nombre de la ruta", "error");
+                    context,
+                    "Debe ingresar el nombre de la ruta",
+                    "error",
+                  );
                 } else if (_currentStep == 1 && stopsInput.isEmpty) {
                   showSnackbar(
-                      context, "Debe agregar al menos una parada", "error");
+                    context,
+                    "Debe agregar al menos una parada",
+                    "error",
+                  );
                 } else if (_currentStep == 2 && meetingPointInput == null) {
-                  showSnackbar(context,
-                      "Debe seleccionar un punto de encuentro", "error");
+                  showSnackbar(
+                    context,
+                    "Debe seleccionar un punto de encuentro",
+                    "error",
+                  );
                 } else if (_currentStep < 3) {
                   _currentStep++;
                 } else {

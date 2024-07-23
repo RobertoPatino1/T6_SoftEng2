@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
@@ -39,7 +41,7 @@ class TouristRoute {
   factory TouristRoute.fromJson(Map<String, dynamic> json) {
     final List<dynamic> decodedPlacesList = json['placesList'] as List<dynamic>;
 
-    List<Place> placesList = decodedPlacesList.map((placeMap) {
+    final List<Place> placesList = decodedPlacesList.map((placeMap) {
       return Place.fromJson(placeMap as Map<String, dynamic>);
     }).toList();
 
@@ -56,18 +58,22 @@ class TouristRoute {
         json['startingPoint']['longitude'] as double,
       ),
       startTime: TimeOfDay(
-          hour: json['startTime']['hour'] as int,
-          minute: json['startTime']['minute'] as int),
+        hour: json['startTime']['hour'] as int,
+        minute: json['startTime']['minute'] as int,
+      ),
       endTime: TimeOfDay(
-          hour: json['endTime']['hour'] as int,
-          minute: json['endTime']['minute'] as int),
+        hour: json['endTime']['hour'] as int,
+        minute: json['endTime']['minute'] as int,
+      ),
       image: json['image'] as String,
       description: json['description'] as String,
       hasStarted: json['hasStarted'] as bool,
       routeType: (json['routeType'] as List<dynamic>)
-          .map((e) => RouteType.values.firstWhere(
-                (element) => element.toString().split('.')[1] == e,
-              ))
+          .map(
+            (e) => RouteType.values.firstWhere(
+              (element) => element.toString().split('.')[1] == e,
+            ),
+          )
           .toList(),
     );
   }

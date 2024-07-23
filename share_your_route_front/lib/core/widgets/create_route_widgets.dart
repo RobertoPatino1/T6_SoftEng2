@@ -38,17 +38,17 @@ Widget buildRouteNameField(
 }
 
 Widget buildRouteDescriptionField(
-    String routeDescription, Function(String) onRouteDescriptionChanged) {
+  String routeDescription,
+  Function(String) onRouteDescriptionChanged,
+) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       const Text('Descripción de la Ruta', style: titlelabelTextStyle),
       const SizedBox(height: 8),
       TextField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: 'Ingrese una descripción',
-        ),
+        decoration:
+            buildInputDecoration(hintText: "Ingrese la descripción de la ruta"),
         onChanged: onRouteDescriptionChanged,
       ),
     ],

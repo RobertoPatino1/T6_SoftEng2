@@ -4,7 +4,7 @@ import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
-import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
+import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 
@@ -64,10 +64,6 @@ class HomeState extends State<Home> {
     final ThemeData theme = Theme.of(context);
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
-
-    print(listFromJson(
-      getPublicRoutes(),
-    ).length);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         height: 60,
@@ -82,15 +78,24 @@ class HomeState extends State<Home> {
           NavigationDestination(
             selectedIcon:
                 Icon(Icons.explore, size: 20, color: theme.colorScheme.primary),
-            icon: const Icon(Icons.explore_outlined,
-                size: 20, color: Colors.grey),
+            icon: const Icon(
+              Icons.explore_outlined,
+              size: 20,
+              color: Colors.grey,
+            ),
             label: 'Explorar',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.notifications,
-                size: 20, color: theme.colorScheme.primary),
-            icon: const Icon(Icons.notifications_outlined,
-                size: 20, color: Colors.grey),
+            selectedIcon: Icon(
+              Icons.notifications,
+              size: 20,
+              color: theme.colorScheme.primary,
+            ),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              size: 20,
+              color: Colors.grey,
+            ),
             label: 'Notificaciones',
           ),
           NavigationDestination(
@@ -137,8 +142,11 @@ class HomeState extends State<Home> {
                               children: [
                                 Text('Empezar una ruta'),
                                 SizedBox(width: 2.1),
-                                Icon(Icons.play_arrow,
-                                    color: Colors.white, size: 15),
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
                               ],
                             ),
                           ),
@@ -193,72 +201,55 @@ class HomeState extends State<Home> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        margin: const EdgeInsets.only(left: 10, right: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 4,
-                              height: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .fontSize,
-                              color: const Color.fromRGBO(191, 141, 48, 1),
-                              margin: const EdgeInsets.only(right: 5),
-                            ),
-                            Text(
-                              "Rutas dentro de la ciudad",
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 270,
-                        child: RouteCardBuilder().buildRouteCard(
-                          context,
-                          routeList
-                              .where((ruta) =>
-                                  ruta.routeType.contains(RouteType.Ciudad))
-                              .toList(),
-                        ), // Color added for testing scroll
+                      RouteListBuilder()
+                          .buildRouteList(context, "Rutas dentro de la ciudad"),
+                      RouteCardBuilder().buildRouteCard(
+                        context,
+                        routeList
+                            .where(
+                              (ruta) =>
+                                  ruta.routeType.contains(RouteType.Ciudad),
+                            )
+                            .toList(),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        margin: const EdgeInsets.only(left: 10, right: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 4,
-                              height: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .fontSize,
-                              color: const Color.fromRGBO(191, 141, 48, 1),
-                              margin: const EdgeInsets.only(right: 5),
-                            ),
-                            Text(
-                              "Rutas cercanas",
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                          ],
-                        ),
+                      RouteListBuilder()
+                          .buildRouteList(context, "Día en la naturaleza "),
+                      RouteCardBuilder().buildRouteCard(
+                        context,
+                        routeList
+                            .where(
+                              (ruta) =>
+                                  ruta.routeType.contains(RouteType.Naturaleza),
+                            )
+                            .toList(),
                       ),
-                      SizedBox(
-                        height: 270,
-                        child: RouteCardBuilder().buildRouteCard(
-                            context,
-                            listFromJson(
-                                getPublicRoutes()) // Replace with your data source
-                            ), // Color added for testing scroll
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      RouteListBuilder()
+                          .buildRouteList(context, "Cultura e Historia"),
+                      RouteCardBuilder().buildRouteCard(
+                        context,
+                        routeList
+                            .where(
+                              (ruta) =>
+                                  ruta.routeType.contains(RouteType.Cultura),
+                            )
+                            .toList(),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      RouteListBuilder()
+                          .buildRouteList(context, "Rutas cercanas"),
+                      RouteCardBuilder().buildRouteCard(
+                        context,
+                        listFromJson(
+                          getPublicRoutes(),
+                        ),
                       ),
                     ],
                   ),

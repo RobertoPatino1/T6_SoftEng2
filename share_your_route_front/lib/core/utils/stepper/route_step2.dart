@@ -9,10 +9,10 @@ class RouteStep2 extends StatefulWidget {
   final Function(List<Place>) onStopsChanged;
 
   const RouteStep2({
-    Key? key,
+    super.key,
     required this.stops,
     required this.onStopsChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<RouteStep2> createState() => _RouteStep2State();

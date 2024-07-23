@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
-import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
+import 'package:share_your_route_front/models/tourist_route.dart';
 
 class RouteService {
   List<TouristRoute> touristRouteList = [];
@@ -12,7 +12,7 @@ class RouteService {
   RouteService._();
 
   static Future<RouteService> create() async {
-    var service = RouteService._();
+    final service = RouteService._();
     await service.loadInitialRouteData();
     return service;
   }
@@ -29,17 +29,17 @@ class RouteService {
             jsonData.map((item) => item as Map<String, dynamic>).toList();
 
         touristRouteList = listFromJson(listOfMaps);
-        print(touristRouteList);
       } else {
+        // ignore: avoid_print
         print('El contenido JSON no es una lista.');
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error al leer o parsear el archivo: $e');
     }
   }
 
   Future<List<TouristRoute>> fetchRouteData() async {
-    print(touristRouteList);
     return touristRouteList;
   }
 
@@ -49,7 +49,7 @@ class RouteService {
   }
 
   Future<void> updateData(String name, TouristRoute updatedData) async {
-    int index = touristRouteList.indexWhere((item) => item.name == name);
+    final int index = touristRouteList.indexWhere((item) => item.name == name);
     if (index != -1) {
       touristRouteList[index] = updatedData;
       await _updateLocalData();
@@ -64,7 +64,7 @@ class RouteService {
   Future<void> _updateLocalData() async {
     final directory = await getApplicationDocumentsDirectory();
     final filePath = path.join(directory.path, 'tourist_route.json');
-    List<Map<String, dynamic>> jsonData =
+    final List<Map<String, dynamic>> jsonData =
         touristRouteList.map((item) => item.toJson()).toList();
     File(filePath).writeAsStringSync(jsonEncode(jsonData));
   }
