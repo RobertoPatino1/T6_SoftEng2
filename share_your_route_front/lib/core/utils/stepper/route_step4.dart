@@ -1,9 +1,15 @@
+// ignore_for_file: unnecessary_cast
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
+import 'package:share_your_route_front/models/place.dart';
 
 class RouteStep4 extends StatelessWidget {
   final String routeName;
+  final String routeDescription;
+  final DateTime routeDate;
   final int numberOfPeople;
   final int numberOfGuides;
   final double rangeAlert;
@@ -13,7 +19,7 @@ class RouteStep4 extends StatelessWidget {
   final LatLng? meetingPoint;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
-  final List<Map<String, dynamic>> stops;
+  final List<Place> stops;
 
   const RouteStep4({
     super.key,
@@ -28,6 +34,8 @@ class RouteStep4 extends StatelessWidget {
     required this.onConfirm,
     required this.onCancel,
     required this.stops,
+    required this.routeDescription,
+    required this.routeDate,
   });
 
   @override
@@ -46,6 +54,36 @@ class RouteStep4 extends StatelessWidget {
               ),
               TextSpan(
                 text: routeName,
+                style: labelTextStyle,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        RichText(
+          text: TextSpan(
+            children: [
+              const TextSpan(
+                text: 'Descripción de la Ruta: ',
+                style: boldlabelTextStyle,
+              ),
+              TextSpan(
+                text: routeDescription,
+                style: labelTextStyle,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        RichText(
+          text: TextSpan(
+            children: [
+              const TextSpan(
+                text: 'Fecha de la Ruta: ',
+                style: boldlabelTextStyle,
+              ),
+              TextSpan(
+                text: DateFormat.yMd().format(routeDate),
                 style: labelTextStyle,
               ),
             ],
@@ -179,8 +217,9 @@ class RouteStep4 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(stops.length, (index) {
               final stop = stops[index];
-              final stopName = stop['name'];
-              final stopTime = stop['time'] as TimeOfDay;
+              final stopName = stop.name;
+              final stopStartTime = stop.startTime as TimeOfDay;
+              final stopEndTime = stop.endTime as TimeOfDay;
               return RichText(
                 text: TextSpan(
                   children: [
@@ -189,7 +228,8 @@ class RouteStep4 extends StatelessWidget {
                       style: boldlabelTextStyle,
                     ),
                     TextSpan(
-                      text: '$stopName - ${stopTime.format(context)}',
+                      text:
+                          '$stopName  Inicio:${stopStartTime.format(context)}  Fin:${stopEndTime.format(context)}',
                       style: labelTextStyle,
                     ),
                   ],

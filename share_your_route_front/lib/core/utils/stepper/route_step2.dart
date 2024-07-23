@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/add_stop_screen.dart';
-import 'package:share_your_route_front/modules/route_creation/presenters/view_stops_map_screen.dart'; // Importar la nueva pantalla
+import 'package:share_your_route_front/modules/route_creation/presenters/view_stops_map_screen.dart';
 
 class RouteStep2 extends StatefulWidget {
-  final List<Map<String, dynamic>> stops;
-  final Function(List<Map<String, dynamic>>) onStopsChanged;
+  final List<Place> stops;
+  final Function(List<Place>) onStopsChanged;
 
   const RouteStep2({
     super.key,
@@ -18,7 +19,7 @@ class RouteStep2 extends StatefulWidget {
 }
 
 class _RouteStep2State extends State<RouteStep2> {
-  List<Map<String, dynamic>> stops = [];
+  List<Place> stops = [];
 
   @override
   void initState() {
@@ -26,14 +27,25 @@ class _RouteStep2State extends State<RouteStep2> {
     stops = List.from(widget.stops);
   }
 
-  void _addStop(String name, LatLng location, TimeOfDay time) {
-    final newStop = {'name': name, 'location': location, 'time': time};
+  void _addStop(
+    String name,
+    LatLng ubication,
+    TimeOfDay startTime,
+    TimeOfDay endTime,
+  ) {
+    final newStop = Place(
+      name: name,
+      ubication: ubication,
+      startTime: startTime,
+      endTime: endTime,
+    );
     setState(() {
       if (!stops.any(
         (stop) =>
-            stop['name'] == name &&
-            stop['location'] == location &&
-            stop['time'] == time,
+            stop.name == name &&
+            stop.ubication == ubication &&
+            stop.startTime == startTime &&
+            stop.endTime == endTime,
       )) {
         stops.add(newStop);
       }
@@ -48,6 +60,19 @@ class _RouteStep2State extends State<RouteStep2> {
     widget.onStopsChanged(stops);
   }
 
+  Future<void> _navigateToAddStopScreen() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AddStopScreen(onStopAdded: _addStop),
+      ),
+    );
+
+    if (result != null && result is Place) {
+      _addStop(result.name, result.ubication, result.startTime, result.endTime);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,22 +80,7 @@ class _RouteStep2State extends State<RouteStep2> {
       children: [
         if (stops.isEmpty)
           ElevatedButton(
-            onPressed: () async {
-              final result = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AddStopScreen(onStopAdded: _addStop),
-                ),
-              );
-
-              if (result != null && result is Map<String, dynamic>) {
-                _addStop(
-                  result['name'] as String,
-                  result['location'] as LatLng,
-                  result['time'] as TimeOfDay,
-                );
-              }
-            },
+            onPressed: _navigateToAddStopScreen,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
             ),
@@ -100,6 +110,10 @@ class _RouteStep2State extends State<RouteStep2> {
                 itemCount: stops.length,
                 itemBuilder: (context, index) {
                   final stop = stops[index];
+                  final startTime = stop.startTime;
+                  final endTime = stop.endTime;
+                  final name = stop.name;
+
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 2.0),
                     padding: const EdgeInsets.symmetric(
@@ -117,7 +131,7 @@ class _RouteStep2State extends State<RouteStep2> {
                       children: [
                         Text(
                           // ignore: avoid_dynamic_calls
-                          '${stop['time'].format(context)}    ${stop['name']}',
+                          '${startTime.format(context)} - ${endTime.format(context)}    $name',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -135,22 +149,7 @@ class _RouteStep2State extends State<RouteStep2> {
               ),
               const SizedBox(height: 15),
               ElevatedButton(
-                onPressed: () async {
-                  final result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => AddStopScreen(onStopAdded: _addStop),
-                    ),
-                  );
-
-                  if (result != null && result is Map<String, dynamic>) {
-                    _addStop(
-                      result['name'] as String,
-                      result['location'] as LatLng,
-                      result['time'] as TimeOfDay,
-                    );
-                  }
-                },
+                onPressed: _navigateToAddStopScreen,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
                 ),

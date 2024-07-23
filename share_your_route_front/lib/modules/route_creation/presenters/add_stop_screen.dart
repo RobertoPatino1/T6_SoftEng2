@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 
 class AddStopScreen extends StatefulWidget {
-  final Function(String, LatLng, TimeOfDay) onStopAdded;
+  final Function(String, LatLng, TimeOfDay, TimeOfDay) onStopAdded;
 
   const AddStopScreen({super.key, required this.onStopAdded});
 
@@ -19,7 +19,8 @@ class _AddStopScreenState extends State<AddStopScreen> {
   LatLng? selectedPosition;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _stopNameController = TextEditingController();
-  TimeOfDay? selectedTime;
+  TimeOfDay? selectedStartTime;
+  TimeOfDay? selectedEndTime;
 
   Future<void> getCurrentLocation() async {
     final LatLng position = await LocationService.determinePosition();
@@ -50,12 +51,13 @@ class _AddStopScreenState extends State<AddStopScreen> {
     super.initState();
   }
 
-  Future<void> selectTime(BuildContext context) async {
+  Future<void> selectTime(BuildContext context, bool isStartTime) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
-      helpText:
-          'Selecciona una hora para llegar a la parada', // Cambia el texto aquí
+      helpText: isStartTime
+          ? 'Selecciona una hora para llegar a la parada'
+          : 'Selecciona una hora para salir de la parada',
       builder: (BuildContext context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
@@ -63,9 +65,13 @@ class _AddStopScreenState extends State<AddStopScreen> {
         );
       },
     );
-    if (picked != null && picked != selectedTime) {
+    if (picked != null) {
       setState(() {
-        selectedTime = picked;
+        if (isStartTime) {
+          selectedStartTime = picked;
+        } else {
+          selectedEndTime = picked;
+        }
       });
     }
   }
@@ -171,27 +177,55 @@ class _AddStopScreenState extends State<AddStopScreen> {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          await selectTime(context, true);
+                        },
+                        child: Text(
+                          selectedStartTime == null
+                              ? 'Seleccionar Hora de Inicio'
+                              : 'Hora de Inicio: ${selectedStartTime!.format(context)}',
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ElevatedButton(
+                        onPressed: () async {
+                          await selectTime(context, false);
+                        },
+                        child: Text(
+                          selectedEndTime == null
+                              ? 'Seleccionar Hora de Fin'
+                              : 'Hora de Fin: ${selectedEndTime!.format(context)}',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () async {
                     if (_stopNameController.text.isNotEmpty &&
-                        selectedPosition != null) {
-                      await selectTime(context);
-                      if (selectedTime != null) {
-                        widget.onStopAdded(
-                          _stopNameController.text,
-                          selectedPosition!,
-                          selectedTime!,
-                        );
-                        Navigator.pop(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          {
-                            'name': _stopNameController.text,
-                            'location': selectedPosition,
-                            'time': selectedTime,
-                          },
-                        );
-                      }
+                        selectedPosition != null &&
+                        selectedStartTime != null &&
+                        selectedEndTime != null) {
+                      widget.onStopAdded(
+                        _stopNameController.text,
+                        selectedPosition!,
+                        selectedStartTime!,
+                        selectedEndTime!,
+                      );
+                      Navigator.pop(
+                        context,
+                        {
+                          'name': _stopNameController.text,
+                          'location': selectedPosition,
+                          'startTime': selectedStartTime,
+                          'endTime': selectedEndTime,
+                        },
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

@@ -42,7 +42,7 @@ class GlobalThemeData {
             height: 1,
           ),
           bodyMedium: GoogleFonts.poppins(
-            fontSize: 10.0,
+            fontSize: 12.0,
             color: Colors.black,
             fontWeight: FontWeight.normal,
             height: 1,
