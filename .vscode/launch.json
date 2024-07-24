@@ -8,7 +8,8 @@
             "name": "share_your_route_front",
             "cwd": "share_your_route_front",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main/main.dart"
         },
         {
             "name": "share_your_route_front (profile mode)",

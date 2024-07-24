@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
+import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
@@ -196,62 +197,72 @@ class HomeState extends State<Home> {
               ],
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      RouteListBuilder()
-                          .buildRouteList(context, "Rutas dentro de la ciudad"),
-                      RouteCardBuilder().buildRouteCard(
-                        context,
-                        routeList
-                            .where(
-                              (ruta) =>
-                                  ruta.routeType.contains(RouteType.Ciudad),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      RouteListBuilder()
-                          .buildRouteList(context, "Día en la naturaleza "),
-                      RouteCardBuilder().buildRouteCard(
-                        context,
-                        routeList
-                            .where(
-                              (ruta) =>
-                                  ruta.routeType.contains(RouteType.Naturaleza),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      RouteListBuilder()
-                          .buildRouteList(context, "Cultura e Historia"),
-                      RouteCardBuilder().buildRouteCard(
-                        context,
-                        routeList
-                            .where(
-                              (ruta) =>
-                                  ruta.routeType.contains(RouteType.Cultura),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      RouteListBuilder()
-                          .buildRouteList(context, "Rutas cercanas"),
-                      RouteCardBuilder().buildRouteCard(
-                        context,
-                        listFromJson(
-                          getPublicRoutes(),
-                        ),
-                      ),
-                    ],
+                  child: FutureBuilder<List<Map<String, dynamic>>>(
+                    future: fetchAPIData("/all"),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final List<TouristRoute> routeList =
+                            listFromJson(snapshot.data!);
+                        return Column(
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            RouteListBuilder().buildRouteList(
+                                context, "Rutas dentro de la ciudad",),
+                            RouteCardBuilder().buildRouteCard(
+                              context,
+                              routeList
+                                  .where(
+                                    (ruta) => ruta.routeType
+                                        .contains(RouteType.Ciudad),
+                                  )
+                                  .toList(),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            RouteListBuilder().buildRouteList(
+                                context, "Día en la naturaleza ",),
+                            RouteCardBuilder().buildRouteCard(
+                              context,
+                              routeList
+                                  .where(
+                                    (ruta) => ruta.routeType
+                                        .contains(RouteType.Naturaleza),
+                                  )
+                                  .toList(),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            RouteListBuilder()
+                                .buildRouteList(context, "Cultura e Historia"),
+                            RouteCardBuilder().buildRouteCard(
+                              context,
+                              routeList
+                                  .where(
+                                    (ruta) => ruta.routeType
+                                        .contains(RouteType.Cultura),
+                                  )
+                                  .toList(),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            RouteListBuilder()
+                                .buildRouteList(context, "Rutas cercanas"),
+                            RouteCardBuilder().buildRouteCard(
+                              context,
+                              listFromJson(publicRoutes),
+                            ),
+                          ],
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text("${snapshot.error}");
+                      }
+                      return const CircularProgressIndicator();
+                    },
                   ),
                 ),
               ),
