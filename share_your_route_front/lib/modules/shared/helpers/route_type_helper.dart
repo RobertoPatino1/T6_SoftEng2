@@ -6,17 +6,17 @@ import 'package:share_your_route_front/core/constants/route_type.dart';
 class RouteTypeHelper {
   static IconData getIconData(RouteType icon) {
     switch (icon) {
-      case RouteType.nature:
+      case RouteType.Naturaleza:
         return Icons.nature_people;
-      case RouteType.adventure:
+      case RouteType.Aventura:
         return Icons.terrain;
-      case RouteType.culture:
+      case RouteType.Cultura:
         return Icons.camera_alt;
-      case RouteType.gastronomic:
+      case RouteType.Gastronomica:
         return Icons.restaurant_menu;
-      case RouteType.religious:
+      case RouteType.Religion:
         return Icons.church;
-      case RouteType.city:
+      case RouteType.Ciudad:
         return Icons.location_city;
     }
   }

@@ -1,0 +1,459 @@
+[
+  {
+    "name": "Ruta de Compras y Gastronomía",
+    "placesList": [
+      {
+        "name": "Shopping Mall",
+        "ubication": { "latitude": -2.162048, "longitude": -79.958177 },
+        "startTime": { "hour": 10, "minute": 0 },
+        "endTime": { "hour": 12, "minute": 0 }
+      },
+      {
+        "name": "Café Samborondón",
+        "ubication": { "latitude": -2.161485, "longitude": -79.930470 },
+        "startTime": { "hour": 12, "minute": 15 },
+        "endTime": { "hour": 13, "minute": 30 }
+      },
+      {
+        "name": "Plaza de las Américas",
+        "ubication": { "latitude": -2.155440, "longitude": -79.946485 },
+        "startTime": { "hour": 14, "minute": 0 },
+        "endTime": { "hour": 16, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 8,
+    "numberGuides": 1,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-04T00:00:00.000",
+    "startingPoint": { "latitude": -2.162048, "longitude": -79.958177 },
+    "startTime": { "hour": 10, "minute": 0 },
+    "endTime": { "hour": 16, "minute": 0 },
+    "image": "ruta_compras_gastronomia",
+    "description": "Disfruta de las mejores tiendas y cafés en Guayaquil",
+    "hasStarted": false,
+    "routeType": ["Gastronomica", "Ciudad"]
+  },
+  {
+    "name": "Descubre Guayaquil Nocturno",
+    "placesList": [
+      {
+        "name": "Malecón 2000",
+        "ubication": { "latitude": -2.189612, "longitude": -79.880251 },
+        "startTime": { "hour": 18, "minute": 0 },
+        "endTime": { "hour": 19, "minute": 30 }
+      },
+      {
+        "name": "Plaza Lagos",
+        "ubication": { "latitude": -2.145478, "longitude": -79.867043 },
+        "startTime": { "hour": 19, "minute": 45 },
+        "endTime": { "hour": 21, "minute": 0 }
+      },
+      {
+        "name": "Bar y Restaurante El Pobre Diablo",
+        "ubication": { "latitude": -2.182568, "longitude": -79.888542 },
+        "startTime": { "hour": 21, "minute": 15 },
+        "endTime": { "hour": 23, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 6,
+    "numberGuides": 1,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-04T00:00:00.000",
+    "startingPoint": { "latitude": -2.189612, "longitude": -79.880251 },
+    "startTime": { "hour": 18, "minute": 0 },
+    "endTime": { "hour": 23, "minute": 0 },
+    "image": "descubre_guayaquil_nocturno",
+    "description": "Explora la vida nocturna de Guayaquil",
+    "hasStarted": false,
+    "routeType": ["Ciudad"]
+  },
+  {
+    "name": "Guayaquil Histórico",
+    "placesList": [
+      {
+        "name": "Museo Antropológico y de Arte Contemporáneo",
+        "ubication": { "latitude": -2.190145, "longitude": -79.877463 },
+        "startTime": { "hour": 9, "minute": 30 },
+        "endTime": { "hour": 11, "minute": 0 }
+      },
+      {
+        "name": "Catedral Metropolitana",
+        "ubication": { "latitude": -2.193704, "longitude": -79.884594 },
+        "startTime": { "hour": 11, "minute": 15 },
+        "endTime": { "hour": 12, "minute": 30 }
+      },
+      {
+        "name": "Museo Municipal de Guayaquil",
+        "ubication": { "latitude": -2.198762, "longitude": -79.883436 },
+        "startTime": { "hour": 13, "minute": 0 },
+        "endTime": { "hour": 14, "minute": 30 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 8,
+    "numberGuides": 2,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-05T00:00:00.000",
+    "startingPoint": { "latitude": -2.190145, "longitude": -79.877463 },
+    "startTime": { "hour": 9, "minute": 30 },
+    "endTime": { "hour": 14, "minute": 30 },
+    "image": "guayaquil_historico",
+    "description": "Un recorrido por los lugares históricos de la ciudad",
+    "hasStarted": false,
+    "routeType": ["Cultura", "Ciudad"]
+  },
+  {
+    "name": "Relajación y Recreación",
+    "placesList": [
+      {
+        "name": "Parque Samanes",
+        "ubication": { "latitude": -2.146099, "longitude": -79.884021 },
+        "startTime": { "hour": 10, "minute": 0 },
+        "endTime": { "hour": 12, "minute": 0 }
+      },
+      {
+        "name": "Parque de la Kennedy",
+        "ubication": { "latitude": -2.169416, "longitude": -79.936208 },
+        "startTime": { "hour": 12, "minute": 15 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Vía a la Costa",
+        "ubication": { "latitude": -2.135738, "longitude": -79.963643 },
+        "startTime": { "hour": 14, "minute": 30 },
+        "endTime": { "hour": 16, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 6,
+    "numberGuides": 1,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-05T00:00:00.000",
+    "startingPoint": { "latitude": -2.146099, "longitude": -79.884021 },
+    "startTime": { "hour": 10, "minute": 0 },
+    "endTime": { "hour": 16, "minute": 0 },
+    "image": "relajacion_recreacion",
+    "description": "Un día de relajación y diversión en Guayaquil",
+    "hasStarted": false,
+    "routeType": ["Naturaleza", "Ciudad"]
+  },
+  {
+    "name": "Exploración de la Naturaleza",
+    "placesList": [
+      {
+        "name": "Parque Histórico",
+        "ubication": { "latitude": -2.165457, "longitude": -79.892087 },
+        "startTime": { "hour": 9, "minute": 0 },
+        "endTime": { "hour": 11, "minute": 0 }
+      },
+      {
+        "name": "Malecón 2000",
+        "ubication": { "latitude": -2.189612, "longitude": -79.880251 },
+        "startTime": { "hour": 11, "minute": 30 },
+        "endTime": { "hour": 13, "minute": 0 }
+      },
+      {
+        "name": "Parque de las Iguanas",
+        "ubication": { "latitude": -2.196160, "longitude": -79.882203 },
+        "startTime": { "hour": 13, "minute": 30 },
+        "endTime": { "hour": 15, "minute": 0 }
+      },
+      {
+        "name": "Jardín Botánico",
+        "ubication": { "latitude": -2.176288, "longitude": -79.930775 },
+        "startTime": { "hour": 15, "minute": 30 },
+        "endTime": { "hour": 17, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 8,
+    "numberGuides": 1,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-02T00:00:00.000",
+    "startingPoint": { "latitude": -2.165457, "longitude": -79.892087 },
+    "startTime": { "hour": 9, "minute": 0 },
+    "endTime": { "hour": 17, "minute": 0 },
+    "image": "exploracion_naturaleza",
+    "description": "Conéctate con la naturaleza en el corazón de la ciudad",
+    "hasStarted": false,
+    "routeType": ["Naturaleza", "Ciudad"]
+  },
+  {
+    "name": "Aventura en la Ciudad",
+    "placesList": [
+      {
+        "name": "Parque Samanes",
+        "ubication": { "latitude": -2.146099, "longitude": -79.884021 },
+        "startTime": { "hour": 10, "minute": 0 },
+        "endTime": { "hour": 12, "minute": 0 }
+      },
+      {
+        "name": "Cerro Santa Ana",
+        "ubication": { "latitude": -2.185917, "longitude": -79.880247 },
+        "startTime": { "hour": 12, "minute": 30 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Barrio Las Peñas",
+        "ubication": { "latitude": -2.186578, "longitude": -79.879603 },
+        "startTime": { "hour": 14, "minute": 30 },
+        "endTime": { "hour": 16, "minute": 0 }
+      },
+      {
+        "name": "Parque Centenario",
+        "ubication": { "latitude": -2.188705, "longitude": -79.884313 },
+        "startTime": { "hour": 16, "minute": 30 },
+        "endTime": { "hour": 18, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 5,
+    "numberGuides": 2,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-02T00:00:00.000",
+    "startingPoint": { "latitude": -2.146099, "longitude": -79.884021 },
+    "startTime": { "hour": 10, "minute": 0 },
+    "endTime": { "hour": 18, "minute": 0 },
+    "image": "aventura_ciudad",
+    "description": "Descubre la ciudad a través de la aventura",
+    "hasStarted": false,
+    "routeType": ["Aventura", "Ciudad"]
+  },
+  {
+    "name": "Tour Cultural",
+    "placesList": [
+      {
+        "name": "Museo Antropológico y de Arte Contemporáneo",
+        "ubication": { "latitude": -2.190145, "longitude": -79.877463 },
+        "startTime": { "hour": 10, "minute": 0 },
+        "endTime": { "hour": 12, "minute": 0 }
+      },
+      {
+        "name": "Museo Nahim Isaías",
+        "ubication": { "latitude": -2.197277, "longitude": -79.881246 },
+        "startTime": { "hour": 12, "minute": 30 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Casa de la Cultura",
+        "ubication": { "latitude": -2.195991, "longitude": -79.883548 },
+        "startTime": { "hour": 14, "minute": 30 },
+        "endTime": { "hour": 16, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 6,
+    "numberGuides": 2,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-03T00:00:00.000",
+    "startingPoint": { "latitude": -2.190145, "longitude": -79.877463 },
+    "startTime": { "hour": 10, "minute": 0 },
+    "endTime": { "hour": 16, "minute": 0 },
+    "image": "tour_cultural",
+    "description": "Un viaje por la historia y cultura de Guayaquil",
+    "hasStarted": false,
+    "routeType": ["Cultura", "Ciudad"]
+  },
+  {
+    "name": "Circuito Gastronómico",
+    "placesList": [
+      {
+        "name": "Mercado del Río",
+        "ubication": { "latitude": -2.188914, "longitude": -79.880850 },
+        "startTime": { "hour": 11, "minute": 0 },
+        "endTime": { "hour": 13, "minute": 0 }
+      },
+      {
+        "name": "Plaza Lagos",
+        "ubication": { "latitude": -2.145478, "longitude": -79.867043 },
+        "startTime": { "hour": 13, "minute": 30 },
+        "endTime": { "hour": 15, "minute": 0 }
+      },
+      {
+        "name": "Café de Tere",
+        "ubication": { "latitude": -2.176128, "longitude": -79.888532 },
+        "startTime": { "hour": 15, "minute": 30 },
+        "endTime": { "hour": 17, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 10,
+    "numberGuides": 1,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-03T00:00:00.000",
+    "startingPoint": { "latitude": -2.188914, "longitude": -79.880850 },
+    "startTime": { "hour": 11, "minute": 0 },
+    "endTime": { "hour": 17, "minute": 0 },
+    "image": "circuito_gastronomico",
+    "description": "Explora los sabores típicos de Guayaquil",
+    "hasStarted": false,
+    "routeType": ["Gastronomica", "Ciudad"]
+  },
+  {
+    "name": "Centro artístico e historia",
+    "placesList": [
+      {
+        "name": "Galería Norte",
+        "ubication": { "latitude": -2.1610327, "longitude": -79.9288587 },
+        "startTime": { "hour": 11, "minute": 0 },
+        "endTime": { "hour": 11, "minute": 30 }
+      },
+      {
+        "name": "Galería Central",
+        "ubication": { "latitude": -2.1610327, "longitude": -79.9288587 },
+        "startTime": { "hour": 11, "minute": 30 },
+        "endTime": { "hour": 13, "minute": 0 }
+      },
+      {
+        "name": "Galería Sur",
+        "ubication": { "latitude": -2.1610327, "longitude": -79.9288587 },
+        "startTime": { "hour": 13, "minute": 0 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Museo Contemporáneo",
+        "ubication": { "latitude": -2.1610327, "longitude": -79.9288587 },
+        "startTime": { "hour": 14, "minute": 0 },
+        "endTime": { "hour": 16, "minute": 0 }
+      },
+      {
+        "name": "Museo Histórico",
+        "ubication": { "latitude": -2.1610327, "longitude": -79.9288587 },
+        "startTime": { "hour": 16, "minute": 0 },
+        "endTime": { "hour": 17, "minute": 15 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 4,
+    "numberGuides": 2,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-01T00:00:00.000",
+    "startingPoint": { "latitude": -2.1610327, "longitude": -79.9288587 },
+    "startTime": { "hour": 11, "minute": 0 },
+    "endTime": { "hour": 17, "minute": 15 },
+    "image": "centro_artistico",
+    "description": "Descubre las maravillas artísticas de la ciudad",
+    "hasStarted": false,
+    "routeType": ["Cultura", "Ciudad"]
+  },
+  {
+    "name": "Zoológico de la ciudad",
+    "placesList": [
+      {
+        "name": "Zona Marina",
+        "ubication": { "latitude": -2.0039392, "longitude": -79.9675815 },
+        "startTime": { "hour": 12, "minute": 0 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Zona Terrestre",
+        "ubication": { "latitude": -2.0039392, "longitude": -79.9675815 },
+        "startTime": { "hour": 14, "minute": 0 },
+        "endTime": { "hour": 18, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 10,
+    "numberGuides": 2,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-01T00:00:00.000",
+    "startingPoint": { "latitude": -2.0039392, "longitude": -79.9675815 },
+    "startTime": { "hour": 12, "minute": 0 },
+    "endTime": { "hour": 18, "minute": 0 },
+    "image": "fauna_silvestre",
+    "description": "Descubre la fauna del lugar",
+    "hasStarted": false,
+    "routeType": ["Naturaleza"]
+  },
+  {
+    "name": "Ruta gastronómica",
+    "placesList": [
+      {
+        "name": "Restaurante La Delicia",
+        "ubication": { "latitude": -2.188275, "longitude": -79.878273 },
+        "startTime": { "hour": 10, "minute": 0 },
+        "endTime": { "hour": 12, "minute": 0 }
+      },
+      {
+        "name": "Buffet Internacional",
+        "ubication": { "latitude": -2.188275, "longitude": -79.878273 },
+        "startTime": { "hour": 12, "minute": 0 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Restaurante La Tradición",
+        "ubication": { "latitude": -2.188275, "longitude": -79.878273 },
+        "startTime": { "hour": 14, "minute": 0 },
+        "endTime": { "hour": 15, "minute": 0 }
+      },
+      {
+        "name": "Pastelería Dulce Vida",
+        "ubication": { "latitude": -2.188275, "longitude": -79.878273 },
+        "startTime": { "hour": 15, "minute": 0 },
+        "endTime": { "hour": 16, "minute": 45 }
+      },
+      {
+        "name": "Restaurante Central",
+        "ubication": { "latitude": -2.188275, "longitude": -79.878273 },
+        "startTime": { "hour": 16, "minute": 45 },
+        "endTime": { "hour": 17, "minute": 15 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 6,
+    "numberGuides": 3,
+    "routeIsPublic": true,
+    "routeDate": "2024-08-01T00:00:00.000",
+    "startingPoint": { "latitude": -2.188275, "longitude": -79.878273 },
+    "startTime": { "hour": 10, "minute": 0 },
+    "endTime": { "hour": 17, "minute": 15 },
+    "image": "ruta_gastronomica",
+    "description": "Encuentra los mejores platos típicos",
+    "hasStarted": false,
+    "routeType": ["Gastronomica", "Ciudad"]
+  },
+  {
+    "name": "Tarde con amigos",
+    "placesList": [
+      {
+        "name": "Lugar1",
+        "ubication": { "latitude": -2.1626356, "longitude": -79.9295814 },
+        "startTime": { "hour": 12, "minute": 0 },
+        "endTime": { "hour": 14, "minute": 0 }
+      },
+      {
+        "name": "Lugar2",
+        "ubication": { "latitude": -2.1626356, "longitude": -79.9295814 },
+        "startTime": { "hour": 14, "minute": 0 },
+        "endTime": { "hour": 16, "minute": 0 }
+      },
+      {
+        "name": "Lugar3",
+        "ubication": { "latitude": -2.1626356, "longitude": -79.9295814 },
+        "startTime": { "hour": 16, "minute": 0 },
+        "endTime": { "hour": 18, "minute": 0 }
+      },
+      {
+        "name": "Lugar4",
+        "ubication": { "latitude": -2.1626356, "longitude": -79.9295814 },
+        "startTime": { "hour": 18, "minute": 0 },
+        "endTime": { "hour": 20, "minute": 0 }
+      }
+    ],
+    "currentPlaceIndex": 0,
+    "numberPeople": 4,
+    "numberGuides": 2,
+    "routeIsPublic": false,
+    "routeDate": "2024-08-01T00:00:00.000",
+    "startingPoint": { "latitude": -2.1626356, "longitude": -79.9295814 },
+    "startTime": { "hour": 12, "minute": 0 },
+    "endTime": { "hour": 20, "minute": 0 },
+    "image": "no_image",
+    "description": "Paseo privado con amigos",
+    "hasStarted": false,
+    "routeType": ["Gastronomica", "Aventura", "Ciudad"]
+  }
+  
+]

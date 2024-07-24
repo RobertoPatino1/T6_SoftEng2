@@ -1,1 +1,2 @@
-enum RouteType { nature, culture, gastronomic, adventure, religious, city }
+// ignore: constant_identifier_names
+enum RouteType { Naturaleza, Cultura, Gastronomica, Aventura, Religion, Ciudad }

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
-import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 
 List<Map<Place, DateTime>> places = [
@@ -34,8 +33,16 @@ List<Map<String, dynamic>> getPublicRoutes() {
   return publicRoutes;
 }
 
+void addPublicRoute(TouristRoute route) {
+  publicRoutes.add(route.toJson());
+}
+
 List<Map<String, dynamic>> getPrivateRoutes() {
   return privateRoutes;
+}
+
+void addPrivateRoute(TouristRoute route) {
+  privateRoutes.add(route.toJson());
 }
 
 List<TouristRoute> listFromJson(List<Map<String, dynamic>> jsonList) {

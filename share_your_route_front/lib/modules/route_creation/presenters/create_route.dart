@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/route_type.dart';
+import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step3.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step4.dart';
+import 'package:share_your_route_front/models/place.dart';
+import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/home/home_page/presenters/home_page.dart';
+import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});
@@ -15,15 +21,60 @@ class CreateRoute extends StatefulWidget {
 
 class _CreateRouteState extends State<CreateRoute> {
   int _currentStep = 0;
-  String routeName = '';
-  int numberOfPeople = 2;
-  int numberOfGuides = 1;
-  double rangeAlert = 2;
-  bool showPlaceInfo = false;
-  String alertSound = 'Sonido 1';
-  bool publicRoute = false;
-  LatLng? meetingPoint;
-  List<Map<String, dynamic>> stops = [];
+  String routeNameInput = '';
+  String routeDescriptionInput = '';
+  DateTime routeDateInput = DateTime.now();
+  int numberOfPeopleInput = 2;
+  int numberOfGuidesInput = 1;
+  double rangeAlertInput = 2;
+  bool showPlaceInfoInput = false;
+  String alertSoundInput = 'Sonido 1';
+  bool publicRouteInput = false;
+  LatLng? meetingPointInput;
+  List<Place> stopsInput = [];
+  List<RouteType> routeTypesInput =
+      []; // Lista para tipos de ruta seleccionados
+
+  late final RouteService routeService;
+
+  void createRoute() {
+    // Aquí puedes procesar los datos capturados y crear la nueva ruta
+    final TouristRoute newRoute = TouristRoute(
+      name: routeNameInput,
+      placesList: stopsInput,
+      currentPlaceIndex: 0,
+      numberPeople: numberOfPeopleInput,
+      numberGuides: numberOfGuidesInput,
+      routeIsPublic: publicRouteInput,
+      routeDate: routeDateInput,
+      startingPoint: meetingPointInput!,
+      startTime:
+          stopsInput.isNotEmpty ? stopsInput.first.startTime : TimeOfDay.now(),
+      endTime:
+          stopsInput.isNotEmpty ? stopsInput.last.endTime : TimeOfDay.now(),
+      image: 'no_image',
+      description: routeDescriptionInput,
+      hasStarted: false,
+      routeType: routeTypesInput, // Usar directamente la lista de RouteType
+    );
+
+    addPublicRoute(newRoute);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Ruta creada")),
+    );
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    });
+  }
+
+  Future<void> createRouteData(TouristRoute newRoute) async {
+    routeService = await RouteService.create();
+    await routeService.createData(newRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,18 +112,28 @@ class _CreateRouteState extends State<CreateRoute> {
             currentStep: _currentStep,
             onStepContinue: () {
               setState(() {
-                if (_currentStep < 3) {
+                if (_currentStep == 0 && routeNameInput.isEmpty) {
+                  showSnackbar(
+                    context,
+                    "Debe ingresar el nombre de la ruta",
+                    "error",
+                  );
+                } else if (_currentStep == 1 && stopsInput.isEmpty) {
+                  showSnackbar(
+                    context,
+                    "Debe agregar al menos una parada",
+                    "error",
+                  );
+                } else if (_currentStep == 2 && meetingPointInput == null) {
+                  showSnackbar(
+                    context,
+                    "Debe seleccionar un punto de encuentro",
+                    "error",
+                  );
+                } else if (_currentStep < 3) {
                   _currentStep++;
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Ruta creada')),
-                  );
-                  Future.delayed(const Duration(seconds: 1), () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const HomePage()),
-                    );
-                  });
+                  createRoute();
                 }
               });
             },
@@ -115,7 +176,17 @@ class _CreateRouteState extends State<CreateRoute> {
                       SizedBox(
                         width: 200,
                         child: ElevatedButton(
-                          onPressed: details.onStepContinue,
+                          onPressed: () {
+                            if (routeNameInput.isNotEmpty) {
+                              details.onStepContinue!();
+                            } else {
+                              showSnackbar(
+                                context,
+                                "Debe ingresar el nombre de la ruta",
+                                "error",
+                              );
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(45, 75, 115, 1),
@@ -132,7 +203,24 @@ class _CreateRouteState extends State<CreateRoute> {
                     else
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: details.onStepContinue,
+                          onPressed: () {
+                            if (_currentStep == 1 && stopsInput.isEmpty) {
+                              showSnackbar(
+                                context,
+                                "Debe agregar al menos una parada",
+                                "error",
+                              );
+                            } else if (_currentStep == 2 &&
+                                meetingPointInput == null) {
+                              showSnackbar(
+                                context,
+                                "Debe seleccionar un punto de encuentro",
+                                "error",
+                              );
+                            } else {
+                              details.onStepContinue!();
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(45, 75, 115, 1),
@@ -160,43 +248,55 @@ class _CreateRouteState extends State<CreateRoute> {
                   ),
                 ),
                 content: RouteStep1(
-                  routeName: routeName,
-                  numberOfPeople: numberOfPeople,
-                  numberOfGuides: numberOfGuides,
-                  rangeAlert: rangeAlert,
-                  showPlaceInfo: showPlaceInfo,
-                  alertSound: alertSound,
-                  publicRoute: publicRoute,
+                  routeName: routeNameInput,
+                  routeDescription: routeDescriptionInput,
+                  routeDate: routeDateInput,
+                  numberOfPeople: numberOfPeopleInput,
+                  numberOfGuides: numberOfGuidesInput,
+                  rangeAlert: rangeAlertInput,
+                  showPlaceInfo: showPlaceInfoInput,
+                  alertSound: alertSoundInput,
+                  publicRoute: publicRouteInput,
+                  selectedRouteTypes: routeTypesInput, // Convertir a String
                   onRouteNameChanged: (value) => setState(() {
-                    routeName = value;
+                    routeNameInput = value;
+                  }),
+                  onRouteDescriptionChanged: (value) => setState(() {
+                    routeDescriptionInput = value;
+                  }),
+                  onRouteDateChanged: (value) => setState(() {
+                    routeDateInput = value;
                   }),
                   onNumberOfPeopleChanged: (value) => setState(() {
-                    numberOfPeople = value;
-                    if (numberOfPeople < 1) {
-                      numberOfPeople = 1;
-                    } else if (numberOfPeople > 30) {
-                      numberOfPeople = 30;
+                    numberOfPeopleInput = value;
+                    if (numberOfPeopleInput < 1) {
+                      numberOfPeopleInput = 1;
+                    } else if (numberOfPeopleInput > 30) {
+                      numberOfPeopleInput = 30;
                     }
                   }),
                   onNumberOfGuidesChanged: (value) => setState(() {
-                    numberOfGuides = value;
-                    if (numberOfGuides < 0) {
-                      numberOfGuides = 0;
-                    } else if (numberOfGuides > 5) {
-                      numberOfGuides = 5;
+                    numberOfGuidesInput = value;
+                    if (numberOfGuidesInput < 0) {
+                      numberOfGuidesInput = 0;
+                    } else if (numberOfGuidesInput > 5) {
+                      numberOfGuidesInput = 5;
                     }
                   }),
                   onRangeAlertChanged: (value) => setState(() {
-                    rangeAlert = value;
+                    rangeAlertInput = value;
                   }),
                   onShowPlaceInfoChanged: (value) => setState(() {
-                    showPlaceInfo = value;
+                    showPlaceInfoInput = value;
                   }),
                   onAlertSoundChanged: (value) => setState(() {
-                    alertSound = value;
+                    alertSoundInput = value;
                   }),
                   onPublicRouteChanged: (value) => setState(() {
-                    publicRoute = value;
+                    publicRouteInput = value;
+                  }),
+                  onRouteTypesChanged: (value) => setState(() {
+                    routeTypesInput = value;
                   }),
                 ),
                 isActive: _currentStep >= 0,
@@ -210,9 +310,9 @@ class _CreateRouteState extends State<CreateRoute> {
                   ),
                 ),
                 content: RouteStep2(
-                  stops: stops,
+                  stops: stopsInput,
                   onStopsChanged: (value) => setState(() {
-                    stops = value;
+                    stopsInput = value;
                   }),
                 ),
                 isActive: _currentStep >= 1,
@@ -226,9 +326,9 @@ class _CreateRouteState extends State<CreateRoute> {
                   ),
                 ),
                 content: RouteStep3(
-                  meetingPoint: meetingPoint,
+                  meetingPoint: meetingPointInput,
                   onMeetingPointChanged: (value) => setState(() {
-                    meetingPoint = value;
+                    meetingPointInput = value;
                   }),
                 ),
                 isActive: _currentStep >= 2,
@@ -242,26 +342,18 @@ class _CreateRouteState extends State<CreateRoute> {
                   ),
                 ),
                 content: RouteStep4(
-                  routeName: routeName,
-                  numberOfPeople: numberOfPeople,
-                  numberOfGuides: numberOfGuides,
-                  rangeAlert: rangeAlert,
-                  showPlaceInfo: showPlaceInfo,
-                  alertSound: alertSound,
-                  publicRoute: publicRoute,
-                  meetingPoint: meetingPoint,
-                  stops: stops,
-                  onConfirm: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Ruta creada')),
-                    );
-                    Future.delayed(const Duration(seconds: 1), () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const HomePage()),
-                      );
-                    });
-                  },
+                  routeName: routeNameInput,
+                  routeDescription: routeDescriptionInput,
+                  routeDate: routeDateInput,
+                  numberOfPeople: numberOfPeopleInput,
+                  numberOfGuides: numberOfGuidesInput,
+                  rangeAlert: rangeAlertInput,
+                  showPlaceInfo: showPlaceInfoInput,
+                  alertSound: alertSoundInput,
+                  publicRoute: publicRouteInput,
+                  meetingPoint: meetingPointInput,
+                  stops: stopsInput,
+                  onConfirm: createRoute,
                   onCancel: () {
                     setState(() {
                       _currentStep = 0;

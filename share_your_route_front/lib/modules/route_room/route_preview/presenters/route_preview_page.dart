@@ -79,15 +79,19 @@ class RouteItineraryPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: touristRoute.placesList.length,
                     itemBuilder: (context, index) {
-                      final Place place =
-                          touristRoute.placesList[index].keys.first;
-                      final String startTime = DateFormat('HH:mm')
-                          .format(touristRoute.placesList[index].values.first);
+                      final Place place = touristRoute.placesList[index];
+                      final String startTime = touristRoute
+                          .placesList[index].startTime
+                          .format(context);
+                      final String endTime = touristRoute
+                          .placesList[index].endTime
+                          .format(context);
                       return SizedBox(
                         width: 100,
                         height: 50,
                         child: ItineraryItem(
-                          time: startTime,
+                          timeStart: startTime,
+                          timeEnd: endTime,
                           description: place.name,
                         ),
                       );
@@ -98,7 +102,7 @@ class RouteItineraryPage extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: Text(
-                  DateFormat('d-m-y').format(touristRoute.startTime),
+                  DateFormat("d-MM-yyyy").format(touristRoute.routeDate),
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
@@ -159,24 +163,29 @@ class RouteItineraryPage extends StatelessWidget {
 }
 
 class ItineraryItem extends StatelessWidget {
-  final String time;
+  final String timeStart;
+  final String timeEnd;
   final String description;
 
   const ItineraryItem({
-    required this.time,
+    required this.timeStart,
+    required this.timeEnd,
     required this.description,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 37, 60, 89),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 37, 60, 89),
+        borderRadius: BorderRadius.circular(20), // Aquí redondeas los bordes
+      ),
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       margin: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
           Text(
-            time,
+            "$timeStart-$timeEnd",
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           const SizedBox(width: 20),
