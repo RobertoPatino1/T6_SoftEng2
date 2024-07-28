@@ -9,6 +9,7 @@ import 'package:share_your_route_front/modules/profile/presenters/core/profile_v
 import 'package:share_your_route_front/modules/route_creation/presenters/create_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -184,7 +185,7 @@ class HomeState extends State<Home> {
               Expanded(
                 child: SingleChildScrollView(
                   child: FutureBuilder<List<Map<String, dynamic>>>(
-                    future: fetchAPIData("/all"),
+                    future: getAllRoutes(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         final List<TouristRoute> routeList =

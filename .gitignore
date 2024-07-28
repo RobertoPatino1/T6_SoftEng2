@@ -26,3 +26,4 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 .vscode/
+share_your_route_front/android/app/google-services.json
