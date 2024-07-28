@@ -7,7 +7,7 @@ import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provi
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 
-const apiUrl = "https://shareyourroute-back.onrender.com/api/routes";
+const apiUrl = "https://shareyourroute-back.onrender.com/api/";
 
 List<Place> places = [
   Place(
@@ -30,7 +30,7 @@ Future<List<Map<String,dynamic>>> fetchAPIData(String url) async {
   if (response.statusCode == 200) {
     Logger.root.info("Data loaded");
     Logger.root.log(Level.INFO, response.body);
-    final List<dynamic> jsonList = json.decode(response.body)as List<dynamic>;
+    final List<dynamic> jsonList = json.decode(response.body) as List<dynamic>;
     final List<Map<String,dynamic>> data = List<Map<String,dynamic>>.from(jsonList);
     return data;
   } else {
@@ -40,7 +40,7 @@ Future<List<Map<String,dynamic>>> fetchAPIData(String url) async {
 
 //obtain data from database
 Future<List<Map<String,dynamic>>> getPublicRoutes(){
-  const getRoutesUrl = "/all/public";
+  const getRoutesUrl = "routes/all/public";
   return fetchAPIData(apiUrl + getRoutesUrl);
 }
 
@@ -49,7 +49,7 @@ void addPublicRoute(TouristRoute route) {
 }
 
 Future<List<Map<String,dynamic>>> getPrivateRoutes() {
-  const getRoutesUrl = "/all/private";
+  const getRoutesUrl = "routes/all/private";
   return fetchAPIData(apiUrl + getRoutesUrl);
 }
 
