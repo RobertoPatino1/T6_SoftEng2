@@ -4,6 +4,8 @@ import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/profile/presenters/profile_view.dart';
+import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
@@ -31,6 +33,7 @@ class HomeState extends State<Home> {
   late final RouteService routeService;
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
+  late PageController _pageController;
 
   @override
   void initState() {
@@ -38,17 +41,32 @@ class HomeState extends State<Home> {
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
+    _pageController = PageController(initialPage: currentPageIndex);
   }
 
   @override
   void dispose() {
     _touristRouteService.currentTouristRouteNotifier
         .removeListener(_onTouristRouteChange);
+    _pageController.dispose();
     super.dispose();
   }
 
   void _onTouristRouteChange() {
     setState(() {});
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+  }
+
+  void _onDestinationSelected(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+    _pageController.jumpToPage(index);
   }
 
   @override
@@ -57,49 +75,14 @@ class HomeState extends State<Home> {
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        height: 60,
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: const Color.fromRGBO(37, 60, 89, 0),
-        selectedIndex: currentPageIndex,
-        destinations: <Widget>[
-          NavigationDestination(
-            selectedIcon:
-                Icon(Icons.explore, size: 20, color: theme.colorScheme.primary),
-            icon: const Icon(
-              Icons.explore_outlined,
-              size: 20,
-              color: Colors.grey,
-            ),
-            label: 'Explorar',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(
-              Icons.notifications,
-              size: 20,
-              color: theme.colorScheme.primary,
-            ),
-            icon: const Icon(
-              Icons.notifications_outlined,
-              size: 20,
-              color: Colors.grey,
-            ),
-            label: 'Notificaciones',
-          ),
-          NavigationDestination(
-            selectedIcon:
-                Icon(Icons.person, size: 20, color: theme.colorScheme.primary),
-            icon: const Icon(Icons.person, size: 20, color: Colors.grey),
-            label: 'Perfil',
-          ),
-        ],
+      bottomNavigationBar: CustomNavigationBar(
+        currentPageIndex: currentPageIndex,
+        onDestinationSelected: _onDestinationSelected,
       ),
-      body: IndexedStack(
-        index: currentPageIndex,
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: _onPageChanged,
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -264,21 +247,13 @@ class HomeState extends State<Home> {
             ],
           ),
           // Messages page
-          Container(
-            alignment: Alignment.center,
+          Center(
             child: Text(
               "Muy pronto!!!",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          //Profile page
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              "Muy pronto!!!",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ),
+          ProfileView(), // Agrega el ProfileView como un child de la PageView
         ],
       ),
     );
