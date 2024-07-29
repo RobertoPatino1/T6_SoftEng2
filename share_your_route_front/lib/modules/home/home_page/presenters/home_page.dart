@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
@@ -8,6 +9,7 @@ import 'package:share_your_route_front/modules/profile/presenters/profile_view.d
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 
@@ -180,6 +182,16 @@ class HomeState extends State<Home> {
                         return Column(
                           children: <Widget>[
                             const SizedBox(
+                              height: 30,
+                            ),
+                            RouteListBuilder()
+                                .buildRouteList(context, "Rutas de hoy"),
+                            RouteCardBuilder().buildRouteCard(
+                                context,
+                                routeList.where((ruta) {
+                                  return DateComparator(ruta.routeDate);
+                                }).toList()),
+                            const SizedBox(
                               height: 20,
                             ),
                             RouteListBuilder().buildRouteList(
@@ -224,15 +236,6 @@ class HomeState extends State<Home> {
                                         .contains(RouteType.Cultura),
                                   )
                                   .toList(),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            RouteListBuilder()
-                                .buildRouteList(context, "Rutas cercanas"),
-                            RouteCardBuilder().buildRouteCard(
-                              context,
-                              listFromJson(publicRoutes),
                             ),
                           ],
                         );
