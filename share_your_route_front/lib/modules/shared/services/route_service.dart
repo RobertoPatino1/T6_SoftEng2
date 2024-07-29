@@ -4,47 +4,8 @@ import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
-import 'package:logging/logging.dart';
-import 'package:http/http.dart' as http;
-
-const apiUrl = "https://shareyourroute-back.onrender.com/api/routes";
-
-Future<List<Map<String, dynamic>>> fetchAPIData(String url) async {
-  final response = await http.get(Uri.parse(apiUrl + url));
-  Logger.root.shout(response.body);
-  if (response.statusCode == 200) {
-    Logger.root.info("Data loaded");
-    Logger.root.log(Level.INFO, response.body);
-    final List<dynamic> jsonList = json.decode(response.body) as List<dynamic>;
-    final List<Map<String, dynamic>> data =
-        List<Map<String, dynamic>>.from(jsonList);
-    return data;
-  } else {
-    throw Exception('Failed to load data');
-  }
-}
-
-Future<void> addRoute(String url, Map<String, dynamic> routeData) async {
-  final response = await http.post(
-    Uri.parse(apiUrl + url),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(routeData),
-  );
-
-  Logger.root.shout(response.body);
-  if (response.statusCode == 201) {
-    // HTTP status code 201 indicates successful creation
-    Logger.root.info("Route added successfully");
-    Logger.root.log(Level.INFO, response.body);
-  } else {
-    throw Exception('Failed to add route');
-  }
-}
 
 class RouteService {
   List<TouristRoute> touristRouteList = [];
@@ -79,19 +40,8 @@ class RouteService {
     }
   }
 
-  //obtain data from database
-  Future<List<Map<String, dynamic>>> getPublicRoutes() {
-    const getRoutesUrl = "/all/public";
-    return fetchAPIData(apiUrl + getRoutesUrl);
-  }
-
-  void addPublicRoute(TouristRoute route) {
-    publicRoutes.add(route.toJson());
-  }
-
-  Future<List<Map<String, dynamic>>> getPrivateRoutes() {
-    const getRoutesUrl = "/all/private";
-    return fetchAPIData(apiUrl + getRoutesUrl);
+  Future<List<TouristRoute>> fetchRouteData() async {
+    return touristRouteList;
   }
 
   Future<void> createData(TouristRoute newData) async {

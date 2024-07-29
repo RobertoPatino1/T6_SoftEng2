@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 
@@ -86,18 +87,33 @@ class RouteCardBuilder {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 1,
+                        if (DateComparator(touristRoute.routeDate) == true) ...[
+                          Center(
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 1,
+                              ),
+                              child: Text(
+                                "Fecha: Hoy",
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                             ),
-                            child: Text(
-                              "Fecha: ${DateFormat('dd-MM-2024').format(touristRoute.routeDate)}",
-                              style: Theme.of(context).textTheme.labelSmall,
+                          )
+                        ] else ...[
+                          Center(
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 1,
+                              ),
+                              child: Text(
+                                "Fecha: ${DateFormat('dd-MM-2024').format(touristRoute.routeDate)}",
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                             ),
-                          ),
-                        ),
+                          )
+                        ],
                         Center(
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -136,4 +152,5 @@ class RouteCardBuilder {
       ),
     );
   }
+
 }

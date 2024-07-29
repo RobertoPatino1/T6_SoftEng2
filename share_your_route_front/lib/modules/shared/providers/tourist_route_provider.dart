@@ -15,6 +15,10 @@ class TouristRouteService {
     currentTouristRouteNotifier.value = route;
   }
 
+  void unsetCurrentTouristRoute() {
+    currentTouristRouteNotifier.value = null;
+  }
+
   TouristRoute? getCurrentTouristRoute() {
     return currentTouristRouteNotifier.value;
   }
