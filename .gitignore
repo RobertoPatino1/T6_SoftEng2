@@ -27,4 +27,4 @@ doc/api/
 .flutter-plugins-dependencies
 .vscode/
 share_your_route_front/android/app/google-services.json
-share_your_route_front/android/app/google-services.json
+share_your_route_front/lib/firebase_options.dart

@@ -7,7 +7,7 @@ import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provi
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 
-const apiUrl = "https://shareyourroute-back.onrender.com/api/";
+const apiUrl = "https://shareyourroute-back.onrender.com/api/routes";
 
 List<Place> places = [
   Place(

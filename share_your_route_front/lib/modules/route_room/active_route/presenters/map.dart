@@ -51,6 +51,7 @@ class MapState extends State<Map> {
             onPressed: () {
               Modular.to.pop();
               Modular.to.pop();
+              Modular.to.pop();
             },
           ),
           title: Text(

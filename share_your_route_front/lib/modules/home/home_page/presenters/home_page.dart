@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
@@ -10,6 +11,7 @@ import 'package:share_your_route_front/modules/route_creation/presenters/create_
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -38,9 +40,18 @@ class HomeState extends State<Home> {
   int currentPageIndex = 0;
   late PageController _pageController;
 
+  Future<void> _loadData() async {
+    routeService = await RouteService.create();
+    final routes = await routeService.fetchRouteData();
+    setState(() {
+      routeList = routes;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _loadData();
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
@@ -184,12 +195,20 @@ class HomeState extends State<Home> {
                         return Column(
                           children: <Widget>[
                             const SizedBox(
+                              height: 30,
+                            ),
+                            RouteListBuilder()
+                                .buildRouteList(context, "Rutas de hoy"),
+                            RouteCardBuilder().buildRouteCard(
+                                context,
+                                routeList.where((ruta) {
+                                  return DateComparator(ruta.routeDate);
+                                }).toList()),
+                            const SizedBox(
                               height: 20,
                             ),
                             RouteListBuilder().buildRouteList(
-                              context,
-                              "Rutas dentro de la ciudad",
-                            ),
+                                context, "Rutas dentro de la ciudad",),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
@@ -203,9 +222,7 @@ class HomeState extends State<Home> {
                               height: 30,
                             ),
                             RouteListBuilder().buildRouteList(
-                              context,
-                              "Día en la naturaleza ",
-                            ),
+                                context, "Día en la naturaleza ",),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
@@ -228,15 +245,6 @@ class HomeState extends State<Home> {
                                         .contains(RouteType.Cultura),
                                   )
                                   .toList(),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            RouteListBuilder()
-                                .buildRouteList(context, "Rutas cercanas"),
-                            RouteCardBuilder().buildRouteCard(
-                              context,
-                              listFromJson(publicRoutes),
                             ),
                           ],
                         );
