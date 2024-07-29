@@ -38,18 +38,9 @@ class HomeState extends State<Home> {
   int currentPageIndex = 0;
   late PageController _pageController;
 
-  Future<void> _loadData() async {
-    routeService = await RouteService.create();
-    final routes = await routeService.fetchRouteData();
-    setState(() {
-      routeList = routes;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _loadData();
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
