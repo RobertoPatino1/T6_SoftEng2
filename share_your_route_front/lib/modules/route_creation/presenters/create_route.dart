@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
-import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step3.dart';
@@ -58,7 +59,7 @@ class _CreateRouteState extends State<CreateRoute> {
       routeType: routeTypesInput, // Usar directamente la lista de RouteType
     );
 
-    addPublicRoute(newRoute);
+    addRoute('/saveRoute', newRoute.toJson());
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Ruta creada")),

@@ -32,18 +32,9 @@ class HomeState extends State<Home> {
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
 
-  Future<void> _loadData() async {
-    routeService = await RouteService.create();
-    final routes = await routeService.fetchRouteData();
-    setState(() {
-      routeList = routes;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _loadData();
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
@@ -209,7 +200,9 @@ class HomeState extends State<Home> {
                               height: 20,
                             ),
                             RouteListBuilder().buildRouteList(
-                                context, "Rutas dentro de la ciudad",),
+                              context,
+                              "Rutas dentro de la ciudad",
+                            ),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
@@ -223,7 +216,9 @@ class HomeState extends State<Home> {
                               height: 30,
                             ),
                             RouteListBuilder().buildRouteList(
-                                context, "Día en la naturaleza ",),
+                              context,
+                              "Día en la naturaleza ",
+                            ),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
