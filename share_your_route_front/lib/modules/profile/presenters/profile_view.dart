@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors, avoid_redundant_argument_values
-
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/profile/presenters/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/profile_options.dart';
+import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -11,6 +10,7 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   int currentPageIndex = 2; // Perfil page index
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,8 @@ class _ProfileViewState extends State<ProfileView> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfileHeader(
+            const ProfileHeader(
               imagePath:
                   'asset/images/centro_artistico.jpg', // TODO: Change profile image to the user profile image
               name: 'John Doe',
@@ -63,7 +62,7 @@ class _ProfileViewState extends State<ProfileView> {
                   icon: Icons.logout,
                   title: 'Cerrar sesión',
                   onTap: () {
-                    // TODO: LOG OUT
+                    _authService.logout();
                   },
                 ),
               ],
