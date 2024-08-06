@@ -133,25 +133,6 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
-                      decoration: buildInputDecoration(
-                        labelText: 'Nombre de usuario',
-                        hintText: 'mr_robot007',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese su nombre de usuario';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15.0,
-                      right: 15.0,
-                      top: 15,
-                    ),
-                    child: TextFormField(
                       controller: passwordController,
                       obscureText: _obscurePassword,
                       decoration: buildInputDecoration(
