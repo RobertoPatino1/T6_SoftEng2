@@ -179,21 +179,25 @@ class HomeState extends State<Home> {
                       if (snapshot.hasData) {
                         final List<TouristRoute> routeList =
                             listFromJson(snapshot.data!);
+                        final todayRoutes = routeList.where((ruta) {
+                          return DateComparator(ruta.routeDate);
+                        }).toList();
                         return Column(
                           children: <Widget>[
                             const SizedBox(
                               height: 30,
                             ),
-                            RouteListBuilder()
-                                .buildRouteList(context, "Rutas de hoy"),
-                            RouteCardBuilder().buildRouteCard(
+                            if (todayRoutes.isNotEmpty) ...[
+                              RouteListBuilder()
+                                  .buildRouteList(context, "Rutas de hoy"),
+                              RouteCardBuilder().buildRouteCard(
                                 context,
-                                routeList.where((ruta) {
-                                  return DateComparator(ruta.routeDate);
-                                }).toList()),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                                todayRoutes,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
                             RouteListBuilder().buildRouteList(
                               context,
                               "Rutas dentro de la ciudad",
