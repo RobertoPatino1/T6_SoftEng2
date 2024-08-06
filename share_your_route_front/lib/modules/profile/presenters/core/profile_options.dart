@@ -8,16 +8,54 @@ class ProfileOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: options.map((option) {
-        return ListTile(
-          leading: Icon(option.icon),
-          title: Text(option.title),
-          onTap: () async {
-            await option
-                .onTap(); // Ejecuta el callback como una función asíncrona
-          },
-        );
-      }).toList(),
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 230, 229, 229),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            children: options.take(2).map((option) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: Icon(option.icon),
+                    title: Text(option.title),
+                    trailing: const Icon(Icons.chevron_right), // Flecha
+                    onTap: option.onTap,
+                  ),
+                  if (option != options[1]) const Divider(),
+                ],
+              );
+            }).toList(),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 230, 229, 229),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            children: options.skip(2).map((option) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: Icon(option.icon),
+                    title: Text(option.title),
+                    trailing: option.title != 'Cerrar sesión'
+                        ? const Icon(Icons.chevron_right)
+                        : null, // Flecha o nada si es "Cerrar sesión"
+                    onTap: option.onTap,
+                  ),
+                  if (option != options.last) const Divider(),
+                ],
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -25,8 +63,7 @@ class ProfileOptions extends StatelessWidget {
 class OptionItem {
   final IconData icon;
   final String title;
-  final Future<void> Function()
-      onTap; // Cambia a un Future<void> para soportar async
+  final VoidCallback onTap;
 
   OptionItem({
     required this.icon,

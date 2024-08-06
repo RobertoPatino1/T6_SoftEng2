@@ -5,6 +5,7 @@ class ProfileHeader extends StatelessWidget {
   final String imagePath;
   final String name;
   final String email;
+  final String bio;
 
   const ProfileHeader({
     super.key,
@@ -12,6 +13,7 @@ class ProfileHeader extends StatelessWidget {
     required this.imagePath,
     required this.name,
     required this.email,
+    required this.bio,
   });
 
   @override
@@ -31,7 +33,6 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
             ),
-            // Foto de perfil con borde blanco
             Positioned(
               bottom: 0,
               child: Container(
@@ -40,7 +41,7 @@ class ProfileHeader extends StatelessWidget {
                   border: Border.all(
                     color: Colors.white,
                     width: 5,
-                  ), // TODO: CHANGE THIS WITH THE APPLIED THEME
+                  ),
                 ),
                 child: CircleAvatar(
                   radius: 80,
@@ -67,6 +68,40 @@ class ProfileHeader extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(
+                  255,
+                  230,
+                  229,
+                  229,
+                ), // Fondo de la tarjeta
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  const Text(
+                    "Acerca de mi:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    bio,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

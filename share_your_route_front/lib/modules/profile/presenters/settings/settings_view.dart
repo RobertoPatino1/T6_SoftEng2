@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/edition/edit_profile.dart';
 
