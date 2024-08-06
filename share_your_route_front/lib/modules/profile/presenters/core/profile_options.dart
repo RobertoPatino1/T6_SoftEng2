@@ -12,7 +12,10 @@ class ProfileOptions extends StatelessWidget {
         return ListTile(
           leading: Icon(option.icon),
           title: Text(option.title),
-          onTap: option.onTap,
+          onTap: () async {
+            await option
+                .onTap(); // Ejecuta el callback como una función asíncrona
+          },
         );
       }).toList(),
     );
@@ -22,7 +25,8 @@ class ProfileOptions extends StatelessWidget {
 class OptionItem {
   final IconData icon;
   final String title;
-  final VoidCallback onTap;
+  final Future<void> Function()
+      onTap; // Cambia a un Future<void> para soportar async
 
   OptionItem({
     required this.icon,

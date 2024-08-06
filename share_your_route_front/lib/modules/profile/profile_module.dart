@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:share_your_route_front/modules/profile/presenters/profile_settings.dart';
-import 'package:share_your_route_front/modules/profile/presenters/profile_view.dart';
+import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/settings_view.dart';
 
 class ProfileViewModule extends Module {
   @override
@@ -11,7 +11,7 @@ class ProfileViewModule extends Module {
     );
     r.child(
       '/settings',
-      child: (context) => ProfileSettings(),
+      child: (context) => SettingsView(),
     );
   }
 }
