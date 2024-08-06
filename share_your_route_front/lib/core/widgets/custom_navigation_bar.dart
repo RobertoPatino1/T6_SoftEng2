@@ -5,10 +5,10 @@ class CustomNavigationBar extends StatelessWidget {
   final ValueChanged<int> onDestinationSelected;
 
   const CustomNavigationBar({
-    Key? key,
+    super.key,
     required this.currentPageIndex,
     required this.onDestinationSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

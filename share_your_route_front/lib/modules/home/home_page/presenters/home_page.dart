@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
-import 'package:share_your_route_front/models/tourist_route.dart';
-import 'package:share_your_route_front/modules/profile/presenters/profile_view.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
+import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
@@ -73,7 +73,7 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    Theme.of(context);
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
     return Scaffold(
@@ -256,7 +256,7 @@ class HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          ProfileView(), // Agrega el ProfileView como un child de la PageView
+          ProfileView(),
         ],
       ),
     );
