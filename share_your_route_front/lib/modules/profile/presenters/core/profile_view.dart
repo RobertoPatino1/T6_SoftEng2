@@ -27,6 +27,7 @@ class _ProfileViewState extends State<ProfileView> {
                   'asset/images/centro_artistico.jpg', // TODO: Change profile image to the user profile image
               name: 'John Doe',
               email: 'johndoe@example.com',
+              backgroundImagePath: 'asset/images/aventura_ciudad.jpg',
             ),
             const SizedBox(height: 20),
             ProfileOptions(
