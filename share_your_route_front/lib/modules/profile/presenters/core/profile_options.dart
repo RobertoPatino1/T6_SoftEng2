@@ -67,7 +67,7 @@ class ProfileOptions extends StatelessWidget {
           child: Column(
             children: options.skip(2).map((option) {
               BorderRadius? borderRadius;
-              if (option == options.first) {
+              if (option == options[2]) {
                 borderRadius =
                     const BorderRadius.vertical(top: Radius.circular(15));
               } else if (option == options.last) {
