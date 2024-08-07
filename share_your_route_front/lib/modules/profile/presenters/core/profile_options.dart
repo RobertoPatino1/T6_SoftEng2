@@ -17,15 +17,42 @@ class ProfileOptions extends StatelessWidget {
           ),
           child: Column(
             children: options.take(2).map((option) {
+              BorderRadius? borderRadius;
+              if (option == options.first) {
+                borderRadius =
+                    const BorderRadius.vertical(top: Radius.circular(15));
+              } else if (option == options[1]) {
+                borderRadius =
+                    const BorderRadius.vertical(bottom: Radius.circular(15));
+              }
+
               return Column(
                 children: [
-                  ListTile(
-                    leading: Icon(option.icon),
-                    title: Text(option.title),
-                    trailing: const Icon(Icons.chevron_right), // Flecha
-                    onTap: option.onTap,
+                  Material(
+                    color: Colors.transparent,
+                    borderRadius: borderRadius,
+                    clipBehavior: Clip
+                        .antiAlias, // Asegura que el splash effect respete los bordes
+                    child: InkWell(
+                      onTap: () async {
+                        await Future.delayed(const Duration(milliseconds: 100));
+                        option.onTap();
+                      },
+                      splashColor: Colors.grey,
+                      child: ListTile(
+                        leading: Icon(option.icon),
+                        title: Text(option.title),
+                        trailing: const Icon(Icons.chevron_right),
+                      ),
+                    ),
                   ),
-                  if (option != options[1]) const Divider(),
+                  if (option != options[1])
+                    const Divider(
+                      height: 1,
+                      thickness: 1,
+                      indent: 0,
+                      endIndent: 0,
+                    ),
                 ],
               );
             }).toList(),
@@ -39,17 +66,48 @@ class ProfileOptions extends StatelessWidget {
           ),
           child: Column(
             children: options.skip(2).map((option) {
+              BorderRadius? borderRadius;
+              if (option == options.first) {
+                borderRadius =
+                    const BorderRadius.vertical(top: Radius.circular(15));
+              } else if (option == options.last) {
+                borderRadius =
+                    const BorderRadius.vertical(bottom: Radius.circular(15));
+              }
+
               return Column(
                 children: [
-                  ListTile(
-                    leading: Icon(option.icon),
-                    title: Text(option.title),
-                    trailing: option.title != 'Cerrar sesión'
-                        ? const Icon(Icons.chevron_right)
-                        : null, // Flecha o nada si es "Cerrar sesión"
-                    onTap: option.onTap,
+                  Material(
+                    color: Colors.transparent,
+                    borderRadius: borderRadius,
+                    clipBehavior: Clip
+                        .antiAlias, // Asegura que el splash effect respete los bordes
+                    child: InkWell(
+                      onTap: () async {
+                        await Future.delayed(
+                          const Duration(
+                            milliseconds: 100,
+                          ),
+                        );
+                        option.onTap();
+                      },
+                      splashColor: Colors.grey,
+                      child: ListTile(
+                        leading: Icon(option.icon),
+                        title: Text(option.title),
+                        trailing: option.title != 'Cerrar sesión'
+                            ? const Icon(Icons.chevron_right)
+                            : null,
+                      ),
+                    ),
                   ),
-                  if (option != options.last) const Divider(),
+                  if (option != options.last)
+                    const Divider(
+                      height: 1,
+                      thickness: 1,
+                      indent: 0,
+                      endIndent: 0,
+                    ),
                 ],
               );
             }).toList(),
