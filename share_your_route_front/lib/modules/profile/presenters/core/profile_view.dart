@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
+import 'package:share_your_route_front/modules/profile/presenters/help/help_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/routes/created_routes_history.dart';
+import 'package:share_your_route_front/modules/profile/presenters/routes/joined_routes_history.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/settings_view.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 
@@ -36,14 +39,20 @@ class _ProfileViewState extends State<ProfileView> {
                   icon: Icons.route,
                   title: 'Rutas creadas',
                   onTap: () async {
-                    // Mostrar todas las rutas que el usuario ha creado
+                    navigateWithSlideTransition(
+                      context,
+                      const CreatedRoutesHistory(),
+                    );
                   },
                 ),
                 OptionItem(
                   icon: Icons.backpack,
                   title: 'Rutas a las que te has unido',
                   onTap: () async {
-                    // Mostrar todos los viajes a los que el usuario se ha registrado
+                    navigateWithSlideTransition(
+                      context,
+                      const JoinedRoutesHistory(),
+                    );
                   },
                 ),
                 OptionItem(
@@ -57,7 +66,10 @@ class _ProfileViewState extends State<ProfileView> {
                   icon: Icons.help,
                   title: 'Ayuda',
                   onTap: () async {
-                    // Ir a la pantalla de ayuda
+                    navigateWithSlideTransition(
+                      context,
+                      const HelpScreen(),
+                    );
                   },
                 ),
                 OptionItem(
