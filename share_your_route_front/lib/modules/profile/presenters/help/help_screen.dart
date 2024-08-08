@@ -60,14 +60,18 @@ class HelpScreen extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20), // Espacio inferior
+          const SizedBox(height: 20),
         ],
       ),
     );
   }
 
   Widget _buildOption(
-      BuildContext context, IconData icon, String title, Widget page) {
+    BuildContext context,
+    IconData icon,
+    String title,
+    Widget page,
+  ) {
     return Material(
       color: Colors.transparent,
       child: InkWell(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
+import 'package:share_your_route_front/modules/profile/presenters/about/about_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/help_screen.dart';
@@ -14,7 +15,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  int currentPageIndex = 2; // Perfil page index
+  int currentPageIndex = 2;
   final AuthService _authService = AuthService();
 
   @override
@@ -76,7 +77,10 @@ class _ProfileViewState extends State<ProfileView> {
                   icon: Icons.info,
                   title: 'Información',
                   onTap: () async {
-                    // Ir a la pantalla de información
+                    navigateWithSlideTransition(
+                      context,
+                      const AboutScreen(),
+                    );
                   },
                 ),
                 OptionItem(
