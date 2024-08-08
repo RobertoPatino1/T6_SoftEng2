@@ -127,14 +127,26 @@ class GlobalThemeData {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor:
-              WidgetStateProperty.all<Color>(lightColorScheme.secondary),
-          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey; // Color cuando está desactivado
+              }
+              return lightColorScheme.secondary; // Color cuando está habilitado
+            },
+          ),
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.white; // Color del texto cuando está desactivado
+              }
+              return Colors.white; // Color del texto cuando está habilitado
+            },
+          ),
           textStyle: WidgetStateProperty.all<TextStyle>(
             GoogleFonts.poppins(
               fontSize: 12.0,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
             ),
           ),
         ),

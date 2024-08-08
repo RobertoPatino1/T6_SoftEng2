@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
+import 'package:share_your_route_front/modules/profile/presenters/about/about_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/help_screen.dart';
@@ -14,7 +15,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  int currentPageIndex = 2; // Perfil page index
+  int currentPageIndex = 2;
   final AuthService _authService = AuthService();
 
   @override
@@ -34,60 +35,71 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 20),
             ProfileOptions(
-              options: [
-                OptionItem(
-                  icon: Icons.route,
-                  title: 'Rutas creadas',
-                  onTap: () async {
-                    navigateWithSlideTransition(
-                      context,
-                      const CreatedRoutesHistory(),
-                    );
-                  },
+              optionGroups: [
+                OptionGroup(
+                  options: [
+                    OptionItem(
+                      icon: Icons.route,
+                      title: 'Rutas creadas',
+                      onTap: () async {
+                        navigateWithSlideTransition(
+                          context,
+                          const CreatedRoutesHistory(),
+                        );
+                      },
+                    ),
+                    OptionItem(
+                      icon: Icons.backpack,
+                      title: 'Rutas a las que te has unido',
+                      onTap: () async {
+                        navigateWithSlideTransition(
+                          context,
+                          const JoinedRoutesHistory(),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                OptionItem(
-                  icon: Icons.backpack,
-                  title: 'Rutas a las que te has unido',
-                  onTap: () async {
-                    navigateWithSlideTransition(
-                      context,
-                      const JoinedRoutesHistory(),
-                    );
-                  },
-                ),
-                OptionItem(
-                  icon: Icons.settings,
-                  title: 'Ajustes',
-                  onTap: () async {
-                    navigateWithSlideTransition(context, SettingsView());
-                  },
-                ),
-                OptionItem(
-                  icon: Icons.help,
-                  title: 'Ayuda',
-                  onTap: () async {
-                    navigateWithSlideTransition(
-                      context,
-                      const HelpScreen(),
-                    );
-                  },
-                ),
-                OptionItem(
-                  icon: Icons.info,
-                  title: 'Información',
-                  onTap: () async {
-                    // Ir a la pantalla de información
-                  },
-                ),
-                OptionItem(
-                  icon: Icons.logout,
-                  title: 'Cerrar sesión',
-                  onTap: () async {
-                    _authService.logout();
-                  },
+                OptionGroup(
+                  options: [
+                    OptionItem(
+                      icon: Icons.settings,
+                      title: 'Ajustes',
+                      onTap: () async {
+                        navigateWithSlideTransition(context, SettingsView());
+                      },
+                    ),
+                    OptionItem(
+                      icon: Icons.help,
+                      title: 'Ayuda',
+                      onTap: () async {
+                        navigateWithSlideTransition(
+                          context,
+                          const HelpScreen(),
+                        );
+                      },
+                    ),
+                    OptionItem(
+                      icon: Icons.info,
+                      title: 'Información',
+                      onTap: () async {
+                        navigateWithSlideTransition(
+                          context,
+                          const AboutScreen(),
+                        );
+                      },
+                    ),
+                    OptionItem(
+                      icon: Icons.logout,
+                      title: 'Cerrar sesión',
+                      onTap: () async {
+                        _authService.logout();
+                      },
+                    ),
+                  ],
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
