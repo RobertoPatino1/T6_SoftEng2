@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
+import 'package:share_your_route_front/modules/profile/presenters/help/options/licence_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/help/options/terms_and_privacy_screen.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -12,15 +15,15 @@ class HelpScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Spacer(), // Añade espacio flexible
-          // Imagen centrada
+          const Spacer(),
+
           Image.asset(
             'asset/images/help_screen_img.jpg',
-            width: 500, // Ajusta el tamaño de la imagen según sea necesario
+            width: 500,
             height: 500,
             fit: BoxFit.contain,
           ),
-          const Spacer(flex: 2), // Mayor espacio entre la imagen y las opciones
+          const Spacer(flex: 2),
           // Opciones
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -30,15 +33,19 @@ class HelpScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildOption(context, Icons.travel_explore, 'Quiénes Somos'),
-                _buildDivider(),
                 _buildOption(
                   context,
                   Icons.description,
-                  'Términos y Condiciones',
+                  'Términos y Políticas',
+                  const TermsAndPrivacyScreen(),
                 ),
                 _buildDivider(),
-                _buildOption(context, Icons.lock, 'Licencia'),
+                _buildOption(
+                  context,
+                  Icons.lock,
+                  'Licencia',
+                  const LicenseScreen(),
+                ),
               ],
             ),
           ),
@@ -59,12 +66,14 @@ class HelpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOption(BuildContext context, IconData icon, String title) {
+  Widget _buildOption(
+      BuildContext context, IconData icon, String title, Widget page) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
           // Acción al tocar la opción
+          navigateWithSlideTransition(context, page);
         },
         splashColor: Colors.grey,
         child: ListTile(

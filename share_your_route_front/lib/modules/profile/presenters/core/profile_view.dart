@@ -5,7 +5,7 @@ import 'package:share_your_route_front/modules/profile/presenters/core/profile_o
 import 'package:share_your_route_front/modules/profile/presenters/help/help_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/routes/created_routes_history.dart';
 import 'package:share_your_route_front/modules/profile/presenters/routes/joined_routes_history.dart';
-import 'package:share_your_route_front/modules/profile/presenters/settings/settings_view.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/settings_screen.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 
 class ProfileView extends StatefulWidget {
