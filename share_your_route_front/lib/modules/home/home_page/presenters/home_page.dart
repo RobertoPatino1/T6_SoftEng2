@@ -262,6 +262,7 @@ class HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
+
           ProfileView(),
         ],
       ),
