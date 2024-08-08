@@ -18,8 +18,8 @@ class AboutScreen extends StatelessWidget {
               Image.asset(
                 'asset/images/logo.png',
                 width: double.infinity,
-                height: 150, // Reduce la altura aquí
-                fit: BoxFit.contain, // Ajusta el contenido
+                height: 150,
+                fit: BoxFit.contain,
               ),
               const SizedBox(height: 20),
               const Text(
