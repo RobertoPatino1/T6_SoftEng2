@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 const TextStyle labelTextStyle = TextStyle(
   fontSize: 16,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class RouteStep1 extends StatefulWidget {
   final String routeName;

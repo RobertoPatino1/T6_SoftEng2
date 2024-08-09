@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -6,9 +7,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Información'),
-      ),
+      appBar: const CustomAppBar(title: "Información"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

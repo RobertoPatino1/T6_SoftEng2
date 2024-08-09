@@ -14,6 +14,7 @@ class CustomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return NavigationBar(
+      backgroundColor: const Color.fromARGB(189, 227, 227, 227),
       height: 60,
       onDestinationSelected: onDestinationSelected,
       indicatorColor: const Color.fromRGBO(37, 60, 89, 0),

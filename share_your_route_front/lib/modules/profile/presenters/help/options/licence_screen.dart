@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class LicenseScreen extends StatelessWidget {
   const LicenseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Licencia'),
-      ),
-      body: const Padding(
+    return const Scaffold(
+      appBar: CustomAppBar(title: "Licencia"),
+      body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
