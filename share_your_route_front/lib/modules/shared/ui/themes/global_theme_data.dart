@@ -165,4 +165,20 @@ class GlobalThemeData {
     onSurface: Color(0xFF241E30),
     brightness: Brightness.light,
   );
+
+  static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
+
+  static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
+
+  static const ColorScheme darkColorScheme = ColorScheme(
+    primary: Color.fromARGB(255, 191, 141, 48),
+    onPrimary: Colors.black,
+    secondary: Color.fromARGB(255, 45, 75, 115),
+    onSecondary: Color(0xFFEFF0F2),
+    error: Colors.redAccent,
+    onError: Color(0xFFFFFFFF),
+    surface: Color.fromARGB(255, 37, 60, 89),
+    onSurface: Color.fromARGB(255, 238, 240, 242),
+    brightness: Brightness.dark,
+  );
 }
