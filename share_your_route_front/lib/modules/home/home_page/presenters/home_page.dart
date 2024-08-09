@@ -6,10 +6,12 @@ import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_j
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
+import 'package:share_your_route_front/modules/route_creation/presenters/create_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 List<TouristRoute> routeList = [];
 
@@ -117,7 +119,8 @@ class HomeState extends State<Home> {
                       const SizedBox(height: 8),
                       ElevatedButton(
                         onPressed: () {
-                          Modular.to.pushNamed('/auth/home/creation');
+                          navigateWithSlideTransition(
+                              context, const CreateRoute());
                         },
                         child: const IntrinsicWidth(
                           child: Center(
