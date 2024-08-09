@@ -29,6 +29,8 @@ void showSnackbar(BuildContext context, String message, String messageType) {
       icon = const Icon(Icons.info, color: Colors.white);
   }
 
+  ScaffoldMessenger.of(context).clearSnackBars();
+
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: SizedBox(
