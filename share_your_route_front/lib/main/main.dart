@@ -8,6 +8,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
 import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
 
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "lib/core/configs/.env");
@@ -18,14 +20,17 @@ void main() async {
   );
 }
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Share your route',
-      themeMode: ThemeMode.light,
+      themeMode: themeMode,
       theme: GlobalThemeData.lightThemeData,
+      darkTheme: GlobalThemeData.darkThemeData,
       routerConfig: Modular.routerConfig,
     );
   }
@@ -128,8 +133,6 @@ class _MainPageState extends State<MainPage> {
         Modular.to.navigate('/auth/');
       });
     } catch (error) {
-      // Manejo del error si la ubicación no se puede obtener
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al obtener la ubicación: $error')),
       );
@@ -159,7 +162,6 @@ class _MainPageState extends State<MainPage> {
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
-                // ignore: sized_box_for_whitespace
                 child: Container(
                   width: 200,
                   height: 150,

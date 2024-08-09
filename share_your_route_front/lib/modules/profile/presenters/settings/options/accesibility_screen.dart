@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_your_route_front/main/main.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
-class AccesibilityScreen extends StatefulWidget {
+class AccesibilityScreen extends ConsumerWidget {
   @override
-  _AccessibilitySettingsPageState createState() =>
-      _AccessibilitySettingsPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = ref.watch(themeModeProvider) == ThemeMode.dark;
 
-class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
-  bool isDarkMode = false;
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Accesibilidad"),
       body: Column(
@@ -37,16 +33,8 @@ class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
               trailing: Switch(
                 value: isDarkMode,
                 onChanged: (value) {
-                  setState(() {
-                    isDarkMode = value;
-                    // TODO: Aquí es donde se cambia el tema de la aplicación
-                    if (isDarkMode) {
-                      // TODO:Cambiar al tema oscuro
-                      // TODO:Cambia el tema globalmente usando el ThemeData o un ThemeMode
-                    } else {
-                      // TODO:Cambiar al tema claro
-                    }
-                  });
+                  final newThemeMode = value ? ThemeMode.dark : ThemeMode.light;
+                  ref.read(themeModeProvider.notifier).state = newThemeMode;
                 },
               ),
             ),
