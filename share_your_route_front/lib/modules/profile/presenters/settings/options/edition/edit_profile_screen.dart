@@ -26,16 +26,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _pickProfileImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _profileImage = pickedFile;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _profileImage = pickedFile;
+      });
+    }
   }
 
   Future<void> _pickBannerImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _bannerImage = pickedFile;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _bannerImage = pickedFile;
+      });
+    }
   }
 
   Future<void> _editBio() async {
@@ -67,7 +71,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       image: DecorationImage(
                         image: _bannerImage == null
                             ? const AssetImage(
-                                'asset/images/aventura_ciudad.jpg')
+                                'asset/images/aventura_ciudad.jpg',
+                              )
                             : FileImage(File(_bannerImage!.path))
                                 as ImageProvider,
                         fit: BoxFit.cover,
@@ -97,14 +102,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _profileImage == null
-                            ? const AssetImage(
-                                'asset/images/centro_artistico.jpg',
-                              )
-                            : FileImage(File(_profileImage!.path))
-                                as ImageProvider,
+                      GestureDetector(
+                        onTap: _pickProfileImage,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: _profileImage == null
+                              ? const AssetImage(
+                                  'asset/images/centro_artistico.jpg',
+                                )
+                              : FileImage(File(_profileImage!.path))
+                                  as ImageProvider,
+                        ),
                       ),
                       GestureDetector(
                         onTap: _pickProfileImage,
@@ -190,6 +198,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           // TODO: Implementar la lógica de guardado
+                          Navigator.of(context).pop();
                         }
                       },
                       child: const Text('Guardar cambios'),
