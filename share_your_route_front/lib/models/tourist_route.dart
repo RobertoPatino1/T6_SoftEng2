@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/models/place.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 
 class TouristRoute {
   final String name;
@@ -110,5 +111,8 @@ class TouristRoute {
       'hasStarted': hasStarted,
       'routeType': encodedRouteType,
     };
+  }
+  void save(){
+    saveRoute(toJson());
   }
 }

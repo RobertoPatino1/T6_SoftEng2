@@ -25,3 +25,8 @@ Future getPrivateRoutes() {
   const getRoutesUrl = "routes/all/private";
   return getRequest("$apiUrl$getRoutesUrl");
 }
+
+Future saveRoute(Map<String, dynamic> routeJson) async {
+  final response = await postRequest("${apiUrl}routes/save", routeJson);
+  return response;
+}

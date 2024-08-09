@@ -52,19 +52,38 @@ class HelpScreen extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
-              height: 10,
+          ),
+          const SizedBox(
+            height: 10,
+          ), // Espacio entre las opciones y el texto de propiedad
+          Text(
+            '© 2024 Share Your Route LLC™',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
             ),
-            Text(
-              '© 2024 Share Your Route LLC™',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[600],
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-          ],
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 20), // Espacio inferior
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOption(
+      BuildContext context, IconData icon, String title, Widget page,) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          // Acción al tocar la opción
+          navigateWithSlideTransition(context, page);
+        },
+        splashColor: Colors.grey,
+        child: ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          trailing: const Icon(Icons.chevron_right),
         ),
       ),
     );

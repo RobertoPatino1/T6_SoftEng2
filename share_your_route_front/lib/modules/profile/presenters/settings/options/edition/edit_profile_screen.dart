@@ -71,8 +71,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       image: DecorationImage(
                         image: _bannerImage == null
                             ? const AssetImage(
-                                'asset/images/aventura_ciudad.jpg',
-                              )
+                                'asset/images/aventura_ciudad.jpg',)
                             : FileImage(File(_bannerImage!.path))
                                 as ImageProvider,
                         fit: BoxFit.cover,
@@ -102,17 +101,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      GestureDetector(
-                        onTap: _pickProfileImage,
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundImage: _profileImage == null
-                              ? const AssetImage(
-                                  'asset/images/centro_artistico.jpg',
-                                )
-                              : FileImage(File(_profileImage!.path))
-                                  as ImageProvider,
-                        ),
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: _profileImage == null
+                            ? const AssetImage(
+                                'asset/images/centro_artistico.jpg')
+                            : FileImage(File(_profileImage!.path))
+                                as ImageProvider,
                       ),
                       GestureDetector(
                         onTap: _pickProfileImage,
@@ -171,27 +166,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: _editBio,
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                bio,
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            const Icon(Icons.edit, color: Colors.grey),
-                          ],
-                        ),
-                      ),
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration:
+                          const InputDecoration(labelText: 'Contraseña'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor ingrese su contraseña';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: confirmPasswordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                          labelText: 'Confirmar Contraseña'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor confirme su contraseña';
+                        }
+                        if (value != passwordController.text) {
+                          return 'Las contraseñas no coinciden';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton(

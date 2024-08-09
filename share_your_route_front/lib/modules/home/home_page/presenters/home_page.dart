@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
-import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
@@ -10,8 +8,8 @@ import 'package:share_your_route_front/modules/profile/presenters/core/profile_v
 import 'package:share_your_route_front/modules/route_creation/presenters/create_route.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
-import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -203,7 +201,7 @@ class HomeState extends State<Home> {
                                 context,
                                 routeList.where((ruta) {
                                   return DateComparator(ruta.routeDate);
-                                }).toList()),
+                                }).toList(),),
                             const SizedBox(
                               height: 20,
                             ),

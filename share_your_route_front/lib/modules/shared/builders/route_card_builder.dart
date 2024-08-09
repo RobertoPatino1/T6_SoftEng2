@@ -99,7 +99,7 @@ class RouteCardBuilder {
                                 style: Theme.of(context).textTheme.labelSmall,
                               ),
                             ),
-                          )
+                          ),
                         ] else ...[
                           Center(
                             child: Container(
@@ -112,7 +112,7 @@ class RouteCardBuilder {
                                 style: Theme.of(context).textTheme.labelSmall,
                               ),
                             ),
-                          )
+                          ),
                         ],
                         Center(
                           child: Container(
