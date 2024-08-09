@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 
 class ProfileOptions extends StatelessWidget {
-  final List<OptionItem> options;
+  final List<OptionGroup> optionGroups;
 
-  const ProfileOptions({super.key, required this.options});
+  const ProfileOptions({super.key, required this.optionGroups});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Container(
+      children: optionGroups.map((group) {
+        return Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 230, 229, 229),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
-            children: options.take(2).map((option) {
+            children: group.options.map((option) {
               BorderRadius? borderRadius;
-              if (option == options.first) {
+              if (group.options.length == 1) {
+                // Si solo hay una opción en el grupo, todos los bordes son redondeados
+                borderRadius = BorderRadius.circular(15);
+              } else if (option == group.options.first) {
+                // Si es la primera opción, redondear solo los bordes superiores
                 borderRadius =
                     const BorderRadius.vertical(top: Radius.circular(15));
-              } else if (option == options[1]) {
+              } else if (option == group.options.last) {
+                // Si es la última opción, redondear solo los bordes inferiores
                 borderRadius =
                     const BorderRadius.vertical(bottom: Radius.circular(15));
               }
@@ -29,10 +34,9 @@ class ProfileOptions extends StatelessWidget {
               return Column(
                 children: [
                   Material(
-                    color: Colors.transparent,
+                    color: option.backgroundColor ?? Colors.transparent,
                     borderRadius: borderRadius,
-                    clipBehavior: Clip
-                        .antiAlias, // Asegura que el splash effect respete los bordes
+                    clipBehavior: Clip.antiAlias,
                     child: InkWell(
                       onTap: () async {
                         await Future.delayed(const Duration(milliseconds: 100));
@@ -40,13 +44,21 @@ class ProfileOptions extends StatelessWidget {
                       },
                       splashColor: Colors.grey,
                       child: ListTile(
-                        leading: Icon(option.icon),
-                        title: Text(option.title),
-                        trailing: const Icon(Icons.chevron_right),
+                        leading: Icon(option.icon,
+                            color: option.textColor ?? Colors.black),
+                        title: Text(
+                          option.title,
+                          style: TextStyle(
+                              color: option.textColor ?? Colors.black),
+                        ),
+                        trailing: Icon(
+                          Icons.chevron_right,
+                          color: option.textColor ?? Colors.black,
+                        ),
                       ),
                     ),
                   ),
-                  if (option != options[1])
+                  if (option != group.options.last)
                     const Divider(
                       height: 1,
                       thickness: 1,
@@ -57,75 +69,30 @@ class ProfileOptions extends StatelessWidget {
               );
             }).toList(),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 230, 229, 229),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Column(
-            children: options.skip(2).map((option) {
-              BorderRadius? borderRadius;
-              if (option == options[2]) {
-                borderRadius =
-                    const BorderRadius.vertical(top: Radius.circular(15));
-              } else if (option == options.last) {
-                borderRadius =
-                    const BorderRadius.vertical(bottom: Radius.circular(15));
-              }
-
-              return Column(
-                children: [
-                  Material(
-                    color: Colors.transparent,
-                    borderRadius: borderRadius,
-                    clipBehavior: Clip
-                        .antiAlias, // Asegura que el splash effect respete los bordes
-                    child: InkWell(
-                      onTap: () async {
-                        await Future.delayed(
-                          const Duration(
-                            milliseconds: 100,
-                          ),
-                        );
-                        option.onTap();
-                      },
-                      splashColor: Colors.grey,
-                      child: ListTile(
-                        leading: Icon(option.icon),
-                        title: Text(option.title),
-                        trailing: option.title != 'Cerrar sesión'
-                            ? const Icon(Icons.chevron_right)
-                            : null,
-                      ),
-                    ),
-                  ),
-                  if (option != options.last)
-                    const Divider(
-                      height: 1,
-                      thickness: 1,
-                      indent: 0,
-                      endIndent: 0,
-                    ),
-                ],
-              );
-            }).toList(),
-          ),
-        ),
-      ],
+        );
+      }).toList(),
     );
   }
+}
+
+class OptionGroup {
+  final List<OptionItem> options;
+
+  OptionGroup({required this.options});
 }
 
 class OptionItem {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   OptionItem({
     required this.icon,
     required this.title,
     required this.onTap,
+    this.backgroundColor,
+    this.textColor,
   });
 }

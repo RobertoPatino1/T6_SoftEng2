@@ -32,7 +32,7 @@ void showSnackbar(BuildContext context, String message, String messageType) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: SizedBox(
-        height: 50, // Adjust the height as needed
+        height: 50,
         child: Row(
           children: [
             icon,

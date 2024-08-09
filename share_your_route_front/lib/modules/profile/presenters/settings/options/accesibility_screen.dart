@@ -40,12 +40,12 @@ class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
                 onChanged: (value) {
                   setState(() {
                     isDarkMode = value;
-                    // Aquí es donde cambiarías el tema de la aplicación
+                    // TODO: Aquí es donde se cambia el tema de la aplicación
                     if (isDarkMode) {
-                      // Cambiar al tema oscuro
-                      // Cambia el tema globalmente usando el ThemeData o un ThemeMode
+                      // TODO:Cambiar al tema oscuro
+                      // TODO:Cambia el tema globalmente usando el ThemeData o un ThemeMode
                     } else {
-                      // Cambiar al tema claro
+                      // TODO:Cambiar al tema claro
                     }
                   });
                 },
