@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class JoinedRoutesHistory extends StatelessWidget {
   const JoinedRoutesHistory({super.key});
@@ -6,9 +7,7 @@ class JoinedRoutesHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rutas a las que te has unido'),
-      ),
+      appBar: const CustomAppBar(title: "Rutas Unidas"),
       body: ListView.builder(
         itemCount: 10, // Número de elementos de ejemplo
         itemBuilder: (context, index) {

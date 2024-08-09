@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/options/licence_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/options/terms_and_privacy_screen.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -10,16 +11,14 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ayuda'),
-      ),
+      appBar: const CustomAppBar(title: "Ayuda"),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(height: 20),
             Image.asset(
-              'asset/images/help_screen_img.jpg',
+              'asset/images/help_screen_img.webp',
               width: double.infinity,
               height: 400,
               fit: BoxFit.contain,

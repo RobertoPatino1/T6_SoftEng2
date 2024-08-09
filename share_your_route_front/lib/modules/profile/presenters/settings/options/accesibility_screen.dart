@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class AccesibilityScreen extends StatefulWidget {
   @override
@@ -12,15 +13,13 @@ class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Accesibilidad'),
-      ),
+      appBar: const CustomAppBar(title: "Accesibilidad"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Spacer(),
           Image.asset(
-            'asset/images/help_screen_img.jpg',
+            'asset/images/accessibility_screen_img.png',
             width: 300,
             height: 300,
             fit: BoxFit.contain,

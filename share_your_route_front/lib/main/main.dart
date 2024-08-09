@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
-import 'package:share_your_route_front/modules/shared/themes/global_theme_data.dart';
+import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

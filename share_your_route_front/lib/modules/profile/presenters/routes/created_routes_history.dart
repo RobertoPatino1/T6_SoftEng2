@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class CreatedRoutesHistory extends StatelessWidget {
   const CreatedRoutesHistory({super.key});
@@ -6,9 +7,7 @@ class CreatedRoutesHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rutas Creadas'),
-      ),
+      appBar: const CustomAppBar(title: "Rutas Creadas"),
       body: ListView.builder(
         itemCount: 10, // Número de elementos de ejemplo
         itemBuilder: (context, index) {

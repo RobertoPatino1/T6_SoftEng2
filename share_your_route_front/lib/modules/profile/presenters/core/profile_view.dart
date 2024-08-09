@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
 import 'package:share_your_route_front/modules/profile/presenters/about/about_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
@@ -8,6 +7,7 @@ import 'package:share_your_route_front/modules/profile/presenters/routes/created
 import 'package:share_your_route_front/modules/profile/presenters/routes/joined_routes_history.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/settings_screen.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class ProfileView extends StatefulWidget {
   @override

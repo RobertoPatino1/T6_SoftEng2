@@ -1,26 +1,28 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/password/bio_edition_screen.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
-class EditProfilePage extends StatefulWidget {
+class EditProfileScreen extends StatefulWidget {
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
   XFile? _profileImage;
   XFile? _bannerImage;
+  String bio =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit."; // Biografía inicial
   final TextEditingController nameController =
       TextEditingController(text: "John");
   final TextEditingController surnameController =
       TextEditingController(text: "Doe");
   final TextEditingController emailController =
       TextEditingController(text: "johndoe@example.com");
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
 
   Future<void> _pickProfileImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -36,12 +38,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
   }
 
+  Future<void> _editBio() async {
+    navigateWithSlideTransition(
+      context,
+      BioEditionScreen(
+        currentBio: bio,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Editar Perfil'),
-      ),
+      appBar: const CustomAppBar(title: "Editar Perfil"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -92,7 +101,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         radius: 50,
                         backgroundImage: _profileImage == null
                             ? const AssetImage(
-                                'asset/images/centro_artistico.jpg')
+                                'asset/images/centro_artistico.jpg',
+                              )
                             : FileImage(File(_profileImage!.path))
                                 as ImageProvider,
                       ),
@@ -102,7 +112,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           radius: 15,
                           backgroundColor: Color.fromARGB(255, 230, 229, 229),
                           child: Icon(
-                            Icons.edit,
+                            Icons.camera_alt,
                             color: Color.fromARGB(255, 45, 75, 115),
                             size: 15,
                           ),
@@ -153,33 +163,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration:
-                          const InputDecoration(labelText: 'Contraseña'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese su contraseña';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      controller: confirmPasswordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                          labelText: 'Confirmar Contraseña'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor confirme su contraseña';
-                        }
-                        if (value != passwordController.text) {
-                          return 'Las contraseñas no coinciden';
-                        }
-                        return null;
-                      },
+                    GestureDetector(
+                      onTap: _editBio,
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                bio,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            const Icon(Icons.edit, color: Colors.grey),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton(
@@ -205,8 +209,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     nameController.dispose();
     surnameController.dispose();
     emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
     super.dispose();
   }
 }

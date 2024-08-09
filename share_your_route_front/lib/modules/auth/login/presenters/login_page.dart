@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
