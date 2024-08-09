@@ -7,6 +7,7 @@ import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class RouteItineraryPage extends StatelessWidget {
   @override
@@ -15,18 +16,7 @@ class RouteItineraryPage extends StatelessWidget {
         // ignore: cast_nullable_to_non_nullable
         TouristRouteService().getCurrentTouristRoute() as TouristRoute;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Modular.to.pop();
-          },
-        ),
-        title: Text(
-          touristRoute.name,
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-      ),
+      appBar: CustomAppBar(title: touristRoute.name),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
