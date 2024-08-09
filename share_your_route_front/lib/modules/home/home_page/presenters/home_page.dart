@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
@@ -9,6 +10,7 @@ import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
@@ -174,7 +176,7 @@ class HomeState extends State<Home> {
               Expanded(
                 child: SingleChildScrollView(
                   child: FutureBuilder<List<Map<String, dynamic>>>(
-                    future: fetchAPIData("/all"),
+                    future: getAllRoutes(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         final List<TouristRoute> routeList =
@@ -215,9 +217,7 @@ class HomeState extends State<Home> {
                               height: 30,
                             ),
                             RouteListBuilder().buildRouteList(
-                              context,
-                              "Día en la naturaleza ",
-                            ),
+                                context, "Día en la naturaleza ",),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
@@ -260,6 +260,7 @@ class HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
+
           ProfileView(),
         ],
       ),

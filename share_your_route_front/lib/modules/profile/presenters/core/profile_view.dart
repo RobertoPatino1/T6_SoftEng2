@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:share_your_route_front/core/utils/animations/page_transitions.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_header.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
+import 'package:share_your_route_front/modules/profile/presenters/help/help_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/routes/created_routes_history.dart';
+import 'package:share_your_route_front/modules/profile/presenters/routes/joined_routes_history.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/settings_screen.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 
 class ProfileView extends StatefulWidget {
@@ -16,17 +20,17 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const ProfileHeader(
               imagePath:
-                  'asset/images/centro_artistico.jpg', // TODO: Change profile image to the user profile image
+                  'asset/images/centro_artistico.jpg', // Cambiar a la imagen de perfil del usuario
               name: 'John Doe',
               email: 'johndoe@example.com',
+              backgroundImagePath: 'asset/images/aventura_ciudad.jpg',
+              bio:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla nibh non vulputate iaculis. Sed id ligula quis sapien ultricies lobortis quis sit amet massa. Nam convallis, lectus et posuere fermentum, augue tellus mollis velit, vitae aliquam dolor lectus at libero. In at luctus ante. Pellentesque mattis urna metus, et dignissim diam lobortis vitae.', // TODO: Cambiar esta biografía a ser dinámica
             ),
             const SizedBox(height: 20),
             ProfileOptions(
@@ -35,35 +39,44 @@ class _ProfileViewState extends State<ProfileView> {
                   icon: Icons.route,
                   title: 'Rutas creadas',
                   onTap: () async {
-                    // TODO: SHOW ALL THE ROUTES THAT THE USER HAS CREATED IN A LIST
+                    navigateWithSlideTransition(
+                      context,
+                      const CreatedRoutesHistory(),
+                    );
                   },
                 ),
                 OptionItem(
                   icon: Icons.backpack,
                   title: 'Rutas a las que te has unido',
                   onTap: () async {
-                    // TODO: SHOW ALL THE TRIPS THE USER HAS REGISTERED IN A LIST
+                    navigateWithSlideTransition(
+                      context,
+                      const JoinedRoutesHistory(),
+                    );
                   },
                 ),
                 OptionItem(
                   icon: Icons.settings,
                   title: 'Ajustes',
                   onTap: () async {
-                    Modular.to.pushNamed('/auth/home/profile/settings');
+                    navigateWithSlideTransition(context, SettingsView());
                   },
                 ),
                 OptionItem(
                   icon: Icons.help,
                   title: 'Ayuda',
                   onTap: () async {
-                    // TODO: GO TO HELP SCREEN
+                    navigateWithSlideTransition(
+                      context,
+                      const HelpScreen(),
+                    );
                   },
                 ),
                 OptionItem(
                   icon: Icons.info,
                   title: 'Información',
                   onTap: () async {
-                    // TODO: GO TO HELP SCREEN
+                    // Ir a la pantalla de información
                   },
                 ),
                 OptionItem(
