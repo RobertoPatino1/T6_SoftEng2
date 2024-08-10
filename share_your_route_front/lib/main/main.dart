@@ -129,6 +129,7 @@ class _MainPageState extends State<MainPage> {
   Future<void> _determinePositionAndNavigate() async {
     try {
       await determinePosition();
+      //aqui va lo que coloque en la linea 61
       Timer(const Duration(seconds: 3), () {
         Modular.to.navigate('/auth/');
       });
