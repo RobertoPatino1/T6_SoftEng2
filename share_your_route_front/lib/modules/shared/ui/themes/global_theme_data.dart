@@ -176,7 +176,7 @@ class GlobalThemeData {
     onSecondary: Color.fromARGB(255, 255, 255, 255),
     error: Colors.redAccent,
     onError: Color(0xFFFFFFFF),
-    surface: Color.fromARGB(255, 0, 0, 0), // Cambiado a un tono azul oscuro
+    surface: Color.fromARGB(255, 22, 27, 34), // Cambiado a un tono azul oscuro
     onSurface: Color.fromARGB(255, 29, 34, 104),
     brightness: Brightness.dark,
   );

@@ -59,6 +59,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _checkLocationPermission();
+    
   }
 
   Future<void> _checkLocationPermission() async {
