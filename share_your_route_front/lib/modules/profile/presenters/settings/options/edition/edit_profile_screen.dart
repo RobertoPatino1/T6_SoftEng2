@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/password/bio_edition_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/bio/bio_edition_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 

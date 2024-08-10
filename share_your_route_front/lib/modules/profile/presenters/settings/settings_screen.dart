@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/accesibility_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/deletion/delete_account_screen.dart';
-import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/password/check_password_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/edit_profile_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/password/check_password_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
