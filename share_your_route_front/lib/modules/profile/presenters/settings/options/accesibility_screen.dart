@@ -40,7 +40,8 @@ class AccesibilityScreen extends ConsumerWidget {
                   Vibrate.vibrate();
                   final bool canVibrate = await Vibrate.canVibrate;
                   if (canVibrate) {
-                    showSnackbar(context, "caca", "success");
+                    showSnackbar(
+                        context, "El celular si puede vibrar", "confirmation");
                   }
 
                   final newThemeMode = value ? ThemeMode.dark : ThemeMode.light;
