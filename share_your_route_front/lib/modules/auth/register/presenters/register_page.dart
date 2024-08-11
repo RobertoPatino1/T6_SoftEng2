@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/core/constants/app_regex.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 
@@ -52,6 +53,18 @@ class RegisterState extends State<Register> {
     }
   }
 
+  void _register() {
+    if (_formKey.currentState!.validate() &&
+        passwordController.text == confirmPasswordController.text) {
+      if (passNotifier.value == PasswordStrength.strong ||
+          passNotifier.value == PasswordStrength.secure) {
+        Modular.to.pushNamed('/auth/home');
+      } else {
+        showSnackbar(context, 'Debe ingresar una contraseña fuerte', 'error');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +84,7 @@ class RegisterState extends State<Register> {
                       child: SizedBox(
                         width: 200,
                         height: 150,
-                        child: Image.asset('asset/images/logo.png'),
+                        child: Image.asset(logoURL),
                       ),
                     ),
                   ),
@@ -256,33 +269,7 @@ class RegisterState extends State<Register> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {
-                      final registerJson = {
-                        'firstName': nameController.text,
-                        'lastName': lastNameController.text,
-                        'email': emailController.text,
-                        'password': passwordController.text,
-                      };
-                      final passwordsMatch = passwordController.text ==
-                          confirmPasswordController.text;
-                      if (_formKey.currentState!.validate() && passwordsMatch) {
-                        final response = createAccount(registerJson);
-                        response.then((value) {
-                          final Map<String, dynamic> responseJson = value as Map<String, dynamic>;
-                          if (responseJson['error'] != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(responseJson['error'].toString()),
-                              ),
-                            );
-                          } else {
-                            Modular.to.navigate('/auth/');
-                          }
-                        }).onError((error, stackTrace) {
-                          Logger.root.severe('Error: $error');
-                        });
-                      }
-                    },
+                    onPressed: _register,
                     child: const Text(
                       'Crear cuenta',
                     ),

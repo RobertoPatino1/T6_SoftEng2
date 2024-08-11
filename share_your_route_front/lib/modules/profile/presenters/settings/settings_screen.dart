@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/accesibility_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/deletion/delete_account_screen.dart';
@@ -23,7 +24,7 @@ class _SettingsViewState extends State<SettingsView> {
           children: [
             const SizedBox(height: 20),
             Image.asset(
-              'asset/images/settings_screen_img.jpg',
+              settingsScreenLogoURL,
               width: double.infinity,
               height: 400,
               fit: BoxFit.contain,

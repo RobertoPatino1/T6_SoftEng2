@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logging/logging.dart';
 
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class LoginPage extends StatelessWidget {
@@ -44,7 +45,7 @@ class LoginState extends State<Login> {
                     child: Container(
                       width: 200,
                       height: 150,
-                      child: Image.asset('asset/images/logo.png'),
+                      child: Image.asset(logoURL),
                     ),
                   ),
                 ),
@@ -53,7 +54,7 @@ class LoginState extends State<Login> {
                   child: TextField(
                     controller: _emailController,
                     decoration: buildInputDecoration(
-                      labelText: 'Correo electrónico',
+                      labelText: 'Email',
                     ),
                   ),
                 ),

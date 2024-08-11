@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/main/main.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -17,7 +18,7 @@ class AccesibilityScreen extends ConsumerWidget {
         children: [
           const Spacer(),
           Image.asset(
-            'asset/images/accessibility_screen_img.png',
+            accessibilityScreenLogoURL,
             width: 300,
             height: 300,
             fit: BoxFit.contain,
@@ -39,6 +40,7 @@ class AccesibilityScreen extends ConsumerWidget {
                   // SystemSound.play(SystemSoundType.click);
                   Vibrate.vibrate();
                   final bool canVibrate = await Vibrate.canVibrate;
+                  //TODO: CONFIRM THIS
                   if (canVibrate) {
                     showSnackbar(
                         context, "El celular si puede vibrar", "confirmation");

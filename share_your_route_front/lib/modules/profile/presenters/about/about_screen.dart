@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class AboutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'asset/images/logo.png',
+                logoURL,
                 width: double.infinity,
                 height: 150,
                 fit: BoxFit.contain,

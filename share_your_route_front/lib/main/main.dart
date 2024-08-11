@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/firebase_options.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
 import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
 
@@ -192,10 +193,10 @@ class _MainPageState extends State<MainPage> {
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 200,
                   height: 150,
-                  child: Image.asset('asset/images/logo.png'),
+                  child: Image.asset(logoURL),
                 ),
               ),
             ),
