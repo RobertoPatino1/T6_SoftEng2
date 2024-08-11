@@ -6,6 +6,6 @@ class AuthService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
-    Modular.to.pushReplacementNamed('/auth/');
+    Modular.to.pushReplacementNamed('/auth');
   }
 }
