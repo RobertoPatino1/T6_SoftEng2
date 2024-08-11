@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/bio/bio_edition_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -71,7 +72,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       image: DecorationImage(
                         image: _bannerImage == null
                             ? const AssetImage(
-                                'asset/images/aventura_ciudad.jpg',
+                                //TODO: CHANGE THIS TO THE USER BACKGROUND PIC, IF THE DATA IS NULL, THEN USE STOCK
+                                stockBackgroundPictureURL,
                               )
                             : FileImage(File(_bannerImage!.path))
                                 as ImageProvider,
@@ -108,7 +110,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           radius: 50,
                           backgroundImage: _profileImage == null
                               ? const AssetImage(
-                                  'asset/images/centro_artistico.jpg',
+                                  //TODO: CHANGE THIS TO THE USER PROFILE PIC, IF THE DATA IS NULL, THEN USE STOCK
+                                  stockProfilePictureURL,
                                 )
                               : FileImage(File(_profileImage!.path))
                                   as ImageProvider,

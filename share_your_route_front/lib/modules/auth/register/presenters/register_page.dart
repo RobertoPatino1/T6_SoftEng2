@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/core/constants/app_regex.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -47,6 +48,18 @@ class RegisterState extends State<Register> {
     }
   }
 
+  void _register() {
+    if (_formKey.currentState!.validate() &&
+        passwordController.text == confirmPasswordController.text) {
+      if (passNotifier.value == PasswordStrength.strong ||
+          passNotifier.value == PasswordStrength.secure) {
+        Modular.to.pushNamed('/auth/home');
+      } else {
+        showSnackbar(context, 'Debe ingresar una contraseña fuerte', 'error');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +79,7 @@ class RegisterState extends State<Register> {
                       child: SizedBox(
                         width: 200,
                         height: 150,
-                        child: Image.asset('asset/images/logo.png'),
+                        child: Image.asset(logoURL),
                       ),
                     ),
                   ),
@@ -248,13 +261,7 @@ class RegisterState extends State<Register> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate() &&
-                          passwordController.text ==
-                              confirmPasswordController.text) {
-                        Modular.to.pushNamed('/auth/home');
-                      }
-                    },
+                    onPressed: _register,
                     child: const Text(
                       'Crear cuenta',
                     ),
