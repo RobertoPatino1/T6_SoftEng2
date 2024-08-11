@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:logging/logging.dart';
+
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
@@ -20,6 +24,9 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +52,7 @@ class LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
+                    controller: _emailController,
                     decoration: buildInputDecoration(
                       labelText: 'Email',
                     ),
@@ -57,6 +65,7 @@ class LoginState extends State<Login> {
                     top: 15,
                   ),
                   child: TextField(
+                    controller: _passwordController,
                     decoration: buildInputDecoration(labelText: "Contraseña"),
                     obscureText: true,
                   ),
@@ -71,8 +80,28 @@ class LoginState extends State<Login> {
                   ),
                 ),
                 OutlinedButton(
-                  onPressed: () {
-                    Modular.to.pushNamed('/auth/home/');
+                  onPressed: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      if (credential.user != null) {
+                        Modular.to.navigate('/auth/home/');
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      Fluttertoast.showToast(
+                        msg: "Credenciales incorrectas, intente nuevamente.",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                      Logger.root.shout('Failed with error code: ${e.code}');
+                      Logger.root.shout(e.message);
+                    }
                   },
                   child: const Text(
                     'Iniciar sesión',

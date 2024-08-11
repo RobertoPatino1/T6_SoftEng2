@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -98,52 +99,105 @@ class RouteItineraryPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const SizedBox(height: 20),
-              Center(
-                child: OutlinedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(
-                            "Ingreso a la ruta",
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                          content: const Text(
-                            "Estás a punto de ingresar a esta ruta",
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text(
-                                "Cancelar",
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+              if (DateComparator(touristRoute.routeDate) == true) ...[
+                Center(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Ingreso a la ruta",
+                              style: Theme.of(context).textTheme.displayMedium,
                             ),
-                            TextButton(
-                              child: Text(
-                                "Aceptar",
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                              onPressed: () {
-                                Modular.to.pushNamed(
-                                  '/auth/home/room/active',
-                                  arguments: touristRoute,
-                                );
-                              },
+                            content: const Text(
+                              "Estás a punto de ingresar a esta ruta",
                             ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: const Text(
-                    'Ingresar a la ruta',
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  "Cancelar",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text(
+                                  "Aceptar",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                                onPressed: () {
+                                  Modular.to.pushNamed(
+                                    '/auth/home/room/active',
+                                    arguments: touristRoute,
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Text(
+                      'Ingresar a la ruta',
+                    ),
                   ),
                 ),
-              ),
+              ] else ...[
+                Center(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Inscripción a la ruta",
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
+                            content: const Text(
+                              "Estás a punto de inscribirte a esta ruta",
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  "Cancelar",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text(
+                                  "Aceptar",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                                onPressed: () {
+                                  TouristRouteService()
+                                      .unsetCurrentTouristRoute();
+                                  Modular.to.pop();
+                                  Modular.to.pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Text(
+                      'Inscribirse a la ruta',
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         ),

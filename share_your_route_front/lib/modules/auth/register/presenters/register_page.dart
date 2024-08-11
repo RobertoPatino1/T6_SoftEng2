@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:logging/logging.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/core/constants/app_regex.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -24,6 +26,9 @@ class Register extends StatefulWidget {
 class RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final passNotifier = ValueNotifier<PasswordStrength?>(null);
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final confirmPassNotifier = ValueNotifier<String?>(null);
@@ -86,6 +91,7 @@ class RegisterState extends State<Register> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextFormField(
+                      controller: nameController,
                       decoration: buildInputDecoration(
                         labelText: 'Nombres',
                         hintText: 'Elliot Sam',
@@ -105,6 +111,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      controller: lastNameController,
                       decoration: buildInputDecoration(
                         labelText: 'Apellidos',
                         hintText: 'Alderson Sepiol',
@@ -124,6 +131,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      controller: emailController,
                       decoration: buildInputDecoration(
                         labelText: 'Email',
                         hintText: 'samsepiol@example.com',
