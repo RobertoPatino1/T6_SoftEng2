@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_options.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/options/licence_screen.dart';
 import 'package:share_your_route_front/modules/profile/presenters/help/options/terms_and_privacy_screen.dart';
@@ -18,7 +19,7 @@ class HelpScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             Image.asset(
-              'asset/images/help_screen_img.webp',
+              helpScreenLogoURL,
               width: double.infinity,
               height: 400,
               fit: BoxFit.contain,
