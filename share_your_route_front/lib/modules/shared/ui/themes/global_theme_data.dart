@@ -154,7 +154,7 @@ class GlobalThemeData {
     );
   }
 
-  static const ColorScheme lightColorScheme = ColorScheme(
+   static const ColorScheme lightColorScheme = ColorScheme(
     primary: Color.fromRGBO(37, 60, 89, 1),
     onPrimary: Colors.white,
     secondary: Color.fromRGBO(45, 75, 115, 1),
@@ -165,20 +165,19 @@ class GlobalThemeData {
     onSurface: Color(0xFF241E30),
     brightness: Brightness.light,
   );
-
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
 
   static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Color.fromARGB(255, 191, 141, 48),
+    primary:  Color.fromARGB(255, 37, 60, 89),
     onPrimary: Colors.black,
     secondary: Color.fromARGB(255, 45, 75, 115),
-    onSecondary: Color(0xFFEFF0F2),
+    onSecondary: Color.fromARGB(255, 255, 255, 255),
     error: Colors.redAccent,
     onError: Color(0xFFFFFFFF),
-    surface: Color.fromARGB(255, 37, 60, 89),
-    onSurface: Color.fromARGB(255, 238, 240, 242),
+    surface: Color.fromARGB(255, 22, 27, 34), // Cambiado a un tono azul oscuro
+    onSurface: Color.fromARGB(255, 29, 34, 104),
     brightness: Brightness.dark,
   );
 }
