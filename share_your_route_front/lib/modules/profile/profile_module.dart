@@ -11,7 +11,7 @@ class ProfileViewModule extends Module {
     );
     r.child(
       '/settings',
-      child: (context) => SettingsView(),
+      child: (context) => SettingsScreen(),
     );
   }
 }

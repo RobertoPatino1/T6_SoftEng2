@@ -9,8 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:share_your_route_front/firebase_options.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
+import 'package:share_your_route_front/firebase_options.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
 import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
 
@@ -23,8 +23,6 @@ Future<void> loadFirebase() async {
 }
 
 void main() async {
-
-  
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "lib/core/configs/.env");
   runApp(
@@ -47,7 +45,8 @@ void _setupLogging() {
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((LogRecord record) {
     // ignore: avoid_print
-    print('${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
+    print(
+        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
   });
 }
 
@@ -90,7 +89,6 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _checkLocationPermission();
-    
   }
 
   Future<void> _checkLocationPermission() async {

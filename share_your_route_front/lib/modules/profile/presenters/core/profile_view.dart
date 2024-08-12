@@ -65,7 +65,7 @@ class _ProfileViewState extends State<ProfileView> {
                       icon: Icons.settings,
                       title: 'Ajustes',
                       onTap: () async {
-                        navigateWithSlideTransition(context, SettingsView());
+                        navigateWithSlideTransition(context, SettingsScreen());
                       },
                     ),
                     OptionItem(
