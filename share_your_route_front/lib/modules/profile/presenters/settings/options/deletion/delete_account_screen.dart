@@ -18,7 +18,7 @@ class _DeleteAccountPageState extends State<DeleteAccountScreen> {
     if (_formKey.currentState!.validate()) {
       // TODO: Lógica para eliminar la cuenta aquí
       // Validar la contraseña ingresada con Firebase
-      _authService.logout();
+      _authService.logout(context);
     }
   }
 
