@@ -74,14 +74,14 @@ FIREBASE_DATABASE_URL=https://share-your-route-ff4ad-default-rtdb.firebaseio.com
 ```
 
 ### Build configuration files for firebase
-**Install Firebase CLI**
-Check this [link](https://firebase.google.com/docs/cli#mac-linux-npm) for more detailed steps.
+**Install Firebase CLI**  
+Check this [link](https://firebase.google.com/docs/cli#mac-linux-npm) for more detailed steps.  
 **Note:** _You need to have curl isntalled in your system_
 ```
 curl -sL https://firebase.tools | bash
 ```
 
-**Log in and test the Firebase CLI**
+**Log in and test the Firebase CLI**  
 
 _After running this command you'll need to follow the link showed in the terminal and accept the required permissions._
 ```
@@ -92,8 +92,8 @@ firebase login
 ```
 dart pub global activate flutterfire_cli
 ```
-**Configure the project to use Firebase**
-**Note:** _Make sure this command is being executed on the root of the project_
+**Configure the project to use Firebase**  
+**Note:** _Make sure this command is being executed on the root of the project_  
 ```
 flutterfire configure
 ```
