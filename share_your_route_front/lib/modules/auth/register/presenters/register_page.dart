@@ -80,7 +80,7 @@ class RegisterState extends State<Register> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top: 60.0),
+                    padding: const EdgeInsets.only(top: 60.0, bottom: 15),
                     child: Center(
                       child: SizedBox(
                         width: 200,
