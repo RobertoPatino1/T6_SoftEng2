@@ -58,6 +58,7 @@ class RegisterState extends State<Register> {
         passwordController.text == confirmPasswordController.text) {
       if (passNotifier.value == PasswordStrength.strong ||
           passNotifier.value == PasswordStrength.secure) {
+        //TODO: REGISTER USER IN FIREBASE DATABASE BEFORE CHANGING SCREEN
         Modular.to.pushNamed('/auth/home');
       } else {
         showSnackbar(context, 'Debe ingresar una contraseña fuerte', 'error');
