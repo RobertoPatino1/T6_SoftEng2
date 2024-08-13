@@ -30,3 +30,13 @@ Future saveRoute(Map<String, dynamic> routeJson) async {
   final response = await postRequest("${apiUrl}routes/save", routeJson);
   return response;
 }
+
+Future getUserData(String userId) async {
+  final response = await getRequest("${apiUrl}users/$userId");
+  return response;
+}
+
+Future updateUserData(String userId, Map<String, dynamic> userData) async {
+  final response = await putRequest("${apiUrl}users/$userId", userData);
+  return response;
+}
