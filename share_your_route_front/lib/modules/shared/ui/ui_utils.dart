@@ -63,7 +63,7 @@ void showSnackbar(BuildContext context, String message, String messageType) {
 }
 
 Widget slideInTransition(BuildContext context, Animation<double> animation,
-    Animation<double> secondaryAnimation, Widget child) {
+    Animation<double> secondaryAnimation, Widget child,) {
   const begin = Offset(1.0, 0.0);
   const end = Offset.zero;
   const curve = Curves.ease;

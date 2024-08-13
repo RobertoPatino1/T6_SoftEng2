@@ -121,7 +121,7 @@ class HomeState extends State<Home> {
                       ElevatedButton(
                         onPressed: () {
                           navigateWithSlideTransition(
-                              context, const CreateRoute());
+                              context, const CreateRoute(),);
                         },
                         child: const IntrinsicWidth(
                           child: Center(

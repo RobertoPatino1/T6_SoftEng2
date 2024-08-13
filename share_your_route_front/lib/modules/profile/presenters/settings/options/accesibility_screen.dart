@@ -43,7 +43,7 @@ class AccesibilityScreen extends ConsumerWidget {
                   //TODO: CONFIRM THIS
                   if (canVibrate) {
                     showSnackbar(
-                        context, "El celular si puede vibrar", "confirmation");
+                        context, "El celular si puede vibrar", "confirmation",);
                   }
 
                   final newThemeMode = value ? ThemeMode.dark : ThemeMode.light;

@@ -45,11 +45,11 @@ class ProfileOptions extends StatelessWidget {
                       splashColor: Colors.grey,
                       child: ListTile(
                         leading: Icon(option.icon,
-                            color: option.textColor ?? Colors.black),
+                            color: option.textColor ?? Colors.black,),
                         title: Text(
                           option.title,
                           style: TextStyle(
-                              color: option.textColor ?? Colors.black),
+                              color: option.textColor ?? Colors.black,),
                         ),
                         trailing: Icon(
                           Icons.chevron_right,
