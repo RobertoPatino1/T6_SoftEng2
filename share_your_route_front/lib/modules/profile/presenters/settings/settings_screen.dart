@@ -49,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: 'Accesibilidad',
                       onTap: () async {
                         navigateWithSlideTransition(
-                            context, AccesibilityScreen());
+                            context, AccesibilityScreen(),);
                       },
                     ),
                   ],
@@ -77,13 +77,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       textColor: Colors.white,
                       onTap: () async {
                         navigateWithSlideTransition(
-                            context, DeleteAccountScreen());
+                            context, DeleteAccountScreen(),);
                       },
                     ),
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
