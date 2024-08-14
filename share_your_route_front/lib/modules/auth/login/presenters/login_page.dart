@@ -73,6 +73,7 @@ class LoginState extends State<Login> {
                 TextButton(
                   onPressed: () {
                     //TODO FORGOT PASSWORD SCREEN GOES HERE
+                    Modular.to.navigate('/auth/forgotPassword');
                   },
                   child: Text(
                     'Olvidaste tu contraseña?',
@@ -91,14 +92,6 @@ class LoginState extends State<Login> {
                         Modular.to.navigate('/auth/home/');
                       }
                     } on FirebaseAuthException catch (e) {
-                      // Fluttertoast.showToast(
-                      //   msg: "Credenciales incorrectas, intente nuevamente.",
-                      //   toastLength: Toast.LENGTH_SHORT,
-                      //   gravity: ToastGravity.BOTTOM,
-                      //   backgroundColor: Colors.red,
-                      //   textColor: Colors.white,
-                      //   fontSize: 16.0,
-                      // );
                       showSnackbar(
                           context,
                           "Credenciales incorrectas, intente nuevamente.",
