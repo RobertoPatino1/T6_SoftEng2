@@ -1,3 +1,5 @@
+import 'package:share_your_route_front/core/constants/urls.dart';
+
 class UserData {
   final String firstName;
   final String lastName;
@@ -21,8 +23,8 @@ class UserData {
       lastName: (json['lastName'] != null) ? json['lastName'] as String : '',
       email: (json['email'] != null) ? json['email'] as String : '',
       bio: (json['bio'] != null) ? json['bio'] as String : '',
-      backgroundPhoto: (json['backgroundPhoto'] != null) ? json['backgroundPhoto'] as String : '',
-      profilePhoto: (json['profilePhoto'] != null) ? json['profilePhoto'] as String : '',
+      backgroundPhoto: (json['backgroundPhoto'] != null) ? json['backgroundPhoto'] as String : stockBackgroundPictureURL,
+      profilePhoto: (json['profilePhoto'] != null) ? json['profilePhoto'] as String : stockProfilePictureURL,
     );
   }
 
