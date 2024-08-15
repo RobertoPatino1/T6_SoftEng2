@@ -6,6 +6,18 @@ class GlobalThemeData {
   static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
 
+  static const Color lightColorSchemePrimary = Color.fromRGBO(37, 60, 89, 1);
+  static const Color lightColorSchemeSecondary = Color.fromRGBO(45, 75, 115, 1);
+  static const Color lightColorSchemeOnSecondary = Color(0xFF322942);
+  static const Color lightColorSchemeOnSurface = Color(0xFF241E30);
+
+  static const Color darkColorSchemePrimary = Color.fromARGB(255, 37, 60, 89);
+  static const Color darkColorSchemeOnSecondary =
+      Color.fromARGB(255, 45, 75, 115);
+  static const Color darkColorSchemeSurface = Color.fromARGB(255, 22, 27, 34);
+  static const Color darkColorSchemeOnSurface =
+      Color.fromARGB(255, 200, 200, 200);
+
   static ThemeData lightThemeData =
       themeData(lightColorScheme, _lightFocusColor);
 
@@ -168,27 +180,26 @@ class GlobalThemeData {
   }
 
   static const ColorScheme lightColorScheme = ColorScheme(
-    primary: Color.fromRGBO(37, 60, 89, 1),
+    primary: lightColorSchemePrimary,
     onPrimary: Colors.white,
-    secondary: Color.fromRGBO(45, 75, 115, 1),
-    onSecondary: Color(0xFF322942),
+    secondary: lightColorSchemeSecondary,
+    onSecondary: lightColorSchemeOnSecondary,
     error: Colors.redAccent,
-    onError: Color(0xFFFFFFFF),
+    onError: Colors.white,
     surface: Colors.white,
-    onSurface: Color(0xFF241E30),
+    onSurface: lightColorSchemeOnSurface,
     brightness: Brightness.light,
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Color.fromARGB(255, 37, 60, 89),
+    primary: darkColorSchemePrimary,
     onPrimary: Colors.white,
-    secondary: Color.fromARGB(255, 45, 75, 115),
-    onSecondary: Color.fromARGB(255, 255, 255, 255),
+    secondary: darkColorSchemeOnSecondary,
+    onSecondary: Colors.white,
     error: Colors.redAccent,
-    onError: Color(0xFFFFFFFF),
-    surface: Color.fromARGB(255, 22, 27, 34), // Fondo sin transparencia
-    onSurface:
-        Color.fromARGB(255, 200, 200, 200), // Color claro para texto y bordes
+    onError: Colors.white,
+    surface: darkColorSchemeSurface,
+    onSurface: darkColorSchemeOnSurface,
     brightness: Brightness.dark,
   );
 }
