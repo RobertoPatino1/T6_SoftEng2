@@ -144,7 +144,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   image: DecorationImage(
                     image: _bannerImage == null
                         ? AssetImage(
-                            //TODO: CHANGE THIS TO THE USER BACKGROUND PIC, IF THE DATA IS NULL, THEN USE STOCK
                             backgroundPicture,
                           )
                         : FileImage(File(_bannerImage!.path)) as ImageProvider,
@@ -181,7 +180,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       radius: 50,
                       backgroundImage: _profileImage == null
                           ? AssetImage(
-                              //TODO: CHANGE THIS TO THE USER PROFILE PIC, IF THE DATA IS NULL, THEN USE STOCK
                               profilePicture,
                             )
                           : FileImage(File(_profileImage!.path))
