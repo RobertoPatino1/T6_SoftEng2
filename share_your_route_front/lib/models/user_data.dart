@@ -1,4 +1,5 @@
 import 'package:share_your_route_front/core/constants/urls.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 
 class UserData {
   final String firstName;
@@ -37,5 +38,8 @@ class UserData {
       'backgroundPhoto': backgroundPhoto,
       'profilePhoto': profilePhoto,
     };
+  }
+  void update(String uid) {
+    updateUserData(uid, toJson());
   }
 }
