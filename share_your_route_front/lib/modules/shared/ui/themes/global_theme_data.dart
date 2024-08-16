@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class GlobalThemeData {
   static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
-
-  static const Color lightColorSchemePrimary = Color.fromRGBO(37, 60, 89, 1);
-  static const Color lightColorSchemeSecondary = Color.fromRGBO(45, 75, 115, 1);
-  static const Color lightColorSchemeOnSecondary = Color(0xFF322942);
-  static const Color lightColorSchemeOnSurface = Color(0xFF241E30);
-
-  static const Color darkColorSchemePrimary = Color.fromARGB(255, 37, 60, 89);
-  static const Color darkColorSchemeOnSecondary =
-      Color.fromARGB(255, 45, 75, 115);
-  static const Color darkColorSchemeSurface = Color.fromARGB(255, 22, 27, 34);
-  static const Color darkColorSchemeOnSurface =
-      Color.fromARGB(255, 200, 200, 200);
 
   static ThemeData lightThemeData =
       themeData(lightColorScheme, _lightFocusColor);

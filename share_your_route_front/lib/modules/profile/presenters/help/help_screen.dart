@@ -41,7 +41,7 @@ class HelpScreen extends StatelessWidget {
                     ),
                     OptionItem(
                       icon: Icons.lock,
-                      title: 'Licencia',
+                      title: 'Licencias',
                       onTap: () async {
                         navigateWithSlideTransition(
                           context,

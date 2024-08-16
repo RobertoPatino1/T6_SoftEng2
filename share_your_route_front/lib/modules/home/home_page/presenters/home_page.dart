@@ -198,15 +198,18 @@ class HomeState extends State<Home> {
                             RouteListBuilder()
                                 .buildRouteList(context, "Rutas de hoy"),
                             RouteCardBuilder().buildRouteCard(
-                                context,
-                                routeList.where((ruta) {
-                                  return DateComparator(ruta.routeDate);
-                                }).toList(),),
+                              context,
+                              routeList.where((ruta) {
+                                return DateComparator(ruta.routeDate);
+                              }).toList(),
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
                             RouteListBuilder().buildRouteList(
-                                context, "Rutas dentro de la ciudad",),
+                              context,
+                              "Rutas dentro de la ciudad",
+                            ),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
@@ -220,7 +223,9 @@ class HomeState extends State<Home> {
                               height: 30,
                             ),
                             RouteListBuilder().buildRouteList(
-                                context, "Día en la naturaleza ",),
+                              context,
+                              "Día en la naturaleza ",
+                            ),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
