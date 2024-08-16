@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/bio/bio_edition_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -54,6 +55,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final bioTextColor = isDarkMode ? Colors.white : Colors.black;
+    final bioBorderColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
       appBar: const CustomAppBar(title: "Editar Perfil"),
       body: SingleChildScrollView(
@@ -180,15 +185,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                            border:
+                                Border.all(color: bioBorderColor, width: 1)),
                         child: Row(
                           children: [
                             Expanded(
                               child: Text(
                                 bio,
-                                style: const TextStyle(fontSize: 16),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: bioTextColor,
+                                ),
                               ),
                             ),
                             const Icon(Icons.edit, color: Colors.grey),

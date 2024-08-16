@@ -98,10 +98,17 @@ class TermsAndPrivacyScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                'Si tienes alguna pregunta o inquietud, no dudes en contactarnos a través de nuestra dirección de correo electrónico: shareyouroute@gmail.com.',
+                'Si tienes alguna pregunta o inquietud, no dudes en contactarnos a través de nuestra dirección de correo electrónico:',
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.left,
               ),
+              SizedBox(height: 10),
+              Text(
+                'shareyouroute@gmail.com',
+                style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 10),
             ],
           ),
         ),
