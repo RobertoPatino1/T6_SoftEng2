@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class BioEditionScreen extends StatefulWidget {
@@ -27,7 +29,9 @@ class _BioEditionScreenState extends State<BioEditionScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              // TODO: UPDATE THE SAVED BIO IN THE DATABASE
+              updateUserData(FirebaseAuth.instance.currentUser!.uid, {
+                'bio': _bioController.text,
+              });
               Navigator.of(context).pop(_bioController.text);
             },
             child: const Text(
