@@ -50,7 +50,7 @@ class HelpScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                )
+                ),
               ],
             ),
             const SizedBox(

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logging/logging.dart';
 
 import 'package:share_your_route_front/core/constants/urls.dart';
@@ -95,7 +94,7 @@ class LoginState extends State<Login> {
                       showSnackbar(
                           context,
                           "Credenciales incorrectas, intente nuevamente.",
-                          "error");
+                          "error",);
                       Logger.root.shout('Failed with error code: ${e.code}');
                       Logger.root.shout(e.message);
                       //TODO: REMOVE THIS STATEMENT BEFORE DEPLOYMENT

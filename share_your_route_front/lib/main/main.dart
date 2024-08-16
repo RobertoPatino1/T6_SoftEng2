@@ -46,7 +46,7 @@ void _setupLogging() {
   Logger.root.onRecord.listen((LogRecord record) {
     // ignore: avoid_print
     print(
-        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
+        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}',);
   });
 }
 
