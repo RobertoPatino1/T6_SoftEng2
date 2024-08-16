@@ -54,6 +54,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final bioTextColor = isDarkMode ? Colors.white : Colors.black;
+    final bioBorderColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
       appBar: const CustomAppBar(title: "Editar Perfil"),
       body: SingleChildScrollView(
@@ -174,21 +178,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        left: 10.0,
+                      ), // Añade espacio solo a la izquierda
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Bio",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 2.5),
                     GestureDetector(
                       onTap: _editBio,
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200],
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: bioBorderColor),
                         ),
                         child: Row(
                           children: [
                             Expanded(
                               child: Text(
                                 bio,
-                                style: const TextStyle(fontSize: 16),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: bioTextColor,
+                                ),
                               ),
                             ),
                             const Icon(Icons.edit, color: Colors.grey),
