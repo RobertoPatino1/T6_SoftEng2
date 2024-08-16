@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 import 'package:share_your_route_front/oss_licenses.dart';
@@ -13,6 +14,11 @@ class LicenseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
       appBar: const CustomAppBar(title: "Licencias"),
       body: Padding(
@@ -85,22 +91,22 @@ class LicenseScreen extends StatelessWidget {
                     itemCount: licenses.length,
                     itemBuilder: (_, index) {
                       return Card(
-                        color: const Color.fromARGB(255, 230, 229, 229),
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        child: Container(
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          color: cardBackgroundColor,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          clipBehavior: Clip.antiAlias,
                           child: ListTile(
                             title: Text(
                               licenses[index].name,
-                              style: const TextStyle(fontSize: 16),
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.start,
+                              style: TextStyle(color: textColor),
                             ),
-                            trailing: const Icon(Icons.chevron_right),
+                            trailing:
+                                Icon(Icons.chevron_right, color: textColor),
                             onTap: () {
                               navigateWithSlideTransition(
                                 context,
@@ -111,9 +117,32 @@ class LicenseScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                          ),
-                        ),
-                      );
+                          )
+
+                          // child: Container(
+                          //   height: 50,
+                          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                          //   child: ListTile(
+                          //     title: Text(
+                          //       licenses[index].name,
+                          //       style: const TextStyle(fontSize: 16),
+                          //       overflow: TextOverflow.ellipsis,
+                          //       textAlign: TextAlign.start,
+                          //     ),
+                          //     trailing: const Icon(Icons.chevron_right),
+                          //     onTap: () {
+                          //       navigateWithSlideTransition(
+                          //         context,
+                          //         LicenceDetailPage(
+                          //           title: licenses[index].name,
+                          //           description: licenses[index].description,
+                          //           licence: licenses[index].license!,
+                          //         ),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
+                          );
                     },
                   ),
                 ],
