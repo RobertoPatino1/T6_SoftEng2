@@ -4,7 +4,6 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/main/main.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
-import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class AccesibilityScreen extends ConsumerWidget {
   @override
@@ -36,15 +35,7 @@ class AccesibilityScreen extends ConsumerWidget {
               trailing: Switch(
                 value: isDarkMode,
                 onChanged: (value) async {
-                  // HapticFeedback.mediumImpact();
-                  // SystemSound.play(SystemSoundType.click);
                   Vibrate.vibrate();
-                  final bool canVibrate = await Vibrate.canVibrate;
-                  //TODO: CONFIRM THIS
-                  if (canVibrate) {
-                    showSnackbar(
-                        context, "El celular si puede vibrar", "confirmation");
-                  }
 
                   final newThemeMode = value ? ThemeMode.dark : ThemeMode.light;
                   ref.read(themeModeProvider.notifier).state = newThemeMode;

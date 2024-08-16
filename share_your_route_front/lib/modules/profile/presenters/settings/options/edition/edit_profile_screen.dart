@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/bio/bio_edition_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -179,16 +178,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        left: 10.0,
+                      ), // Añade espacio solo a la izquierda
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Bio",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 2.5),
                     GestureDetector(
                       onTap: _editBio,
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
-                            border:
-                                Border.all(color: bioBorderColor, width: 1)),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: bioBorderColor),
+                        ),
                         child: Row(
                           children: [
                             Expanded(
