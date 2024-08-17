@@ -91,6 +91,7 @@ class LoginState extends State<Login> {
                       }
                     } on FirebaseAuthException catch (e) {
                       showSnackbar(
+                        // ignore: use_build_context_synchronously
                         context,
                         "Credenciales incorrectas, intente nuevamente.",
                         "error",

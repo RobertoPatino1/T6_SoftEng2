@@ -41,9 +41,12 @@ class HomeState extends State<Home> {
   late PageController _pageController;
   int unreadNotificationsCount = 3;
   final List<NotificationItem> notifications = [
-    NotificationItem("Actualizacion de sus rutas favoritas", "Detalles del mensaje 1", DateTime.now()),
-    NotificationItem("Registro en ruta 'El Dorado'", "Detalles del mensaje 2", DateTime.now().subtract(const Duration(hours: 1))),
-    NotificationItem("Cambios en ruta 'Ceibos'", "Detalles del mensaje 3", DateTime.now().subtract(const Duration(days: 1))),
+    NotificationItem("Actualizacion de sus rutas favoritas",
+        "Detalles del mensaje 1", DateTime.now()),
+    NotificationItem("Registro en ruta 'El Dorado'", "Detalles del mensaje 2",
+        DateTime.now().subtract(const Duration(hours: 1))),
+    NotificationItem("Cambios en ruta 'Ceibos'", "Detalles del mensaje 3",
+        DateTime.now().subtract(const Duration(days: 1))),
   ];
 
   Future<void> _loadData() async {
@@ -54,7 +57,7 @@ class HomeState extends State<Home> {
     });
   }
 
-  void _handleUnreadCountChanged(int count){
+  void _handleUnreadCountChanged(int count) {
     setState(() {
       unreadNotificationsCount = count;
     });
@@ -87,8 +90,8 @@ class HomeState extends State<Home> {
     setState(() {
       currentPageIndex = index;
       if (index == 1) {
-      _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
-    }
+        _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
+      }
     });
   }
 
@@ -97,7 +100,7 @@ class HomeState extends State<Home> {
       currentPageIndex = index;
     });
 
-    if(index == 1){
+    if (index == 1) {
       _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
     }
 
@@ -128,57 +131,56 @@ class HomeState extends State<Home> {
             children: <Widget>[
               if (currentRoute == null) ...[
                 Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.only(
                     top: 50,
                     bottom: 10,
-                  ), // Padding superior ajustado
+                  ),
                   decoration: BoxDecoration(
                     color: topNavBarBackgroundColor.withOpacity(0.6),
                   ),
-                  child: ClipRRect(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Es hora de una nueva aventura!",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineLarge,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ), // Ajuste del espacio entre textos
-                        Text(
-                          "¿Deseas crear una ruta?",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const SizedBox(height: 5),
-                        ElevatedButton(
-                          onPressed: () {
-                            navigateWithSlideTransition(
-                              context,
-                              const CreateRoute(),
-                            );
-                          },
-                          child: const IntrinsicWidth(
-                            child: Center(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('Empezar una ruta'),
-                                  SizedBox(width: 2.1),
-                                  Icon(
-                                    Icons.play_arrow,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                ],
-                              ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Es hora de una nueva aventura!",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "¿Deseas crear una ruta?",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 5),
+                      ElevatedButton(
+                        onPressed: () {
+                          navigateWithSlideTransition(
+                            context,
+                            const CreateRoute(),
+                          );
+                        },
+                        child: const IntrinsicWidth(
+                          child: Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Empezar una ruta'),
+                                SizedBox(width: 2.1),
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ] else ...[
@@ -299,7 +301,10 @@ class HomeState extends State<Home> {
               ),
             ],
           ),
-          NotificationPage(notifications: notifications, onUnreadCountChanged: _handleUnreadCountChanged,),
+          NotificationPage(
+            notifications: notifications,
+            onUnreadCountChanged: _handleUnreadCountChanged,
+          ),
           ProfileView(),
         ],
       ),
