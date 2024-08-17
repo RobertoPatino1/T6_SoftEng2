@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 
 class ProfileOptions extends StatelessWidget {
   final List<OptionGroup> optionGroups;
@@ -7,26 +8,29 @@ class ProfileOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor =
+        isDarkMode ? Theme.of(context).colorScheme.onSurface : Colors.black;
+
     return Column(
       children: optionGroups.map((group) {
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 230, 229, 229),
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
             children: group.options.map((option) {
               BorderRadius? borderRadius;
               if (group.options.length == 1) {
-                // Si solo hay una opción en el grupo, todos los bordes son redondeados
                 borderRadius = BorderRadius.circular(15);
               } else if (option == group.options.first) {
-                // Si es la primera opción, redondear solo los bordes superiores
                 borderRadius =
                     const BorderRadius.vertical(top: Radius.circular(15));
               } else if (option == group.options.last) {
-                // Si es la última opción, redondear solo los bordes inferiores
                 borderRadius =
                     const BorderRadius.vertical(bottom: Radius.circular(15));
               }
@@ -34,7 +38,7 @@ class ProfileOptions extends StatelessWidget {
               return Column(
                 children: [
                   Material(
-                    color: option.backgroundColor ?? Colors.transparent,
+                    color: backgroundColor,
                     borderRadius: borderRadius,
                     clipBehavior: Clip.antiAlias,
                     child: InkWell(
@@ -44,17 +48,12 @@ class ProfileOptions extends StatelessWidget {
                       },
                       splashColor: Colors.grey,
                       child: ListTile(
-                        leading: Icon(option.icon,
-                            color: option.textColor ?? Colors.black,),
+                        leading: Icon(option.icon, color: textColor),
                         title: Text(
                           option.title,
-                          style: TextStyle(
-                              color: option.textColor ?? Colors.black,),
+                          style: TextStyle(color: textColor),
                         ),
-                        trailing: Icon(
-                          Icons.chevron_right,
-                          color: option.textColor ?? Colors.black,
-                        ),
+                        trailing: Icon(Icons.chevron_right, color: textColor),
                       ),
                     ),
                   ),
