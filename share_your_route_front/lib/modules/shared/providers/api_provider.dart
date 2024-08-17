@@ -41,3 +41,8 @@ Future updateUserData(String userId, Map<String, dynamic> userData) async {
   final response = await putRequest("${apiUrl}users/$userId", userData);
   return response;
 }
+
+Future registerUser(Map<String, dynamic> userData) async {
+  final response = await postRequest("${apiUrl}auth/register", userData);
+  return response;
+}

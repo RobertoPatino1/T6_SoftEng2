@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/core/constants/app_regex.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
+import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -56,7 +58,23 @@ class RegisterState extends State<Register> {
         passwordController.text == confirmPasswordController.text) {
       if (passNotifier.value == PasswordStrength.strong ||
           passNotifier.value == PasswordStrength.secure) {
-        //TODO: REGISTER USER IN FIREBASE DATABASE BEFORE CHANGING SCREEN
+        registerUser({
+          'firstName': nameController.text,
+          'lastName': lastNameController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+        }).then((value) {
+          if (value != null) {
+            showSnackbar(context, 'Usuario creado correctamente', 'success');
+            FirebaseAuth.instance.signOut();
+            FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+          } else {
+            showSnackbar(context, 'Error al crear el usuario', 'error');
+          }
+        });
         Modular.to.pushNamed('/auth/home');
       } else {
         showSnackbar(context, 'Debe ingresar una contraseña fuerte', 'error');
