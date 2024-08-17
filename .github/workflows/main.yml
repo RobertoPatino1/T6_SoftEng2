@@ -24,11 +24,6 @@ jobs:
         id: flutter-action
         with:
           architecture: x64
-      - name: Check directory data
-        run: pwd
-      
-      - name: Check content
-        run: ls -la
       
       - name: Install dependencies
         run: flutter pub get
