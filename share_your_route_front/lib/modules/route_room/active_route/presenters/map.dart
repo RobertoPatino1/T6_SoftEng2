@@ -117,16 +117,32 @@ Widget build(BuildContext context) {
             right: 16,
             child: Container(
               padding: const EdgeInsets.all(8.0),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+                color: const Color.fromRGBO(191, 141, 48, 1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text( touristRoute.name ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
               ),
             ),
           ),
+          Positioned(
+            top: 70,
+            left: 16,
+            right: 16,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text( "Proxima parada: ${touristRoute.placesList[touristRoute.currentPlaceIndex].name}" ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
+              ),
+            ),
+          ),
        Positioned(
-            top: 80,
+            top: 100,
             left: 16,
             right: 16,
             child: Container(
