@@ -1,6 +1,7 @@
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:share_your_route_front/modules/shared/providers/http_requests_provider.dart";
 
-const apiUrl = "https://shareyourroute-back.onrender.com/api/";
+final apiUrl = dotenv.env["API_URL"];
 
 Future createAccount(Map<String, String> userJson) async {
   final response = await postRequest("${apiUrl}auth/register", userJson);
@@ -28,5 +29,15 @@ Future getPrivateRoutes() {
 
 Future saveRoute(Map<String, dynamic> routeJson) async {
   final response = await postRequest("${apiUrl}routes/save", routeJson);
+  return response;
+}
+
+Future<Map<String, dynamic>> getUserData(String userId) async {
+  final response = await getRequest("${apiUrl}users/$userId");
+  return response as Map<String, dynamic>;
+}
+
+Future updateUserData(String userId, Map<String, dynamic> userData) async {
+  final response = await putRequest("${apiUrl}users/$userId", userData);
   return response;
 }
