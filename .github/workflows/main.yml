@@ -29,9 +29,16 @@ jobs:
 
       - name: Check directory data
         run: pwd
+      
       - name: Check content
         run: ls -la
+      
+      - name: Change directory to Flutter project
+        run: cd share_your_route_front
 
+      - name: Check content inside 
+        run: ls -la
+      
       - name: Install dependencies
         run: flutter pub get
 
