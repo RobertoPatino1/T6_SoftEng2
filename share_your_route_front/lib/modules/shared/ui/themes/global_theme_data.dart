@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class GlobalThemeData {
@@ -22,19 +23,19 @@ class GlobalThemeData {
         TextTheme(
           headlineLarge: GoogleFonts.poppins(
             fontSize: 25.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
           headlineMedium: GoogleFonts.poppins(
             fontSize: 20.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
           headlineSmall: GoogleFonts.poppins(
             fontSize: 15.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
@@ -98,11 +99,11 @@ class GlobalThemeData {
         labelStyle: TextStyle(color: colorScheme.onSurface),
         hintStyle: TextStyle(color: colorScheme.onSurface),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0), // Esquinas redondeadas
+          borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide(color: colorScheme.onSurface),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0), // Esquinas redondeadas
+          borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide(color: colorScheme.primary),
         ),
       ),
@@ -168,27 +169,28 @@ class GlobalThemeData {
   }
 
   static const ColorScheme lightColorScheme = ColorScheme(
-    primary: Color.fromRGBO(37, 60, 89, 1),
+    primary: lightColorSchemePrimary,
     onPrimary: Colors.white,
-    secondary: Color.fromRGBO(45, 75, 115, 1),
-    onSecondary: Color(0xFF322942),
+    secondary: lightColorSchemeSecondary,
+    onSecondary: lightColorSchemeOnSecondary,
     error: Colors.redAccent,
-    onError: Color(0xFFFFFFFF),
+    onError: Colors.white,
     surface: Colors.white,
-    onSurface: Color(0xFF241E30),
+    onSurface: lightColorSchemeOnSurface,
     brightness: Brightness.light,
+    primaryFixed: lightColorSchemePrimary,
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Color.fromARGB(255, 37, 60, 89),
+    primary: darkColorSchemePrimary,
     onPrimary: Colors.white,
-    secondary: Color.fromARGB(255, 45, 75, 115),
-    onSecondary: Color.fromARGB(255, 255, 255, 255),
+    secondary: darkColorSchemeOnSecondary,
+    onSecondary: Colors.white,
     error: Colors.redAccent,
-    onError: Color(0xFFFFFFFF),
-    surface: Color.fromARGB(255, 22, 27, 34), // Fondo sin transparencia
-    onSurface:
-        Color.fromARGB(255, 200, 200, 200), // Color claro para texto y bordes
+    onError: Colors.white,
+    surface: darkColorSchemeSurface,
+    onSurface: darkColorSchemeOnSurface,
     brightness: Brightness.dark,
+    primaryFixed: Colors.white,
   );
 }

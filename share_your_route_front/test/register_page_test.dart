@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:share_your_route_front/modules/auth/register/presenters/register_page.dart';
 
 void main() {
-  testWidgets('Form show a error message if fields are empty', (WidgetTester tester) async {
-    
+  testWidgets('Form show a error message if fields are empty',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: Register()));
 
     final submitButton = find.descendant(
@@ -23,16 +23,18 @@ void main() {
     expect(find.text('Por favor confirme su contraseña'), findsOneWidget);
   });
 
-  testWidgets('Form show a error message if email is invalidate', (WidgetTester tester) async {
-
+  testWidgets('Form show a error message if email is invalidate',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: Register()));
 
     await tester.enterText(find.byType(TextFormField).at(0), 'Stefano');
     await tester.enterText(find.byType(TextFormField).at(1), 'Suarez');
     await tester.enterText(find.byType(TextFormField).at(2), 'invalid-email');
     await tester.enterText(find.byType(TextFormField).at(3), 'stesherr');
-    await tester.enterText(find.byType(TextFormField).at(4), 'pruebaContraseña');
-    await tester.enterText(find.byType(TextFormField).at(5), 'pruebaContraseña');
+    await tester.enterText(
+        find.byType(TextFormField).at(4), 'pruebaContraseña');
+    await tester.enterText(
+        find.byType(TextFormField).at(5), 'pruebaContraseña');
     await tester.tap(find.text('Crear cuenta'));
     await tester.pump();
 

@@ -13,7 +13,6 @@ class AboutScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
                 logoURL,
@@ -28,16 +27,13 @@ class AboutScreen extends StatelessWidget {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis, metus eu malesuada vehicula, lectus est cursus arcu, vitae laoreet enim est sit amet odio. Donec id metus vitae lorem convallis ultrices. '
-                'Vivamus eget dolor lacus. Proin vestibulum odio nec justo hendrerit, nec aliquet felis viverra. Sed in lacus nec libero malesuada laoreet ac in est. Praesent vehicula neque nisi, in ultricies mi cursus at. '
-                'Nam ut orci eros. Quisque ultricies dui ac odio accumsan, in pulvinar magna cursus. Maecenas gravida suscipit orci, vel porttitor nulla pharetra ac. '
-                'In congue nulla nec purus ornare, in vehicula sem pharetra. Morbi consectetur dolor at diam vehicula, in pulvinar ipsum bibendum. '
-                'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus sollicitudin est ut augue dapibus, vitae varius risus posuere.',
+                'Share Your Route es una aplicación diseñada para mejorar la experiencia de los turistas en Ecuador, proporcionando a las agencias de viajes herramientas para gestionar y coordinar mejor sus tours. La app facilita la comunicación en tiempo real entre guías y turistas, evita problemas como retrasos y pérdidas, y ofrece recomendaciones personalizadas basadas en las preferencias de los usuarios. De esta manera, optimizamos y fortalecemos las experiencias de viaje, garantizando seguridad y satisfacción en cada recorrido.',
                 style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -46,14 +42,13 @@ class AboutScreen extends StatelessWidget {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis dapibus magna, vel facilisis purus facilisis ut. Etiam quis metus nec ipsum tristique dapibus. '
-                'Mauris eu orci odio. Phasellus viverra metus in tellus cursus, in facilisis metus auctor. Nulla facilisi. Suspendisse ut ligula ut eros efficitur viverra. '
-                'Phasellus ornare bibendum magna, id cursus justo vestibulum sit amet.',
+                'En Share Your Route, nos comprometemos a potenciar la calidad de las experiencias turísticas mediante soluciones tecnológicas que optimizan la comunicación, seguridad y satisfacción del cliente. Nuestro objetivo es ser el aliado estratégico para las empresas turísticas, ofreciendo herramientas innovadoras que simplifican la gestión de grupos y mejoran la coordinación en cada viaje. Creemos que el éxito de nuestros clientes es también nuestro éxito.',
                 style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
               ),
             ],
           ),
