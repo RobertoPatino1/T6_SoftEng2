@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/core/constants/app_regex.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -52,6 +54,35 @@ class RegisterState extends State<Register> {
     }
   }
 
+  void _register() {
+    if (_formKey.currentState!.validate() &&
+        passwordController.text == confirmPasswordController.text) {
+      if (passNotifier.value == PasswordStrength.strong ||
+          passNotifier.value == PasswordStrength.secure) {
+        registerUser({
+          'firstName': nameController.text,
+          'lastName': lastNameController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+        }).then((value) {
+          if (value != null) {
+            showSnackbar(context, 'Usuario creado correctamente', 'success');
+            FirebaseAuth.instance.signOut();
+            FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+          } else {
+            showSnackbar(context, 'Error al crear el usuario', 'error');
+          }
+        });
+        Modular.to.pushNamed('/auth/home');
+      } else {
+        showSnackbar(context, 'Debe ingresar una contraseña fuerte', 'error');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +97,12 @@ class RegisterState extends State<Register> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top: 60.0),
+                    padding: const EdgeInsets.only(top: 60.0, bottom: 15),
                     child: Center(
                       child: SizedBox(
                         width: 200,
                         height: 150,
-                        child: Image.asset('asset/images/logo.png'),
+                        child: Image.asset(logoURL),
                       ),
                     ),
                   ),
@@ -256,33 +287,7 @@ class RegisterState extends State<Register> {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {
-                      final registerJson = {
-                        'firstName': nameController.text,
-                        'lastName': lastNameController.text,
-                        'email': emailController.text,
-                        'password': passwordController.text,
-                      };
-                      final passwordsMatch = passwordController.text ==
-                          confirmPasswordController.text;
-                      if (_formKey.currentState!.validate() && passwordsMatch) {
-                        final response = createAccount(registerJson);
-                        response.then((value) {
-                          final Map<String, dynamic> responseJson = value as Map<String, dynamic>;
-                          if (responseJson['error'] != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(responseJson['error'].toString()),
-                              ),
-                            );
-                          } else {
-                            Modular.to.navigate('/auth/');
-                          }
-                        }).onError((error, stackTrace) {
-                          Logger.root.severe('Error: $error');
-                        });
-                      }
-                    },
+                    onPressed: _register,
                     child: const Text(
                       'Crear cuenta',
                     ),

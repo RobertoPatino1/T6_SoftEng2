@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   @override
@@ -15,9 +16,9 @@ class _DeleteAccountPageState extends State<DeleteAccountScreen> {
 
   void _deleteAccount() {
     if (_formKey.currentState!.validate()) {
-      // Lógica para eliminar la cuenta aquí
+      // TODO: Lógica para eliminar la cuenta aquí
       // Validar la contraseña ingresada con Firebase
-      _authService.logout();
+      _authService.logout(context);
     }
   }
 
@@ -36,9 +37,7 @@ class _DeleteAccountPageState extends State<DeleteAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Eliminar Cuenta'),
-      ),
+      appBar: const CustomAppBar(title: "Eliminar Cuenta"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

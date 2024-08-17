@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
+import 'package:share_your_route_front/main/main.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
-class AccesibilityScreen extends StatefulWidget {
+class AccesibilityScreen extends ConsumerWidget {
   @override
-  _AccessibilitySettingsPageState createState() =>
-      _AccessibilitySettingsPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = ref.watch(themeModeProvider) == ThemeMode.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
 
-class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
-  bool isDarkMode = false;
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Accesibilidad'),
-      ),
+      appBar: const CustomAppBar(title: "Accesibilidad"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Spacer(),
           Image.asset(
-            'asset/images/help_screen_img.jpg',
+            accessibilityScreenLogoURL,
             width: 300,
             height: 300,
             fit: BoxFit.contain,
@@ -29,7 +29,7 @@ class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 230, 229, 229),
+              color: cardBackgroundColor,
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListTile(
@@ -37,17 +37,11 @@ class _AccessibilitySettingsPageState extends State<AccesibilityScreen> {
               title: const Text('Tema Oscuro'),
               trailing: Switch(
                 value: isDarkMode,
-                onChanged: (value) {
-                  setState(() {
-                    isDarkMode = value;
-                    // TODO: Aquí es donde se cambia el tema de la aplicación
-                    if (isDarkMode) {
-                      // TODO:Cambiar al tema oscuro
-                      // TODO:Cambia el tema globalmente usando el ThemeData o un ThemeMode
-                    } else {
-                      // TODO:Cambiar al tema claro
-                    }
-                  });
+                onChanged: (value) async {
+                  Vibrate.vibrate();
+
+                  final newThemeMode = value ? ThemeMode.dark : ThemeMode.light;
+                  ref.read(themeModeProvider.notifier).state = newThemeMode;
                 },
               ),
             ),

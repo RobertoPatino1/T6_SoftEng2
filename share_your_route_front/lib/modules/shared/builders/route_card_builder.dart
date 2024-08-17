@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 
 class RouteCardBuilder {
   Widget buildRouteCard(BuildContext context, List<TouristRoute> routesList) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+    final titleColor = isDarkMode ? yellowAccentColor : Colors.black;
+    final iconColor = isDarkMode ? yellowAccentColor : lightColorSchemePrimary;
+
     return SizedBox(
       height: 270,
       child: ListView.builder(
@@ -32,7 +41,7 @@ class RouteCardBuilder {
                     height: 600,
                     margin: const EdgeInsets.only(top: 12, bottom: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: cardBackgroundColor,
                       borderRadius: BorderRadius.circular(20.0),
                       boxShadow: [
                         BoxShadow(
@@ -68,7 +77,10 @@ class RouteCardBuilder {
                         Center(
                           child: Text(
                             touristRoute.name,
-                            style: Theme.of(context).textTheme.displayMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(color: titleColor),
                           ),
                         ),
                         Center(
@@ -79,7 +91,7 @@ class RouteCardBuilder {
                                 padding: const EdgeInsets.all(2.0),
                                 child: Icon(
                                   RouteTypeHelper.getIconData(routeType),
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: iconColor,
                                   size: 22.0,
                                 ),
                               );
@@ -96,10 +108,13 @@ class RouteCardBuilder {
                               ),
                               child: Text(
                                 "Fecha: Hoy",
-                                style: Theme.of(context).textTheme.labelSmall,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall!
+                                    .copyWith(color: textColor),
                               ),
                             ),
-                          )
+                          ),
                         ] else ...[
                           Center(
                             child: Container(
@@ -109,10 +124,13 @@ class RouteCardBuilder {
                               ),
                               child: Text(
                                 "Fecha: ${DateFormat('dd-MM-2024').format(touristRoute.routeDate)}",
-                                style: Theme.of(context).textTheme.labelSmall,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall!
+                                    .copyWith(color: textColor),
                               ),
                             ),
-                          )
+                          ),
                         ],
                         Center(
                           child: Container(
@@ -122,7 +140,10 @@ class RouteCardBuilder {
                             ),
                             child: Text(
                               "${touristRoute.startTime.format(context)} - ${touristRoute.endTime.format(context)}",
-                              style: Theme.of(context).textTheme.labelSmall,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .copyWith(color: textColor),
                             ),
                           ),
                         ),
@@ -130,13 +151,17 @@ class RouteCardBuilder {
                           child: Container(
                             height: 30,
                             margin: const EdgeInsets.symmetric(
-                              horizontal: 5,
+                              horizontal: 15,
                               vertical: 5,
                             ),
                             child: SingleChildScrollView(
                               child: Text(
+                                textAlign: TextAlign.center,
                                 touristRoute.description,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: textColor),
                               ),
                             ),
                           ),

@@ -72,6 +72,31 @@ PORT = 4001
 APPLICATION_CREDENTIALS=../.firebase/serviceAccountKey.json
 FIREBASE_DATABASE_URL=https://share-your-route-ff4ad-default-rtdb.firebaseio.com
 ```
+
+### Build configuration files for firebase
+**Install Firebase CLI**  
+Check this [link](https://firebase.google.com/docs/cli#mac-linux-npm) for more detailed steps.  
+**Note:** _You need to have curl isntalled in your system_
+```
+curl -sL https://firebase.tools | bash
+```
+
+**Log in and test the Firebase CLI**  
+
+_After running this command you'll need to follow the link showed in the terminal and accept the required permissions._
+```
+firebase login
+```
+
+**Install the FlutterFire CLI**
+```
+dart pub global activate flutterfire_cli
+```
+**Configure the project to use Firebase**  
+**Note:** _Make sure this command is being executed on the root of the project_  
+```
+flutterfire configure
+```
 ### Back-End considerations
 - The project is configured to run locally on *localhost* at port *3001*
 - The deployed version of the backend can be found [here](https://shareyourroute-back.onrender.com/).

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logging/logging.dart';
 
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -44,7 +45,7 @@ class LoginState extends State<Login> {
                     child: Container(
                       width: 200,
                       height: 150,
-                      child: Image.asset('asset/images/logo.png'),
+                      child: Image.asset(logoURL),
                     ),
                   ),
                 ),
@@ -53,7 +54,7 @@ class LoginState extends State<Login> {
                   child: TextField(
                     controller: _emailController,
                     decoration: buildInputDecoration(
-                      labelText: 'Correo electrónico',
+                      labelText: 'Email',
                     ),
                   ),
                 ),
@@ -71,7 +72,7 @@ class LoginState extends State<Login> {
                 ),
                 TextButton(
                   onPressed: () {
-                    //TODO FORGOT PASSWORD SCREEN GOES HERE
+                    Modular.to.navigate('/auth/forgotPassword');
                   },
                   child: Text(
                     'Olvidaste tu contraseña?',
@@ -90,16 +91,17 @@ class LoginState extends State<Login> {
                         Modular.to.navigate('/auth/home/');
                       }
                     } on FirebaseAuthException catch (e) {
-                      Fluttertoast.showToast(
-                        msg: "Credenciales incorrectas, intente nuevamente.",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
+                      showSnackbar(
+                        // ignore: use_build_context_synchronously
+                        context,
+                        "Credenciales incorrectas, intente nuevamente.",
+                        "error",
                       );
                       Logger.root.shout('Failed with error code: ${e.code}');
                       Logger.root.shout(e.message);
+                      //TODO: REMOVE THIS STATEMENT BEFORE DEPLOYMENT
+                      // Modular.to.navigate('/auth/home/');
+                      //TODO: REMOVE THIS STATEMENT BEFORE DEPLOYMENT
                     }
                   },
                   child: const Text(

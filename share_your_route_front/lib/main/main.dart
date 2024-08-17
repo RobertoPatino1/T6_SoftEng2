@@ -8,10 +8,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
+import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/firebase_options.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
-import 'package:share_your_route_front/modules/shared/themes/global_theme_data.dart';
+import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
+
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
 
 Future<void> loadFirebase() async {
   await Firebase.initializeApp(
@@ -44,18 +48,22 @@ void _setupLogging() {
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((LogRecord record) {
     // ignore: avoid_print
-    print('${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
+    print(
+        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}',);
   });
 }
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Share your route',
-      themeMode: ThemeMode.light,
+      themeMode: themeMode,
       theme: GlobalThemeData.lightThemeData,
+      darkTheme: GlobalThemeData.darkThemeData,
       routerConfig: Modular.routerConfig,
     );
   }
@@ -154,12 +162,11 @@ class _MainPageState extends State<MainPage> {
   Future<void> _determinePositionAndNavigate() async {
     try {
       await determinePosition();
+      //aqui va lo que coloque en la linea 61
       Timer(const Duration(seconds: 3), () {
         Modular.to.navigate('/auth/');
       });
     } catch (error) {
-      // Manejo del error si la ubicación no se puede obtener
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al obtener la ubicación: $error')),
       );
@@ -189,11 +196,10 @@ class _MainPageState extends State<MainPage> {
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
-                // ignore: sized_box_for_whitespace
-                child: Container(
+                child: SizedBox(
                   width: 200,
                   height: 150,
-                  child: Image.asset('asset/images/logo.png'),
+                  child: Image.asset(logoURL),
                 ),
               ),
             ),

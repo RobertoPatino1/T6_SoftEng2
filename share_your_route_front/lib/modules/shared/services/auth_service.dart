@@ -1,11 +1,12 @@
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  Future<void> logout() async {
+  Future<void> logout(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
-    Modular.to.pushReplacementNamed('/auth/');
+    // ignore: use_build_context_synchronously
+    Navigator.popUntil(context, ModalRoute.withName('/auth/'));
   }
 }

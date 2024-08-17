@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/intl.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
-import 'package:share_your_route_front/core/utils/jsonConverters/data_base_provitional.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/notification/presenters/notification_page.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
+import 'package:share_your_route_front/modules/route_creation/presenters/route_creation_screen.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 List<TouristRoute> routeList = [];
 
@@ -38,6 +40,29 @@ class HomeState extends State<Home> {
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
   late PageController _pageController;
+  int unreadNotificationsCount = 3;
+  final List<NotificationItem> notifications = [
+    NotificationItem("Actualizacion de sus rutas favoritas",
+        "Detalles del mensaje 1", DateTime.now(),),
+    NotificationItem("Registro en ruta 'El Dorado'", "Detalles del mensaje 2",
+        DateTime.now().subtract(const Duration(hours: 1)),),
+    NotificationItem("Cambios en ruta 'Ceibos'", "Detalles del mensaje 3",
+        DateTime.now().subtract(const Duration(days: 1)),),
+  ];
+
+  Future<void> _loadData() async {
+    routeService = await RouteService.create();
+    final routes = await routeService.fetchRouteData();
+    setState(() {
+      routeList = routes;
+    });
+  }
+
+  void _handleUnreadCountChanged(int count) {
+    setState(() {
+      unreadNotificationsCount = count;
+    });
+  }
 
   @override
   void initState() {
@@ -46,6 +71,7 @@ class HomeState extends State<Home> {
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
     _pageController = PageController(initialPage: currentPageIndex);
+    _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
   }
 
   @override
@@ -63,6 +89,9 @@ class HomeState extends State<Home> {
   void _onPageChanged(int index) {
     setState(() {
       currentPageIndex = index;
+      if (index == 1) {
+        _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
+      }
     });
   }
 
@@ -70,11 +99,20 @@ class HomeState extends State<Home> {
     setState(() {
       currentPageIndex = index;
     });
+
+    if (index == 1) {
+      _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
+    }
+
     _pageController.jumpToPage(index);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final topNavBarBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+
     Theme.of(context);
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
@@ -82,6 +120,7 @@ class HomeState extends State<Home> {
       bottomNavigationBar: CustomNavigationBar(
         currentPageIndex: currentPageIndex,
         onDestinationSelected: _onDestinationSelected,
+        unreadNotificationsCount: unreadNotificationsCount,
       ),
       body: PageView(
         controller: _pageController,
@@ -92,27 +131,37 @@ class HomeState extends State<Home> {
             children: <Widget>[
               if (currentRoute == null) ...[
                 Container(
-                  height: 250,
-                  alignment: Alignment.center,
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(
+                    top: 50,
+                    bottom: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: topNavBarBackgroundColor.withOpacity(0.6),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 5),
                       Text(
                         "Es hora de una nueva aventura!",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Text(
                         "¿Deseas crear una ruta?",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () {
-                          Modular.to.pushNamed('/auth/home/creation');
+                          navigateWithSlideTransition(
+                            context,
+                            const CreateRoute(),
+                          );
                         },
                         child: const IntrinsicWidth(
                           child: Center(
@@ -189,6 +238,17 @@ class HomeState extends State<Home> {
                             const SizedBox(
                               height: 30,
                             ),
+                            RouteListBuilder()
+                                .buildRouteList(context, "Rutas de hoy"),
+                            RouteCardBuilder().buildRouteCard(
+                              context,
+                              routeList.where((ruta) {
+                                return DateComparator(ruta.routeDate);
+                              }).toList(),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
                             if (todayRoutes.isNotEmpty) ...[
                               RouteListBuilder()
                                   .buildRouteList(context, "Rutas de hoy"),
@@ -253,14 +313,10 @@ class HomeState extends State<Home> {
               ),
             ],
           ),
-          // Messages page
-          Center(
-            child: Text(
-              "Muy pronto!!!",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+          NotificationPage(
+            notifications: notifications,
+            onUnreadCountChanged: _handleUnreadCountChanged,
           ),
-
           ProfileView(),
         ],
       ),

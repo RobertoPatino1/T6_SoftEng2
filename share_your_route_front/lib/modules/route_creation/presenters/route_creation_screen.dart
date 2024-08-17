@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
@@ -10,8 +8,9 @@ import 'package:share_your_route_front/core/utils/stepper/route_step4.dart';
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:share_your_route_front/modules/home/home_page/presenters/home_page.dart';
-import 'package:share_your_route_front/modules/shared/helpers/ui_helpers.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class CreateRoute extends StatefulWidget {
   const CreateRoute({super.key});
@@ -39,6 +38,7 @@ class _CreateRouteState extends State<CreateRoute> {
   late final RouteService routeService;
 
   void createRoute() {
+    // Aquí puedes procesar los datos capturados y crear la nueva ruta
     final TouristRoute newRoute = TouristRoute(
       name: routeNameInput,
       placesList: stopsInput,
@@ -58,7 +58,7 @@ class _CreateRouteState extends State<CreateRoute> {
       routeType: routeTypesInput, // Usar directamente la lista de RouteType
     );
 
-    addRoute('/save', newRoute.toJson());
+    newRoute.save();
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Ruta creada")),
@@ -80,19 +80,7 @@ class _CreateRouteState extends State<CreateRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          "Crear una nueva ruta",
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontSize: 25.0,
-            color: Color.fromRGBO(45, 75, 115, 1),
-            fontWeight: FontWeight.bold,
-            height: 1,
-          ),
-        ),
-      ),
+      appBar: const CustomAppBar(title: "Crear Ruta"),
       body: Theme(
         data: ThemeData(
           colorScheme: const ColorScheme.light(
