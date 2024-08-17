@@ -50,13 +50,6 @@ class HomeState extends State<Home> {
         DateTime.now().subtract(const Duration(days: 1)),),
   ];
 
-  Future<void> _loadData() async {
-    routeService = await RouteService.create();
-    final routes = await routeService.fetchRouteData();
-    setState(() {
-      routeList = routes;
-    });
-  }
 
   void _handleUnreadCountChanged(int count) {
     setState(() {
