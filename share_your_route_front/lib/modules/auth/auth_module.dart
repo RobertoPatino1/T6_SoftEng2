@@ -10,7 +10,7 @@ class AuthModule extends Module {
     r.child('/', child: (context) => const LoginPage());
     r.child('/register', child: (context) => const Register());
     r.child('/forgotPassword',
-        child: (context) => const ForgotPasswordScreen());
+        child: (context) => const ForgotPasswordScreen(),);
     r.module('/home', module: HomeModule());
   }
 }

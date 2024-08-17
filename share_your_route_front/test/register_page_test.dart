@@ -32,9 +32,9 @@ void main() {
     await tester.enterText(find.byType(TextFormField).at(2), 'invalid-email');
     await tester.enterText(find.byType(TextFormField).at(3), 'stesherr');
     await tester.enterText(
-        find.byType(TextFormField).at(4), 'pruebaContraseña');
+        find.byType(TextFormField).at(4), 'pruebaContraseña',);
     await tester.enterText(
-        find.byType(TextFormField).at(5), 'pruebaContraseña');
+        find.byType(TextFormField).at(5), 'pruebaContraseña',);
     await tester.tap(find.text('Crear cuenta'));
     await tester.pump();
 

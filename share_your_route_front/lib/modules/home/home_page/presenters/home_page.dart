@@ -42,11 +42,11 @@ class HomeState extends State<Home> {
   int unreadNotificationsCount = 3;
   final List<NotificationItem> notifications = [
     NotificationItem("Actualizacion de sus rutas favoritas",
-        "Detalles del mensaje 1", DateTime.now()),
+        "Detalles del mensaje 1", DateTime.now(),),
     NotificationItem("Registro en ruta 'El Dorado'", "Detalles del mensaje 2",
-        DateTime.now().subtract(const Duration(hours: 1))),
+        DateTime.now().subtract(const Duration(hours: 1)),),
     NotificationItem("Cambios en ruta 'Ceibos'", "Detalles del mensaje 3",
-        DateTime.now().subtract(const Duration(days: 1))),
+        DateTime.now().subtract(const Duration(days: 1)),),
   ];
 
   Future<void> _loadData() async {
