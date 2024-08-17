@@ -4,19 +4,19 @@ import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 const TextStyle labelTextStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w500,
-  color: Color.fromRGBO(0, 0, 0, 1),
+  // color: Color.fromRGBO(0, 0, 0, 1),
 );
 
 const TextStyle boldlabelTextStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w600,
-  color: Color.fromRGBO(37, 60, 89, 1),
+  // color: Color.fromRGBO(37, 60, 89, 1),
 );
 
 const TextStyle titlelabelTextStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
-  color: Color.fromRGBO(47, 77, 114, 1),
+  // color: Color.fromRGBO(47, 77, 114, 1),
 );
 
 Widget buildRouteNameField(

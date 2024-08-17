@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
@@ -78,14 +79,14 @@ class _CreateRouteState extends State<CreateRoute> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: const CustomAppBar(title: "Crear Ruta"),
       body: Theme(
         data: ThemeData(
           colorScheme: const ColorScheme.light(
-            primary: Color.fromRGBO(191, 141, 48, 1),
-          ),
+              // primary: Color.fromRGBO(191, 141, 48, 1),
+              ),
         ),
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -228,11 +229,12 @@ class _CreateRouteState extends State<CreateRoute> {
             },
             steps: [
               Step(
-                title: const Text(
+                title: Text(
                   'Información Inicial',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: isDarkMode ? yellowAccentColor : Colors.black,
                   ),
                 ),
                 content: RouteStep1(
@@ -290,11 +292,12 @@ class _CreateRouteState extends State<CreateRoute> {
                 isActive: _currentStep >= 0,
               ),
               Step(
-                title: const Text(
+                title: Text(
                   'Agregar Paradas',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: isDarkMode ? yellowAccentColor : Colors.black,
                   ),
                 ),
                 content: RouteStep2(
@@ -306,11 +309,12 @@ class _CreateRouteState extends State<CreateRoute> {
                 isActive: _currentStep >= 1,
               ),
               Step(
-                title: const Text(
+                title: Text(
                   'Seleccionar Punto de Encuentro',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: isDarkMode ? yellowAccentColor : Colors.black,
                   ),
                 ),
                 content: RouteStep3(
@@ -322,11 +326,12 @@ class _CreateRouteState extends State<CreateRoute> {
                 isActive: _currentStep >= 2,
               ),
               Step(
-                title: const Text(
+                title: Text(
                   'Confirmación',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: isDarkMode ? yellowAccentColor : Colors.black,
                   ),
                 ),
                 content: RouteStep4(
