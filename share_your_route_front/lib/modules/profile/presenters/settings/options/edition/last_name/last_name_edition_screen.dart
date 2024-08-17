@@ -3,36 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
-class BioEditionScreen extends StatefulWidget {
-  final String currentBio;
+class LastNameEditionScreen extends StatefulWidget {
+  final String currentLastName;
 
-  const BioEditionScreen({super.key, required this.currentBio});
+  const LastNameEditionScreen({super.key, required this.currentLastName});
 
   @override
-  _BioEditionScreenState createState() => _BioEditionScreenState();
+  _LastNameEditionScreenState createState() => _LastNameEditionScreenState();
 }
 
-class _BioEditionScreenState extends State<BioEditionScreen> {
-  late TextEditingController _bioController;
+class _LastNameEditionScreenState extends State<LastNameEditionScreen> {
+  late TextEditingController _lastNameController;
 
   @override
   void initState() {
     super.initState();
-    _bioController = TextEditingController(text: widget.currentBio);
+    _lastNameController = TextEditingController(text: widget.currentLastName);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Editar Bio',
+        title: 'Editar Apellidos',
         actions: [
           TextButton(
             onPressed: () {
               updateUserData(FirebaseAuth.instance.currentUser!.uid, {
-                'bio': _bioController.text,
+                'lastName': _lastNameController.text,
               });
-              Navigator.of(context).pop(_bioController.text);
+              Navigator.of(context).pop(_lastNameController.text);
             },
             child: const Text(
               'Hecho',
@@ -47,13 +47,13 @@ class _BioEditionScreenState extends State<BioEditionScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextField(
-          controller: _bioController,
+          controller: _lastNameController,
           maxLines: null,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            labelText: 'Escribe tu biografía',
+            labelText: 'Escribe tus apellidos',
           ),
         ),
       ),
@@ -62,7 +62,7 @@ class _BioEditionScreenState extends State<BioEditionScreen> {
 
   @override
   void dispose() {
-    _bioController.dispose();
+    _lastNameController.dispose();
     super.dispose();
   }
 }

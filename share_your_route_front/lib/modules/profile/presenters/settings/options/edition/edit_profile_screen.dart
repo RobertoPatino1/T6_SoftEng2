@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_your_route_front/models/user_data.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/bio/bio_edition_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/email/email_edition_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/last_name/last_name_edition_screen.dart';
+import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/name/name_edition_screen.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -18,12 +21,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final picker = ImagePicker();
   XFile? _profileImage;
   XFile? _bannerImage;
-  String bio =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit."; // Biografía inicial
+
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
   final emailController = TextEditingController();
   final bioController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final userData = await getUserData(FirebaseAuth.instance.currentUser!.uid);
+    final user = UserData.fromJson(userData["user"] as Map<String, dynamic>);
+
+    setState(() {
+      nameController.text = user.firstName;
+      surnameController.text = user.lastName;
+      emailController.text = user.email;
+      bioController.text = user.bio;
+    });
+  }
+
   Future<void> _pickProfileImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -42,6 +63,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
+  Future<void> _editEmail(String email) async {
+    navigateWithSlideTransition(
+      context,
+      EmailEditionScreen(
+        currentEmail: email,
+      ),
+    );
+  }
+
+  Future<void> _editLastNames(String lastName) async {
+    navigateWithSlideTransition(
+      context,
+      LastNameEditionScreen(
+        currentLastName: lastName,
+      ),
+    );
+  }
+
+  Future<void> _editNames(String name) async {
+    navigateWithSlideTransition(
+      context,
+      NameEditionScreen(
+        currentName: name,
+      ),
+    );
+  }
+
   Future<void> _editBio(String bio) async {
     navigateWithSlideTransition(
       context,
@@ -51,63 +99,117 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  GestureDetector buildEditableContainer(
+    String label,
+    String value,
+    VoidCallback onTap,
+    bool isDarkMode,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                value,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            const Icon(Icons.edit, color: Colors.grey),
+          ],
+        ),
+      ),
+    );
+  }
+
   Column formFields(UserData user) {
+    // final isDarkMode =
+    // MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
-        TextFormField(
-          controller: nameController,
-          decoration: const InputDecoration(labelText: 'Nombres'),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor ingrese sus nombres';
-            }
-            return null;
-          },
-        ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: surnameController,
-          decoration: const InputDecoration(labelText: 'Apellidos'),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor ingrese sus apellidos';
-            }
-            return null;
-          },
-        ),
-        const SizedBox(height: 20),
-        TextFormField(
-          controller: emailController,
-          decoration: const InputDecoration(labelText: 'Email'),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor ingrese su email';
-            }
-            return null;
-          },
-        ),
-        const SizedBox(height: 20),
-        GestureDetector(
-          onTap: () => _editBio(user.bio),
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    user.bio,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-                const Icon(Icons.edit, color: Colors.grey),
-              ],
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Nombres",
+              style: TextStyle(fontSize: 16),
             ),
           ),
+        ),
+        const SizedBox(height: 2.5),
+        buildEditableContainer(
+          "Nombres",
+          user.firstName,
+          () => _editNames(user.firstName),
+          isDarkMode,
+        ),
+        const SizedBox(height: 20),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Apellidos",
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ),
+        const SizedBox(height: 2.5),
+        buildEditableContainer(
+          "Apellidos",
+          user.lastName,
+          () => _editLastNames(user.lastName),
+          isDarkMode,
+        ),
+        const SizedBox(height: 20),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Email",
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ),
+        const SizedBox(height: 2.5),
+        buildEditableContainer(
+          "Email",
+          user.email,
+          () => _editEmail(user.email),
+          isDarkMode,
+        ),
+        const SizedBox(height: 20),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Bio",
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ),
+        const SizedBox(height: 2.5),
+        buildEditableContainer(
+          "Bio",
+          user.bio,
+          () => _editBio(user.bio),
+          isDarkMode,
         ),
         const SizedBox(height: 30),
         ElevatedButton(
@@ -124,12 +226,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Column contentPage(UserData user) {
-    nameController.text = user.firstName;
-    surnameController.text = user.lastName;
-    emailController.text = user.email;
-    
     final backgroundPicture = user.backgroundPhoto;
     final profilePicture = user.profilePhoto;
+
     return Column(
       children: [
         Stack(
@@ -144,9 +243,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: _bannerImage == null
-                        ? AssetImage(
-                            backgroundPicture,
-                          )
+                        ? AssetImage(backgroundPicture)
                         : FileImage(File(_bannerImage!.path)) as ImageProvider,
                     fit: BoxFit.cover,
                   ),
@@ -180,9 +277,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: CircleAvatar(
                       radius: 50,
                       backgroundImage: _profileImage == null
-                          ? AssetImage(
-                              profilePicture,
-                            )
+                          ? AssetImage(profilePicture)
                           : FileImage(File(_profileImage!.path))
                               as ImageProvider,
                     ),
@@ -226,7 +321,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           builder: (context, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
                   ? const Center(child: CircularProgressIndicator())
-                  : contentPage(UserData.fromJson(snapshot.data!["user"] as Map<String, dynamic>)),
+                  : contentPage(
+                      UserData.fromJson(
+                        snapshot.data!["user"] as Map<String, dynamic>,
+                      ),
+                    ),
         ),
       ),
     );
