@@ -5,6 +5,7 @@ import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
 import 'package:share_your_route_front/models/tourist_route.dart';
+import 'package:share_your_route_front/modules/notification/presenters/notification_page.dart';
 import 'package:share_your_route_front/modules/profile/presenters/core/profile_view.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/route_creation_screen.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
@@ -38,12 +39,24 @@ class HomeState extends State<Home> {
   late TouristRouteService _touristRouteService;
   int currentPageIndex = 0;
   late PageController _pageController;
+  int unreadNotificationsCount = 3;
+  final List<NotificationItem> notifications = [
+    NotificationItem("Actualizacion de sus rutas favoritas", "Detalles del mensaje 1", DateTime.now()),
+    NotificationItem("Registro en ruta 'El Dorado'", "Detalles del mensaje 2", DateTime.now().subtract(const Duration(hours: 1))),
+    NotificationItem("Cambios en ruta 'Ceibos'", "Detalles del mensaje 3", DateTime.now().subtract(const Duration(days: 1))),
+  ];
 
   Future<void> _loadData() async {
     routeService = await RouteService.create();
     final routes = await routeService.fetchRouteData();
     setState(() {
       routeList = routes;
+    });
+  }
+
+  void _handleUnreadCountChanged(int count){
+    setState(() {
+      unreadNotificationsCount = count;
     });
   }
 
@@ -55,6 +68,7 @@ class HomeState extends State<Home> {
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
     _pageController = PageController(initialPage: currentPageIndex);
+    _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
   }
 
   @override
@@ -72,6 +86,9 @@ class HomeState extends State<Home> {
   void _onPageChanged(int index) {
     setState(() {
       currentPageIndex = index;
+      if (index == 1) {
+      _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
+    }
     });
   }
 
@@ -79,6 +96,11 @@ class HomeState extends State<Home> {
     setState(() {
       currentPageIndex = index;
     });
+
+    if(index == 1){
+      _handleUnreadCountChanged(notifications.where((n) => !n.isRead).length);
+    }
+
     _pageController.jumpToPage(index);
   }
 
@@ -95,6 +117,7 @@ class HomeState extends State<Home> {
       bottomNavigationBar: CustomNavigationBar(
         currentPageIndex: currentPageIndex,
         onDestinationSelected: _onDestinationSelected,
+        unreadNotificationsCount: unreadNotificationsCount,
       ),
       body: PageView(
         controller: _pageController,
@@ -276,14 +299,7 @@ class HomeState extends State<Home> {
               ),
             ],
           ),
-          // Messages page
-          Center(
-            child: Text(
-              "Muy pronto!!!",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ),
-
+          NotificationPage(notifications: notifications, onUnreadCountChanged: _handleUnreadCountChanged,),
           ProfileView(),
         ],
       ),

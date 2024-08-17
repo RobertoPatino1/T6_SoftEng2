@@ -4,11 +4,13 @@ import 'package:share_your_route_front/core/constants/colors.dart';
 class CustomNavigationBar extends StatelessWidget {
   final int currentPageIndex;
   final ValueChanged<int> onDestinationSelected;
+  final int unreadNotificationsCount;
 
   const CustomNavigationBar({
     super.key,
     required this.currentPageIndex,
     required this.onDestinationSelected,
+    required this.unreadNotificationsCount,
   });
 
   @override
@@ -40,18 +42,48 @@ class CustomNavigationBar extends StatelessWidget {
           ),
           label: 'Explorar',
         ),
-        NavigationDestination(
-          selectedIcon: Icon(
-            Icons.notifications,
-            size: 30,
-            color: selectionColor,
-          ),
-          icon: Icon(
-            Icons.notifications_outlined,
-            size: 30,
-            color: textColor,
-          ),
-          label: 'Notificaciones',
+
+        Stack(
+          children: [
+            NavigationDestination(
+              selectedIcon: Icon(
+                Icons.notifications,
+                size: 30,
+                color: selectionColor,
+              ),
+              icon: const Icon(
+                Icons.notifications_outlined,
+                size: 30,
+                color: textColor,
+              ),
+              label: 'Notificaciones',
+            ),
+            if (unreadNotificationsCount > 0)
+              Positioned(
+                right: 52,
+                top: 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  child: Text(
+                    '$unreadNotificationsCount',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+          ],
         ),
         NavigationDestination(
           selectedIcon: Icon(
@@ -59,6 +91,7 @@ class CustomNavigationBar extends StatelessWidget {
             size: 30,
             color: selectionColor,
           ),
+
           icon: Icon(
             Icons.person_outlined,
             size: 30,
