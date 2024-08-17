@@ -10,7 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
-//import 'package:share_your_route_front/firebase_options.dart';
+import 'package:share_your_route_front/firebase_options.dart';
 import 'package:share_your_route_front/modules/auth/auth_module.dart';
 import 'package:share_your_route_front/modules/shared/ui/themes/global_theme_data.dart';
 
@@ -18,7 +18,7 @@ final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
 
 Future<void> loadFirebase() async {
   await Firebase.initializeApp(
-    //options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
