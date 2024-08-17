@@ -483,14 +483,11 @@ void moveCameraToCurrentPosition() async {
 }
 
 void _updateUIForProximity() {
-
-   final directions = "¡Estás cerca de tu destino!";
-  final distance = "¡Casi llegas!";
+  activeTouristRoute.currentPlaceIndex +=1;
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (context) => RouteStop(
-        directions: directions,
-        distance: distance,
+        stopName: activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name,
       ),
     ),
   );
