@@ -42,7 +42,6 @@ class CustomNavigationBar extends StatelessWidget {
           ),
           label: 'Explorar',
         ),
-
         Stack(
           children: [
             NavigationDestination(
@@ -51,7 +50,7 @@ class CustomNavigationBar extends StatelessWidget {
                 size: 30,
                 color: selectionColor,
               ),
-              icon: const Icon(
+              icon: Icon(
                 Icons.notifications_outlined,
                 size: 30,
                 color: textColor,
@@ -63,7 +62,8 @@ class CustomNavigationBar extends StatelessWidget {
                 right: 52,
                 top: 12,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
@@ -91,7 +91,6 @@ class CustomNavigationBar extends StatelessWidget {
             size: 30,
             color: selectionColor,
           ),
-
           icon: Icon(
             Icons.person_outlined,
             size: 30,

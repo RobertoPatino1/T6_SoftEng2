@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class NotificationPage extends StatefulWidget {
   final ValueChanged<int> onUnreadCountChanged;
   final List<NotificationItem> notifications;
 
-  const NotificationPage(
-      {super.key,
-      required this.notifications,
-      required this.onUnreadCountChanged});
+  const NotificationPage({
+    super.key,
+    required this.notifications,
+    required this.onUnreadCountChanged,
+  });
 
   @override
   _NotificationPageState createState() => _NotificationPageState();
@@ -25,10 +28,14 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
     return Scaffold(
+      appBar: const CustomAppBar(title: "Notificaciones"),
       body: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.only(top: 20),
         child: ListView.builder(
           itemCount: notifications.length,
           itemBuilder: (context, index) {
@@ -49,8 +56,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 width: screenWidth * 0.9,
                 decoration: BoxDecoration(
                   color: notification.isRead
-                      ? const Color.fromARGB(255, 230, 229, 229)
-                      : const Color.fromARGB(255, 200, 230, 201),
+                      ? cardBackgroundColor
+                      : unviewedNotificationBackgroundColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -60,17 +67,16 @@ class _NotificationPageState extends State<NotificationPage> {
                       notification.title,
                       style: TextStyle(
                         fontSize: 15,
-                        color:
-                            notification.isRead ? Colors.black : Colors.green,
+                        color: notification.isRead ? textColor : Colors.green,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       notification.details,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Colors.black,
+                        color: notification.isRead ? textColor : Colors.black,
                       ),
                     ),
                     const SizedBox(height: 10),
