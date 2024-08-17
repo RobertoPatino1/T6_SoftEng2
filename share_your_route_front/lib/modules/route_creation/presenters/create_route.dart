@@ -39,7 +39,6 @@ class _CreateRouteState extends State<CreateRoute> {
   late final RouteService routeService;
 
   void createRoute() {
-    // Aquí puedes procesar los datos capturados y crear la nueva ruta
     final TouristRoute newRoute = TouristRoute(
       name: routeNameInput,
       placesList: stopsInput,
@@ -59,7 +58,7 @@ class _CreateRouteState extends State<CreateRoute> {
       routeType: routeTypesInput, // Usar directamente la lista de RouteType
     );
 
-    addRoute('/saveRoute', newRoute.toJson());
+    addRoute('/save', newRoute.toJson());
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Ruta creada")),

@@ -9,12 +9,12 @@ import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.d
 import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 
-late final TouristRoute touristRoute;
+late TouristRoute activeTouristRoute;
 
 class RouteItineraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    touristRoute =
+    activeTouristRoute =
         // ignore: cast_nullable_to_non_nullable
         TouristRouteService().getCurrentTouristRoute() as TouristRoute;
     return Scaffold(
@@ -27,7 +27,7 @@ class RouteItineraryPage extends StatelessWidget {
           },
         ),
         title: Text(
-          touristRoute.name,
+          activeTouristRoute.name,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
@@ -45,7 +45,7 @@ class RouteItineraryPage extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     image: DecorationImage(
                       image: AssetImage(
-                        "asset/images/${touristRoute.image}.jpg",
+                        "asset/images/${activeTouristRoute.image}.jpg",
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -56,7 +56,7 @@ class RouteItineraryPage extends StatelessWidget {
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: touristRoute.routeType.map((routeType) {
+                  children: activeTouristRoute.routeType.map((routeType) {
                     return Padding(
                       padding: EdgeInsets.zero,
                       child: Icon(
@@ -81,13 +81,13 @@ class RouteItineraryPage extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: touristRoute.placesList.length,
+                    itemCount: activeTouristRoute.placesList.length,
                     itemBuilder: (context, index) {
-                      final Place place = touristRoute.placesList[index];
-                      final String startTime = touristRoute
+                      final Place place = activeTouristRoute.placesList[index];
+                      final String startTime = activeTouristRoute
                           .placesList[index].startTime
                           .format(context);
-                      final String endTime = touristRoute
+                      final String endTime = activeTouristRoute
                           .placesList[index].endTime
                           .format(context);
                       return SizedBox(
@@ -106,13 +106,13 @@ class RouteItineraryPage extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: Text(
-                  DateFormat("d-MM-yyyy").format(touristRoute.routeDate),
+                  DateFormat("d-MM-yyyy").format(activeTouristRoute.routeDate),
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
               const SizedBox(height: 16),
               const SizedBox(height: 20),
-              if (DateComparator(touristRoute.routeDate) == true) ...[
+              if (DateComparator(activeTouristRoute.routeDate) == true) ...[
                 Center(
                   child: OutlinedButton(
                     onPressed: () {
@@ -147,7 +147,7 @@ class RouteItineraryPage extends StatelessWidget {
                                 onPressed: () {
                                   Modular.to.pushNamed(
                                     '/auth/home/room/active',
-                                    arguments: touristRoute,
+                                    arguments: activeTouristRoute,
                                   );
                                 },
                               ),

@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/core/constants/map_contants.dart';
 import 'package:share_your_route_front/modules/route_room/route_preview/presenters/route_preview_page.dart';
+import 'package:share_your_route_front/modules/route_room/stop_route/presenters/route_stop.dart';
 import 'package:share_your_route_front/modules/shared/services/permission_provider.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:html/dom.dart' as html;
@@ -40,8 +41,8 @@ class MapState extends State<Map> with WidgetsBindingObserver {
   );
   List<Marker> markerList = [];
   final Marker _destinationMarker = Marker(
-      markerId: MarkerId("destination"),
-      position: LatLng(-2.173131, -79.854229));
+      markerId: MarkerId(activeTouristRoute.name),
+      position: LatLng(activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.latitude,activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.longitude));
   Position? _currentPosition;
   List<Polyline> myRouteList = [];
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
@@ -122,7 +123,7 @@ Widget build(BuildContext context) {
                 color: const Color.fromRGBO(191, 141, 48, 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text( touristRoute.name ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
+              child: Text( activeTouristRoute.name ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
               ),
             ),
           ),
@@ -137,7 +138,7 @@ Widget build(BuildContext context) {
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text( "Proxima parada: ${touristRoute.placesList[touristRoute.currentPlaceIndex].name}" ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
+              child: Text( "Proxima parada: ${activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name}" ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
               ),
             ),
           ),
@@ -274,6 +275,8 @@ void navigationProcess() {
   }
   
   if (mounted) setState(() {});
+
+   _checkProximityToDestination();
 }
 
 void updateDirectionsBasedOnLocation(int index) {
@@ -456,4 +459,40 @@ void moveCameraToCurrentPosition() async {
       mapStyle = style;
     });
   }
+
+  void _checkProximityToDestination() {
+  if (_currentPosition == null) return;
+
+  final destinationLatLng = LatLng(
+    activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.latitude,
+    activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.longitude,
+  );
+
+  final distanceInMeters = Geolocator.distanceBetween(
+    _currentPosition!.latitude,
+    _currentPosition!.longitude,
+    destinationLatLng.latitude,
+    destinationLatLng.longitude,
+  );
+
+  const double proximityThreshold = 20; // Distancia en metros para considerar "cerca" del destino
+
+  if (distanceInMeters <= proximityThreshold) {
+    _updateUIForProximity(); // Cambia la interfaz cuando el usuario esté cerca del destino
+  }
+}
+
+void _updateUIForProximity() {
+
+   final directions = "¡Estás cerca de tu destino!";
+  final distance = "¡Casi llegas!";
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => RouteStop(
+        directions: directions,
+        distance: distance,
+      ),
+    ),
+  );
+}
 } 
