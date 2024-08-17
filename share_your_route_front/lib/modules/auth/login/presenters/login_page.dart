@@ -71,7 +71,6 @@ class LoginState extends State<Login> {
                 ),
                 TextButton(
                   onPressed: () {
-                    //TODO FORGOT PASSWORD SCREEN GOES HERE
                     Modular.to.navigate('/auth/forgotPassword');
                   },
                   child: Text(
@@ -92,13 +91,14 @@ class LoginState extends State<Login> {
                       }
                     } on FirebaseAuthException catch (e) {
                       showSnackbar(
-                          context,
-                          "Credenciales incorrectas, intente nuevamente.",
-                          "error",);
+                        context,
+                        "Credenciales incorrectas, intente nuevamente.",
+                        "error",
+                      );
                       Logger.root.shout('Failed with error code: ${e.code}');
                       Logger.root.shout(e.message);
                       //TODO: REMOVE THIS STATEMENT BEFORE DEPLOYMENT
-                      Modular.to.navigate('/auth/home/');
+                      // Modular.to.navigate('/auth/home/');
                       //TODO: REMOVE THIS STATEMENT BEFORE DEPLOYMENT
                     }
                   },

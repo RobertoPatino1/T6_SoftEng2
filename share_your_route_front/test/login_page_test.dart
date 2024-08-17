@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:share_your_route_front/modules/auth/login/presenters/login_page.dart';
 
 void main() {
-  testWidgets('Validate if navigate to home screen by clicking on the "Iniciar sesion" button', (WidgetTester tester) async {
+  testWidgets(
+      'Validate if navigate to home screen by clicking on the "Iniciar sesion" button',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: LoginPage()));
 
     expect(find.text('Iniciar sesión'), findsOneWidget);
@@ -19,5 +21,4 @@ void main() {
     expect(find.text('Iniciar sesión'), findsNothing);
     expect(find.text('Es hora de una aventura!'), findsOneWidget);
   });
-
 }
