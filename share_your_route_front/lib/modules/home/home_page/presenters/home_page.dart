@@ -231,17 +231,6 @@ class HomeState extends State<Home> {
                             const SizedBox(
                               height: 30,
                             ),
-                            RouteListBuilder()
-                                .buildRouteList(context, "Rutas de hoy"),
-                            RouteCardBuilder().buildRouteCard(
-                              context,
-                              routeList.where((ruta) {
-                                return DateComparator(ruta.routeDate);
-                              }).toList(),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
                             if (todayRoutes.isNotEmpty) ...[
                               RouteListBuilder()
                                   .buildRouteList(context, "Rutas de hoy"),
