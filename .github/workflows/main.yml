@@ -9,7 +9,9 @@ on:
 jobs:
   flutter_job:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./share_your_route_front
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,12 +33,6 @@ jobs:
         run: pwd
       
       - name: Check content
-        run: ls -la
-      
-      - name: Change directory to Flutter project
-        run: cd share_your_route_front
-
-      - name: Check content inside 
         run: ls -la
       
       - name: Install dependencies
