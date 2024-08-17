@@ -8,7 +8,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
-import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/firebase_options.dart';
