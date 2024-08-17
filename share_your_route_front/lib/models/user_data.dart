@@ -24,8 +24,12 @@ class UserData {
       lastName: (json['lastName'] != null) ? json['lastName'] as String : '',
       email: (json['email'] != null) ? json['email'] as String : '',
       bio: (json['bio'] != null) ? json['bio'] as String : '',
-      backgroundPhoto: (json['backgroundPhoto'] != null) ? json['backgroundPhoto'] as String : stockBackgroundPictureURL,
-      profilePhoto: (json['profilePhoto'] != null) ? json['profilePhoto'] as String : stockProfilePictureURL,
+      backgroundPhoto: (json['backgroundPhoto'] != null)
+          ? json['backgroundPhoto'] as String
+          : stockBackgroundPictureURL,
+      profilePhoto: (json['profilePhoto'] != null)
+          ? json['profilePhoto'] as String
+          : stockProfilePictureURL,
     );
   }
 
@@ -39,6 +43,7 @@ class UserData {
       'profilePhoto': profilePhoto,
     };
   }
+
   void update(String uid) {
     updateUserData(uid, toJson());
   }
