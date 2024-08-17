@@ -21,7 +21,7 @@ class CustomNavigationBar extends StatelessWidget {
     final selectionColor = isDarkMode ? yellowAccentColor : Colors.black;
 
     return NavigationBar(
-      backgroundColor: customNavBarBackgroundColor,
+      backgroundColor: customNavBarBackgroundColor.withOpacity(0.6),
       height: 60,
       onDestinationSelected: onDestinationSelected,
       indicatorColor: selectionColor.withOpacity(0.2),
