@@ -26,11 +26,6 @@ jobs:
           architecture: x64
       - name: Check directory data
         run: pwd
-      - name: Change directory to Flutter project
-        run: cd share_your_route_front
-
-      - name: Check directory data
-        run: pwd
       
       - name: Check content
         run: ls -la
