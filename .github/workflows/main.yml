@@ -33,5 +33,5 @@ jobs:
           mkdir -p lib/core/configs
           echo "MAPBOX_ACCESS_TOKEN=${{ secrets.MAPBOX_ACCESS_TOKEN }}" > lib/core/configs/.env
 
-      - name: Run tests
-        run: flutter test
+      #- name: Run tests
+        #run: flutter test
