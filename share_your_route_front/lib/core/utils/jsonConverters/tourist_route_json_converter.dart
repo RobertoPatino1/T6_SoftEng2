@@ -10,13 +10,13 @@ import 'package:share_your_route_front/models/tourist_route.dart';
 List<Place> places = [
   Place(
     name: "Lugar1",
-    ubication: const LatLng(2.12414, 79.12314),
+    ubication: LatLng(2.12414, 79.12314),
     startTime: const TimeOfDay(hour: 3, minute: 30),
     endTime: const TimeOfDay(hour: 3, minute: 40),
   ),
   Place(
     name: "Lugar2",
-    ubication: const LatLng(2.12414, 79.12314),
+    ubication: LatLng(2.12414, 79.12314),
     startTime: const TimeOfDay(hour: 3, minute: 40),
     endTime: const TimeOfDay(hour: 3, minute: 50),
   ),

@@ -38,7 +38,7 @@ class ViewStopsMapScreen extends StatelessWidget {
         options: MapOptions(
           center: stops.isNotEmpty
               ? stops[0].ubication as LatLng
-              : const LatLng(0, 0),
+              : LatLng(0, 0),
           minZoom: 5,
           maxZoom: 25,
           zoom: 14,
