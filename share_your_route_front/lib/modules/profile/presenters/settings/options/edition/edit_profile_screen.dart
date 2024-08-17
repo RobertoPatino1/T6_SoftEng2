@@ -113,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              // TODO: Implementar la lógica de guardado
+              user.update(FirebaseAuth.instance.currentUser!.uid);
               Navigator.of(context).pop();
             }
           },
@@ -127,6 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     nameController.text = user.firstName;
     surnameController.text = user.lastName;
     emailController.text = user.email;
+    
     final backgroundPicture = user.backgroundPhoto;
     final profilePicture = user.profilePhoto;
     return Column(
@@ -236,6 +237,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     nameController.dispose();
     surnameController.dispose();
     emailController.dispose();
+    bioController.dispose();
     super.dispose();
   }
 }
