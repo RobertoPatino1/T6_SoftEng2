@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/urls.dart';
 import 'package:share_your_route_front/main/main.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -9,6 +10,8 @@ class AccesibilityScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isDarkMode = ref.watch(themeModeProvider) == ThemeMode.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Accesibilidad"),
@@ -26,7 +29,7 @@ class AccesibilityScreen extends ConsumerWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 230, 229, 229),
+              color: cardBackgroundColor,
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListTile(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
@@ -83,6 +84,10 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final topNavBarBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+
     Theme.of(context);
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
@@ -100,47 +105,57 @@ class HomeState extends State<Home> {
             children: <Widget>[
               if (currentRoute == null) ...[
                 Container(
-                  height: 250,
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 5),
-                      Text(
-                        "Es hora de una nueva aventura!",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      const SizedBox(height: 30),
-                      Text(
-                        "¿Deseas crear una ruta?",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 8),
-                      ElevatedButton(
-                        onPressed: () {
-                          navigateWithSlideTransition(
-                              context, const CreateRoute(),);
-                        },
-                        child: const IntrinsicWidth(
-                          child: Center(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('Empezar una ruta'),
-                                SizedBox(width: 2.1),
-                                Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              ],
+                  padding: const EdgeInsets.only(
+                    top: 50,
+                    bottom: 10,
+                  ), // Padding superior ajustado
+                  decoration: BoxDecoration(
+                    color: topNavBarBackgroundColor.withOpacity(0.6),
+                  ),
+                  child: ClipRRect(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Es hora de una nueva aventura!",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ), // Ajuste del espacio entre textos
+                        Text(
+                          "¿Deseas crear una ruta?",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        const SizedBox(height: 5),
+                        ElevatedButton(
+                          onPressed: () {
+                            navigateWithSlideTransition(
+                              context,
+                              const CreateRoute(),
+                            );
+                          },
+                          child: const IntrinsicWidth(
+                            child: Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('Empezar una ruta'),
+                                  SizedBox(width: 2.1),
+                                  Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ] else ...[
