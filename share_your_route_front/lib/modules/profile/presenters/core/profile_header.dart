@@ -32,7 +32,6 @@ class ProfileHeader extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: [
-            // Imagen de fondo
             Container(
               height: 200,
               decoration: BoxDecoration(
@@ -61,58 +60,75 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        Column(
-          children: [
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: nameColor,
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Column(
+              children: [
+                Text(
+                  name.split(" ").take(2).join(" "),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: nameColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                if (name.split(" ").length > 2)
+                  Text(
+                    name.split(" ").skip(2).join(" "),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: nameColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+              ],
             ),
-            const SizedBox(height: 5),
-            Text(
-              email,
-              style: TextStyle(
-                fontSize: 16,
-                color: emailTextColor,
-              ),
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          email,
+          style: TextStyle(
+            fontSize: 16,
+            color: emailTextColor,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: bioBackgroundColor,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(
+              color: bioBorderColor,
+              width: 1.5,
             ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                color: bioBackgroundColor,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: bioBorderColor,
-                  width: 1.5,
+          ),
+          child: Column(
+            children: [
+              Text(
+                "Acerca de mi:",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: bioTextColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              child: Column(
-                children: [
-                  Text(
-                    "Acerca de mi:",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: bioTextColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    bio,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: bioTextColor,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 10),
+              Text(
+                bio,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: bioTextColor,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 20),
       ],
