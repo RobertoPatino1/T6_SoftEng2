@@ -23,19 +23,19 @@ class GlobalThemeData {
         TextTheme(
           headlineLarge: GoogleFonts.poppins(
             fontSize: 25.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
           headlineMedium: GoogleFonts.poppins(
             fontSize: 20.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
           headlineSmall: GoogleFonts.poppins(
             fontSize: 15.0,
-            color: colorScheme.primary,
+            color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
@@ -99,11 +99,11 @@ class GlobalThemeData {
         labelStyle: TextStyle(color: colorScheme.onSurface),
         hintStyle: TextStyle(color: colorScheme.onSurface),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0), // Esquinas redondeadas
+          borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide(color: colorScheme.onSurface),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0), // Esquinas redondeadas
+          borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide(color: colorScheme.primary),
         ),
       ),
@@ -178,6 +178,7 @@ class GlobalThemeData {
     surface: Colors.white,
     onSurface: lightColorSchemeOnSurface,
     brightness: Brightness.light,
+    primaryFixed: lightColorSchemePrimary,
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
@@ -190,5 +191,6 @@ class GlobalThemeData {
     surface: darkColorSchemeSurface,
     onSurface: darkColorSchemeOnSurface,
     brightness: Brightness.dark,
+    primaryFixed: Colors.white,
   );
 }

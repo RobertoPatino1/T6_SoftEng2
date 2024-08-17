@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   final int currentPageIndex;
@@ -13,49 +14,55 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+    final customNavBarBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+    final selectionColor = isDarkMode ? yellowAccentColor : Colors.black;
+
     return NavigationBar(
-      backgroundColor: const Color.fromARGB(189, 227, 227, 227),
+      backgroundColor: customNavBarBackgroundColor,
       height: 60,
       onDestinationSelected: onDestinationSelected,
-      indicatorColor: const Color.fromRGBO(37, 60, 89, 0),
+      indicatorColor: selectionColor.withOpacity(0.2),
       selectedIndex: currentPageIndex,
       destinations: <Widget>[
         NavigationDestination(
           selectedIcon: Icon(
             Icons.explore,
-            size: 20,
-            color: theme.colorScheme.primary,
+            size: 30,
+            color: selectionColor,
           ),
-          icon: const Icon(
+          icon: Icon(
             Icons.explore_outlined,
-            size: 20,
-            color: Colors.grey,
+            size: 30,
+            color: textColor,
           ),
           label: 'Explorar',
         ),
         NavigationDestination(
           selectedIcon: Icon(
             Icons.notifications,
-            size: 20,
-            color: theme.colorScheme.primary,
+            size: 30,
+            color: selectionColor,
           ),
-          icon: const Icon(
+          icon: Icon(
             Icons.notifications_outlined,
-            size: 20,
-            color: Colors.grey,
+            size: 30,
+            color: textColor,
           ),
           label: 'Notificaciones',
         ),
         NavigationDestination(
           selectedIcon: Icon(
             Icons.person,
-            size: 20,
-            color: theme.colorScheme.primary,
+            size: 30,
+            color: selectionColor,
           ),
-          icon: const Icon(
-            Icons.person,
-            size: 20,
-            color: Colors.grey,
+          icon: Icon(
+            Icons.person_outlined,
+            size: 30,
+            color: textColor,
           ),
           label: 'Perfil',
         ),

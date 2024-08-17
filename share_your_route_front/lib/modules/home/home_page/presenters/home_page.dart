@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
 import 'package:share_your_route_front/core/widgets/custom_navigation_bar.dart';
@@ -83,6 +84,9 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDarkMode ? lightColorSchemePrimary : Colors.white;
+
     Theme.of(context);
     final TouristRoute? currentRoute =
         _touristRouteService.getCurrentTouristRoute();
@@ -121,7 +125,9 @@ class HomeState extends State<Home> {
                       ElevatedButton(
                         onPressed: () {
                           navigateWithSlideTransition(
-                              context, const CreateRoute(),);
+                            context,
+                            const CreateRoute(),
+                          );
                         },
                         child: const IntrinsicWidth(
                           child: Center(
