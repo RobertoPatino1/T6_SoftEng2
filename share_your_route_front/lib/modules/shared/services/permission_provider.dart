@@ -33,7 +33,6 @@ class PermissionProvider {
           Permission.location.request().then((value) {
             locationPermission = value;
           });
-          break;
         default:
       }
     } else {
@@ -46,7 +45,7 @@ class PermissionProvider {
               .removeRoute(PermissionProvider.permissionDialogRoute!);
           if (Platform.isAndroid) {
             const AndroidIntent intent = AndroidIntent(
-                action: MapConstants.androidLocationIntentAddress);
+                action: MapConstants.androidLocationIntentAddress,);
             intent.launch();
           } else {
             // TODO: ios integration

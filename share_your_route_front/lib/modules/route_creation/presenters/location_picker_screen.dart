@@ -141,7 +141,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                 ),
                 const SizedBox(
                   height: 20,
-                )
+                ),
               ],
             ),
     );

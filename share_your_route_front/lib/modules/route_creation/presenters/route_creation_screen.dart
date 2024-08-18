@@ -94,13 +94,13 @@ class _CreateRouteState extends State<CreateRoute> {
             setState(() {
               if (_currentStep == 0 && routeNameInput.isEmpty) {
                 showSnackbar(
-                    context, "Debe ingresar el nombre de la ruta", "error");
+                    context, "Debe ingresar el nombre de la ruta", "error",);
               } else if (_currentStep == 1 && stopsInput.isEmpty) {
                 showSnackbar(
-                    context, "Debe agregar al menos una parada", "error");
+                    context, "Debe agregar al menos una parada", "error",);
               } else if (_currentStep == 2 && meetingPointInput == null) {
                 showSnackbar(
-                    context, "Debe seleccionar un punto de encuentro", "error");
+                    context, "Debe seleccionar un punto de encuentro", "error",);
               } else if (_currentStep < 3) {
                 _currentStep++;
               } else {
@@ -149,7 +149,7 @@ class _CreateRouteState extends State<CreateRoute> {
                             details.onStepContinue!();
                           } else {
                             showSnackbar(context,
-                                "Debe ingresar el nombre de la ruta", "error");
+                                "Debe ingresar el nombre de la ruta", "error",);
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -170,13 +170,13 @@ class _CreateRouteState extends State<CreateRoute> {
                         onPressed: () {
                           if (_currentStep == 1 && stopsInput.isEmpty) {
                             showSnackbar(context,
-                                "Debe agregar al menos una parada", "error");
+                                "Debe agregar al menos una parada", "error",);
                           } else if (_currentStep == 2 &&
                               meetingPointInput == null) {
                             showSnackbar(
                                 context,
                                 "Debe seleccionar un punto de encuentro",
-                                "error");
+                                "error",);
                           } else {
                             details.onStepContinue!();
                           }

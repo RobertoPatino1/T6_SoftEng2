@@ -76,7 +76,7 @@ Widget buildLabeledControl(BuildContext context, String label, Widget control) {
 }
 
 Widget buildNumberChanger(
-    BuildContext context, int value, Function(int) onChanged) {
+    BuildContext context, int value, Function(int) onChanged,) {
   final theme = Theme.of(context);
 
   return Row(
@@ -119,7 +119,7 @@ Widget buildRangeSlider(
 }
 
 Widget buildDropdown(
-    BuildContext context, String value, Function(String) onChanged) {
+    BuildContext context, String value, Function(String) onChanged,) {
   // Añadido contexto como parámetro
   final theme = Theme.of(context); // Corrección: usar el contexto correcto
 

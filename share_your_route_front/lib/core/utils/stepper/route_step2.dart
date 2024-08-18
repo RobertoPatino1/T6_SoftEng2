@@ -183,7 +183,7 @@ class _RouteStep2State extends State<RouteStep2> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                  )),
+                  ),),
             ],
           ),
       ],
