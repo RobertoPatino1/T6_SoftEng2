@@ -90,6 +90,7 @@ class RegisterState extends State<Register> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextFormField(
+                      key: const Key('nameField'),
                       controller: nameController,
                       decoration: buildInputDecoration(
                         labelText: 'Nombres',
@@ -110,6 +111,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      key: const Key('lastNameField'),
                       controller: lastNameController,
                       decoration: buildInputDecoration(
                         labelText: 'Apellidos',
@@ -130,6 +132,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      key: const Key('emailField'),
                       controller: emailController,
                       decoration: buildInputDecoration(
                         labelText: 'Email',
@@ -153,6 +156,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      key: const Key('passwordField'),
                       controller: passwordController,
                       obscureText: _obscurePassword,
                       decoration: buildInputDecoration(
@@ -210,6 +214,7 @@ class RegisterState extends State<Register> {
                       top: 15,
                     ),
                     child: TextFormField(
+                      key: const Key('confirmPasswordField'),
                       controller: confirmPasswordController,
                       obscureText: _obscureConfirmPassword,
                       decoration: buildInputDecoration(
@@ -268,6 +273,7 @@ class RegisterState extends State<Register> {
                     ),
                   ),
                   OutlinedButton(
+                    key: const Key('registerButton'),
                     onPressed: _register,
                     child: const Text(
                       'Crear cuenta',
