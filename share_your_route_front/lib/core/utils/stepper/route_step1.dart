@@ -121,6 +121,7 @@ class _RouteStep1State extends State<RouteStep1> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
