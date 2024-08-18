@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -117,14 +118,20 @@ class _RouteStep1State extends State<RouteStep1> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
-          buildRouteNameField(widget.routeName, widget.onRouteNameChanged),
+          buildRouteNameField(
+              context, widget.routeName, widget.onRouteNameChanged),
           const SizedBox(height: 15),
           buildRouteDescriptionField(
+            context,
             widget.routeDescription,
             widget.onRouteDescriptionChanged,
           ),
@@ -163,13 +170,17 @@ class _RouteStep1State extends State<RouteStep1> {
           const SizedBox(height: 15),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(
+            title: Text(
               'Mostrar información del lugar',
-              style: titlelabelTextStyle,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
             ),
             value: widget.showPlaceInfo,
             onChanged: widget.onShowPlaceInfoChanged,
-            activeColor: const Color.fromRGBO(191, 141, 48, 1),
+            activeColor: yellowAccentColor,
           ),
           const SizedBox(height: 15),
           buildLabeledControl(
@@ -179,13 +190,17 @@ class _RouteStep1State extends State<RouteStep1> {
           const SizedBox(height: 15),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(
+            title: Text(
               'Ruta pública',
-              style: titlelabelTextStyle,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
             ),
             value: widget.publicRoute,
             onChanged: widget.onPublicRouteChanged,
-            activeColor: const Color.fromRGBO(191, 141, 48, 1),
+            activeColor: yellowAccentColor,
           ),
           const SizedBox(height: 15),
           const Text('Fecha de la ruta', style: titlelabelTextStyle),

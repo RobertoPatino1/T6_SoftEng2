@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/models/place.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class ViewStopsMapScreen extends StatelessWidget {
   final List<Place> stops;
@@ -14,31 +15,33 @@ class ViewStopsMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Mapa de Paradas',
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Color.fromRGBO(45, 75, 115, 1),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Color.fromRGBO(45, 75, 115, 1),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   title: const Text(
+      //     'Mapa de Paradas',
+      //     style: TextStyle(
+      //       fontSize: 20.0,
+      //       color: Color.fromRGBO(45, 75, 115, 1),
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //       color: Color.fromRGBO(45, 75, 115, 1),
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      // ),
+      appBar: const CustomAppBar(
+        title: "Mapa de Paradas",
       ),
       body: FlutterMap(
         options: MapOptions(
-          center: stops.isNotEmpty
-              ? stops[0].ubication as LatLng
-              : LatLng(0, 0),
+          center:
+              stops.isNotEmpty ? stops[0].ubication as LatLng : LatLng(0, 0),
           minZoom: 5,
           maxZoom: 25,
           zoom: 14,
