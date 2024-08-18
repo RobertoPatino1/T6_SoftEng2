@@ -9,7 +9,7 @@ import 'package:share_your_route_front/modules/shared/providers/api_provider.dar
 class TouristRoute {
   final String name;
   final List<Place> placesList;
-  final int currentPlaceIndex;
+  int currentPlaceIndex;
   final int numberPeople;
   final int numberGuides;
   final bool routeIsPublic;

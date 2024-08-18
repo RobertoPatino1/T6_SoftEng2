@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
 import 'package:share_your_route_front/models/place.dart';
 
@@ -44,7 +45,7 @@ class RouteStep4 extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Resumen de la Ruta', style: titlelabelTextStyle),
-        const Divider(),
+        const Divider(color: yellowAccentColor),
         RichText(
           text: TextSpan(
             children: [

@@ -23,6 +23,8 @@ Future<void> loadFirebase() async {
 }
 
 void main() async {
+
+  
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "lib/core/configs/.env");
   runApp(

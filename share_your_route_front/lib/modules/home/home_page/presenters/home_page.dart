@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/jsonConverters/tourist_route_json_converter.dart';
@@ -10,8 +11,8 @@ import 'package:share_your_route_front/modules/profile/presenters/core/profile_v
 import 'package:share_your_route_front/modules/route_creation/presenters/route_creation_screen.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_card_builder.dart';
 import 'package:share_your_route_front/modules/shared/builders/route_list_builder.dart';
-import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/api_provider.dart';
+import 'package:share_your_route_front/modules/shared/helpers/dates_comparator.dart';
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -49,13 +50,6 @@ class HomeState extends State<Home> {
         DateTime.now().subtract(const Duration(days: 1)),),
   ];
 
-  Future<void> _loadData() async {
-    routeService = await RouteService.create();
-    final routes = await routeService.fetchRouteData();
-    setState(() {
-      routeList = routes;
-    });
-  }
 
   void _handleUnreadCountChanged(int count) {
     setState(() {
@@ -66,7 +60,6 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _loadData();
     _touristRouteService = TouristRouteService();
     _touristRouteService.currentTouristRouteNotifier
         .addListener(_onTouristRouteChange);
@@ -230,22 +223,25 @@ class HomeState extends State<Home> {
                       if (snapshot.hasData) {
                         final List<TouristRoute> routeList =
                             listFromJson(snapshot.data!);
+                        final todayRoutes = routeList.where((ruta) {
+                          return DateComparator(ruta.routeDate);
+                        }).toList();
                         return Column(
                           children: <Widget>[
                             const SizedBox(
                               height: 30,
                             ),
-                            RouteListBuilder()
-                                .buildRouteList(context, "Rutas de hoy"),
-                            RouteCardBuilder().buildRouteCard(
-                              context,
-                              routeList.where((ruta) {
-                                return DateComparator(ruta.routeDate);
-                              }).toList(),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                            if (todayRoutes.isNotEmpty) ...[
+                              RouteListBuilder()
+                                  .buildRouteList(context, "Rutas de hoy"),
+                              RouteCardBuilder().buildRouteCard(
+                                context,
+                                todayRoutes,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
                             RouteListBuilder().buildRouteList(
                               context,
                               "Rutas dentro de la ciudad",
@@ -263,9 +259,7 @@ class HomeState extends State<Home> {
                               height: 30,
                             ),
                             RouteListBuilder().buildRouteList(
-                              context,
-                              "Día en la naturaleza ",
-                            ),
+                                context, "Día en la naturaleza ",),
                             RouteCardBuilder().buildRouteCard(
                               context,
                               routeList
