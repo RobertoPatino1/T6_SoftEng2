@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step2.dart';
@@ -79,7 +80,6 @@ class _CreateRouteState extends State<CreateRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: const CustomAppBar(title: "Crear Ruta"),
       body: Theme(
         data: ThemeData(
@@ -233,6 +233,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: yellowAccentColor,
                   ),
                 ),
                 content: RouteStep1(
@@ -295,6 +296,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: yellowAccentColor,
                   ),
                 ),
                 content: RouteStep2(
@@ -311,6 +313,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: yellowAccentColor,
                   ),
                 ),
                 content: RouteStep3(
@@ -327,6 +330,7 @@ class _CreateRouteState extends State<CreateRoute> {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
+                    color: yellowAccentColor,
                   ),
                 ),
                 content: RouteStep4(
