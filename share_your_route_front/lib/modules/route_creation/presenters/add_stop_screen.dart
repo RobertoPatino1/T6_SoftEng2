@@ -3,8 +3,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
+import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
 class AddStopScreen extends StatefulWidget {
   final Function(String, LatLng, TimeOfDay, TimeOfDay) onStopAdded;
@@ -209,15 +211,15 @@ class _AddStopScreenState extends State<AddStopScreen> {
                         },
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Por favor, complete todos los campos'),
-                        ),
+                      showSnackbar(
+                        context,
+                        "Por favor, complete todos los campos",
+                        "error",
                       );
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(45, 75, 115, 1),
+                    backgroundColor: yellowAccentColor,
                   ),
                   child: const Text(
                     'Confirmar parada',
@@ -227,6 +229,7 @@ class _AddStopScreenState extends State<AddStopScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
     );

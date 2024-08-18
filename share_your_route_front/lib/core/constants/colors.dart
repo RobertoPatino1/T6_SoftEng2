@@ -16,3 +16,6 @@ const Color darkButtonTextColor = Colors.white;
 const Color yellowAccentColor = Color.fromRGBO(191, 141, 48, 1);
 const Color unviewedNotificationBackgroundColor =
     Color.fromARGB(255, 200, 230, 201);
+
+const Color stopEven = Color.fromRGBO(45, 75, 115, 1);
+const Color stopOdd = Color.fromRGBO(37, 60, 89, 1);

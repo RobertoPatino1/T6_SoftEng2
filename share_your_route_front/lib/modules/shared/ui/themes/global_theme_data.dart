@@ -34,7 +34,7 @@ class GlobalThemeData {
             height: 1,
           ),
           headlineSmall: GoogleFonts.poppins(
-            fontSize: 15.0,
+            fontSize: 11.0,
             color: colorScheme.primaryFixed,
             fontWeight: FontWeight.bold,
             height: 1,
@@ -104,7 +104,7 @@ class GlobalThemeData {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(color: colorScheme.primary),
+          borderSide: const BorderSide(color: yellowAccentColor),
         ),
       ),
       textButtonTheme: TextButtonThemeData(

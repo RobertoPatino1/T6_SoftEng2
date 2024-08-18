@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:share_your_route_front/core/widgets/create_route_widgets.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/location_picker_screen.dart';
 
 class RouteStep3 extends StatefulWidget {
@@ -51,7 +51,7 @@ class _RouteStep2State extends State<RouteStep3> {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
+            backgroundColor: yellowAccentColor,
           ),
           child: const Text(
             'Seleccionar en el mapa',
@@ -62,7 +62,6 @@ class _RouteStep2State extends State<RouteStep3> {
         if (selectedPosition != null)
           Text(
             'Punto de Encuentro: ${selectedPosition!.latitude}, ${selectedPosition!.longitude}',
-            style: labelTextStyle,
           ),
       ],
     );
