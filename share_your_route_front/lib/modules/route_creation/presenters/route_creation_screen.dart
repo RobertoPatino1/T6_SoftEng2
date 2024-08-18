@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
@@ -55,6 +56,7 @@ class _CreateRouteState extends State<CreateRoute> {
       description: routeDescriptionInput,
       hasStarted: false,
       routeType: routeTypesInput,
+      ownerUid: FirebaseAuth.instance.currentUser!.uid,
     );
 
     newRoute.save();
