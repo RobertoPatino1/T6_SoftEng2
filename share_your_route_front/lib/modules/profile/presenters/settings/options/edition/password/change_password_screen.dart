@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
@@ -40,12 +41,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       if (newPasswordController.text == confirmPasswordController.text) {
         if (passNotifier.value == PasswordStrength.strong ||
             passNotifier.value == PasswordStrength.secure) {
-          // TODO: Implementar la lógica de cambio de contraseña en la base de datos
-          showSnackbar(
-            context,
-            "Contraseña actualizada con éxito",
-            "confirmation",
-          );
+          try {
+            FirebaseAuth.instance.currentUser!
+                .updatePassword(newPasswordController.text);
+              showSnackbar(
+                context,
+                "Contraseña actualizada con éxito",
+                "confirmation",
+              );
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          } catch (e) {
+            showSnackbar(context, "Error al actualizar la contraseña", "error");
+          }
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         } else {

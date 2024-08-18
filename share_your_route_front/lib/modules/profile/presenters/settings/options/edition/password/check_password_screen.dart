@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/profile/presenters/settings/options/edition/password/change_password_screen.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -14,8 +15,18 @@ class _CheckPasswordScreenState extends State<CheckPasswordScreen> {
 
   void _checkPassword() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Validar la contraseña con la base de datos
-      navigateWithSlideTransition(context, ChangePasswordScreen());
+      FirebaseAuth.instance.currentUser!
+          .reauthenticateWithCredential(
+        EmailAuthProvider.credential(
+          email: FirebaseAuth.instance.currentUser!.email!,
+          password: passwordController.text,
+        ),
+      )
+          .then((_) {
+        navigateWithSlideTransition(context, ChangePasswordScreen());
+      }).catchError((error) {
+        showSnackbar(context, "Contraseña incorrecta!", "error");
+      });
     }
   }
 
