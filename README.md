@@ -21,9 +21,11 @@ mkdir lib/core/configs
 touch lib/core/configs/.env
 ```
 
-**5. Place your Mapbox access token inside the .env file**
+**5. Place your access tokens inside the .env file**
 ```
 MAPBOX_ACCESS_TOKEN = <TOKEN>
+API_URL = <URL>
+GOOGLE_API_KEY = <API_KEY>
 ```
 If you don't have an access token make sure to check the following [link](https://docs.mapbox.com/help/getting-started/access-tokens/)
 
