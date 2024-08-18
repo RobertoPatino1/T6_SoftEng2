@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
@@ -12,7 +11,6 @@ class DeleteAccountScreen extends StatefulWidget {
 class _DeleteAccountPageState extends State<DeleteAccountScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
   bool _isButtonEnabled = false;
 
   void _deleteAccount() {
@@ -24,14 +22,14 @@ class _DeleteAccountPageState extends State<DeleteAccountScreen> {
         ),
       ).then((_) {
         FirebaseAuth.instance.currentUser!.delete().then((_) {
-          _authService.logout(context);
+          FirebaseAuth.instance.signOut();
         }).catchError((error) {
           showSnackbar(context, error.toString(), "error");
         });
       }).catchError((error) {
         showSnackbar(context, error.toString(), "error");
       });
-      _authService.logout(context);
+      FirebaseAuth.instance.signOut();
     }
   }
 
