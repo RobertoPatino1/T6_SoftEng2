@@ -276,7 +276,7 @@ class _RouteStep1State extends State<RouteStep1> {
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: 8.0, horizontal: 12.0), // Reduce el padding
+              vertical: 8.0, horizontal: 12.0,), // Reduce el padding
           child: Text(
             '${initialDate.day}/${initialDate.month}/${initialDate.year}',
             style: theme.textTheme.bodyMedium?.copyWith(

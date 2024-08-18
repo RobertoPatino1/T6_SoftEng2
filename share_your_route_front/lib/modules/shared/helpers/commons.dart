@@ -1,10 +1,10 @@
 import 'package:intl/intl.dart';
 
 String getDropOffTime(num duration) {
-  int minutes = (duration / 60).round();
-  int seconds = (duration % 60).round();
-  DateTime tripEndDateTime =
+  final int minutes = (duration / 60).round();
+  final int seconds = (duration % 60).round();
+  final DateTime tripEndDateTime =
       DateTime.now().add(Duration(minutes: minutes, seconds: seconds));
-  String dropOffTime = DateFormat.jm().format(tripEndDateTime);
+  final String dropOffTime = DateFormat.jm().format(tripEndDateTime);
   return dropOffTime;
 }
