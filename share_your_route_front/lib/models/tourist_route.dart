@@ -21,6 +21,7 @@ class TouristRoute {
   final String description;
   final bool hasStarted;
   final List<RouteType> routeType;
+  final String ownerUid;
 
   TouristRoute({
     required this.name,
@@ -37,6 +38,7 @@ class TouristRoute {
     required this.description,
     required this.hasStarted,
     required this.routeType,
+    required this.ownerUid,
   });
 
   factory TouristRoute.fromJson(Map<String, dynamic> json) {
@@ -76,6 +78,7 @@ class TouristRoute {
             ),
           )
           .toList(),
+      ownerUid: json['ownerUid'] as String,
     );
   }
 
@@ -110,6 +113,7 @@ class TouristRoute {
       'description': description,
       'hasStarted': hasStarted,
       'routeType': encodedRouteType,
+      'ownerUid': ownerUid,
     };
   }
   void save(){
