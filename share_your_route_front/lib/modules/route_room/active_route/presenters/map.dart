@@ -20,18 +20,18 @@ import 'package:share_your_route_front/modules/shared/services/permission_provid
 class MapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Map();
+    return const MapWidget();
   }
 }
 
-class Map extends StatefulWidget {
-  const Map({super.key});
+class MapWidget extends StatefulWidget {
+  const MapWidget({super.key});
 
   @override
-  State<Map> createState() => MapState();
+  State<MapWidget> createState() => MapWidgetState();
 }
 
-class MapState extends State<Map> with WidgetsBindingObserver {
+class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
   String mapStyle = "";
@@ -53,7 +53,6 @@ class MapState extends State<Map> with WidgetsBindingObserver {
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
   Marker? myLocationMarker;
   String _directions = '';
-  String _duration = '';
   String _distance = '';
 
   @override
