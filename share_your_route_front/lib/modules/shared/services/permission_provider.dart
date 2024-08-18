@@ -25,14 +25,13 @@ class PermissionProvider {
                 Navigator.of(MapConstants.globalNavigatorKey.currentContext!)
                     .removeRoute(PermissionProvider.permissionDialogRoute!);
                 openAppSettings();
-              });
+              },);
           Navigator.of(MapConstants.globalNavigatorKey.currentContext!)
               .push(permissionDialogRoute!);
         case PermissionStatus.denied:
           Permission.location.request().then((value) {
             locationPermission = value;
           });
-          break;
         default:
       }
     } else {
@@ -50,7 +49,7 @@ class PermissionProvider {
             } else {
               // TODO: ios integration
             }
-          });
+          },);
       Navigator.of(MapConstants.globalNavigatorKey.currentContext!)
           .push(permissionDialogRoute!);
     }

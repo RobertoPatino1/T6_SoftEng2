@@ -2,19 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
+import 'package:html/dom.dart' as html;
+import 'package:html/parser.dart' as html_parser;
 import 'package:http/http.dart' as http;
+import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_your_route_front/core/constants/map_contants.dart';
 import 'package:share_your_route_front/modules/route_room/route_preview/presenters/route_preview_page.dart';
 import 'package:share_your_route_front/modules/route_room/stop_route/presenters/route_stop.dart';
 import 'package:share_your_route_front/modules/shared/services/permission_provider.dart';
-import 'package:html/parser.dart' as html_parser;
-import 'package:html/dom.dart' as html;
 
 class MapPage extends StatelessWidget {
   @override
@@ -35,14 +36,14 @@ class MapState extends State<Map> with WidgetsBindingObserver {
       Completer<GoogleMapController>();
   String mapStyle = "";
   StreamSubscription<Position>? _positionStream;
-  final CameraPosition _cameraPos = CameraPosition(
+  final CameraPosition _cameraPos = const CameraPosition(
     target: LatLng(-2.173131, -79.854229),
     zoom: 16,
   );
   List<Marker> markerList = [];
   final Marker _destinationMarker = Marker(
       markerId: MarkerId(activeTouristRoute.name),
-      position: LatLng(activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.latitude,activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.longitude));
+      position: LatLng(activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.latitude,activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].ubication.longitude),);
   Position? _currentPosition;
   List<Polyline> myRouteList = [];
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
@@ -81,7 +82,7 @@ Widget build(BuildContext context) {
             mapStyle.isEmpty
         ? Container(
             color: Colors.grey[700],
-            child: Center(child: CircularProgressIndicator()))
+            child: const Center(child: CircularProgressIndicator()),)
         :  
     
     Stack (children: [
@@ -123,7 +124,7 @@ Widget build(BuildContext context) {
                 color: const Color.fromRGBO(191, 141, 48, 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text( activeTouristRoute.name ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
+              child: Text( activeTouristRoute.name ,style: const TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
               ),
             ),
           ),
@@ -138,7 +139,7 @@ Widget build(BuildContext context) {
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text( "Proxima parada: ${activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name}" ,style: TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
+              child: Text( "Proxima parada: ${activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name}" ,style: const TextStyle(color: Colors.white ,fontWeight: ui.FontWeight.bold) ,
               ),
             ),
           ),
@@ -157,7 +158,7 @@ Widget build(BuildContext context) {
                   // Direction arrow and distance
                   Column(
                     children: [
-                      Icon(Icons.arrow_forward, size: 32, color: Colors.black),
+                      const Icon(Icons.arrow_forward, size: 32, color: Colors.black),
                       Text(
                         _distance,
                         style: Theme.of(context).textTheme.headlineSmall,
@@ -186,11 +187,11 @@ Widget build(BuildContext context) {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back, color: Colors.white),
+              child: const Icon(Icons.arrow_back, color: Colors.white),
             ),
           ),
           ]
-          ,)
+          ,),
   
   );
 }
@@ -199,7 +200,7 @@ List<TextSpan> _parseDirectionsToTextSpans(String htmlString) {
   final document = html_parser.parse(htmlString);
   final spans = <TextSpan>[];
   
-  for (var node in document.body!.nodes) {
+  for (final node in document.body!.nodes) {
     if (node.nodeType == html.Node.ELEMENT_NODE) {
       final element = node as html.Element;
       final text = element.text;
@@ -215,18 +216,18 @@ List<TextSpan> _parseDirectionsToTextSpans(String htmlString) {
 
 TextStyle? _getTextStyleForElement(html.Element element) {
   if (element.localName == 'b' || element.localName == 'strong') {
-    return TextStyle(fontWeight: FontWeight.bold);
+    return const TextStyle(fontWeight: FontWeight.bold);
   } else if (element.localName == 'i' || element.localName == 'em') {
-    return TextStyle(fontStyle: FontStyle.italic);
+    return const TextStyle(fontStyle: FontStyle.italic);
   } else if (element.localName == 'div') {
     // Verifica si el div tiene un atributo de estilo en línea
-    String? style = element.attributes['style'];
+    final String? style = element.attributes['style'];
     if (style != null) {
       // Busca el tamaño de fuente en el estilo
-      RegExp fontSizeRegex = RegExp(r'font-size:\s*([\d.]+)em');
-      Match? match = fontSizeRegex.firstMatch(style);
+      final RegExp fontSizeRegex = RegExp(r'font-size:\s*([\d.]+)em');
+      final Match? match = fontSizeRegex.firstMatch(style);
       if (match != null) {
-        double fontSize = double.parse(match.group(1)!) * 16.0; // Multiplica el tamaño en "em" por el tamaño de fuente base (16px).
+        final double fontSize = double.parse(match.group(1)!) * 16.0; // Multiplica el tamaño en "em" por el tamaño de fuente base (16px).
         return TextStyle(fontSize: fontSize);
       }
     }
@@ -237,9 +238,9 @@ TextStyle? _getTextStyleForElement(html.Element element) {
 
   void setCustomIconForUserLocation() {
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
+    final ByteData data = await rootBundle.load(path);
+    final ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    final ui.FrameInfo fi = await codec.getNextFrame();
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
@@ -254,13 +255,13 @@ TextStyle? _getTextStyleForElement(html.Element element) {
 
 
 void navigationProcess() {
-  List<mtk.LatLng> myLatLngList = [];
-  for (var data in myRouteList.first.points) {
+  final List<mtk.LatLng> myLatLngList = [];
+  for (final data in myRouteList.first.points) {
     myLatLngList.add(mtk.LatLng(data.latitude, data.longitude));
   }
   
-  mtk.LatLng myPosition = mtk.LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-  int x = mtk.PolygonUtil.locationIndexOnPath(myPosition, myLatLngList, true, tolerance: 12);
+  final mtk.LatLng myPosition = mtk.LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
+  final int x = mtk.PolygonUtil.locationIndexOnPath(myPosition, myLatLngList, true, tolerance: 12);
   
   if (x == -1) {
     getNewRouteFromAPI();
@@ -282,8 +283,8 @@ void navigationProcess() {
 void updateDirectionsBasedOnLocation(int index) {
   final steps = _directions.split('<br>');
   if (index < steps.length) {
-    String rawHtml = steps[index];
-    String formattedText = _parseHtml(rawHtml);
+    final String rawHtml = steps[index];
+    final String formattedText = _parseHtml(rawHtml);
     setState(() {
       _directions = formattedText;
     });
@@ -296,7 +297,7 @@ String _parseHtml(String htmlString) {
   return text;
 }
 
-void getNewRouteFromAPI() async {
+Future<void> getNewRouteFromAPI() async {
   if (myRouteList.isNotEmpty) myRouteList.clear();
 
   log("GETTING NEW ROUTE !!");
@@ -306,7 +307,7 @@ void getNewRouteFromAPI() async {
   final apiKey = MapConstants.googleApiKey;
 
   final url = Uri.parse(
-    'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$apiKey&mode=walking&language=es'
+    'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$apiKey&mode=walking&language=es',
   );
 
   final response = await http.get(url);
@@ -326,11 +327,11 @@ void getNewRouteFromAPI() async {
 
       setState(() {
         myRouteList.add(Polyline(
-          polylineId: PolylineId('route'),
+          polylineId: const PolylineId('route'),
           points: _decodePoly(polyline).map((e) => LatLng(e.latitude, e.longitude)).toList(),
-          color: Color.fromARGB(255, 33, 155, 255),
+          color: const Color.fromARGB(255, 33, 155, 255),
           width: 5,
-        ));
+        ),);
         _directions = steps.join('<br>'); // Guarda todas las instrucciones sin etiquetas HTML
         _duration = duration;
         _distance = distance;
@@ -344,9 +345,9 @@ void getNewRouteFromAPI() async {
 }
 
   List<mtk.LatLng> _decodePoly(String encoded) {
-    List<mtk.LatLng> poly = [];
+    final List<mtk.LatLng> poly = [];
     int index = 0;
-    int len = encoded.length;
+    final int len = encoded.length;
     int lat = 0;
     int lng = 0;
 
@@ -360,7 +361,7 @@ void getNewRouteFromAPI() async {
         result |= (b & 0x1f) << shift;
         shift += 5;
       } while (b >= 0x20);
-      int dlat = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+      final int dlat = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
       lat += dlat;
 
       shift = 0;
@@ -371,13 +372,13 @@ void getNewRouteFromAPI() async {
         result |= (b & 0x1f) << shift;
         shift += 5;
       } while (b >= 0x20);
-      int dlng = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+      final int dlng = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
       lng += dlng;
 
       poly.add(mtk.LatLng(
-        (lat / 1E5),
-        (lng / 1E5),
-      ));
+        lat / 1E5,
+        lng / 1E5,
+      ),);
     }
     return poly;
   }
@@ -390,7 +391,7 @@ void getNewRouteFromAPI() async {
         Navigator.of(MapConstants.globalNavigatorKey.currentContext!)
             .removeRoute(PermissionProvider.permissionDialogRoute!);
       }
-      Future.delayed(Duration(milliseconds: 250), () async {
+      Future.delayed(const Duration(milliseconds: 250), () async {
         checkPermissionAndListenLocation();
       });
     }
@@ -408,44 +409,42 @@ void getNewRouteFromAPI() async {
 
  void startListeningLocation() {
   _positionStream = Geolocator.getPositionStream(
-    locationSettings: LocationSettings(accuracy: LocationAccuracy.best),
+    locationSettings: const LocationSettings(),
   ).listen((Position position) {
-    if (position != null) {
-      setState(() {
-        _currentPosition = position;
-        if (myLocationMarker == null) {
-          if (markerIcon != BitmapDescriptor.defaultMarker) {
-            myLocationMarker = Marker(
-              markerId: MarkerId('currentLocation'),
-              position: LatLng(position.latitude, position.longitude),
-              icon: markerIcon,
-              rotation: position.heading,
-              zIndex: 2,
-            );
-            markerList.add(myLocationMarker!);
-          }
-        } else {
-          myLocationMarker = myLocationMarker!.copyWith(
-            positionParam: LatLng(position.latitude, position.longitude),
-            rotationParam: position.heading,
+    setState(() {
+      _currentPosition = position;
+      if (myLocationMarker == null) {
+        if (markerIcon != BitmapDescriptor.defaultMarker) {
+          myLocationMarker = Marker(
+            markerId: const MarkerId('currentLocation'),
+            position: LatLng(position.latitude, position.longitude),
+            icon: markerIcon,
+            rotation: position.heading,
+            zIndex: 2,
           );
-          markerList = markerList.map((marker) {
-            if (marker.markerId.value == 'currentLocation') {
-              return myLocationMarker!;
-            } else {
-              return marker;
-            }
-          }).toList();
+          markerList.add(myLocationMarker!);
         }
-      });
-      moveCameraToCurrentPosition();
-      navigationProcess();
-    }
-  });
+      } else {
+        myLocationMarker = myLocationMarker!.copyWith(
+          positionParam: LatLng(position.latitude, position.longitude),
+          rotationParam: position.heading,
+        );
+        markerList = markerList.map((marker) {
+          if (marker.markerId.value == 'currentLocation') {
+            return myLocationMarker!;
+          } else {
+            return marker;
+          }
+        }).toList();
+      }
+    });
+    moveCameraToCurrentPosition();
+    navigationProcess();
+    });
 }
 
 
-void moveCameraToCurrentPosition() async {
+Future<void> moveCameraToCurrentPosition() async {
   final GoogleMapController controller = await _controller.future;
   controller.animateCamera(
     CameraUpdate.newLatLng(LatLng(_currentPosition!.latitude, _currentPosition!.longitude)),

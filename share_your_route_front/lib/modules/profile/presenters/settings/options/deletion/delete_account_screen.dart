@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -16,8 +17,20 @@ class _DeleteAccountPageState extends State<DeleteAccountScreen> {
 
   void _deleteAccount() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Lógica para eliminar la cuenta aquí
-      // Validar la contraseña ingresada con Firebase
+      FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(
+        EmailAuthProvider.credential(
+          email: FirebaseAuth.instance.currentUser!.email!,
+          password: passwordController.text,
+        ),
+      ).then((_) {
+        FirebaseAuth.instance.currentUser!.delete().then((_) {
+          _authService.logout(context);
+        }).catchError((error) {
+          showSnackbar(context, error.toString(), "error");
+        });
+      }).catchError((error) {
+        showSnackbar(context, error.toString(), "error");
+      });
       _authService.logout(context);
     }
   }

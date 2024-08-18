@@ -5,7 +5,7 @@ DialogRoute<dynamic> myCustomDialogRoute(
     {required String title,
     required String text,
     String buttonText = "Ok",
-    VoidCallback? onPressed}) {
+    VoidCallback? onPressed,}) {
   return DialogRoute(
     context: MapConstants.globalNavigatorKey.currentContext!,
     barrierDismissible: false,
