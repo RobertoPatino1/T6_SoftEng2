@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
@@ -52,7 +53,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Seleccionar Ubicación"),
+      appBar: const CustomAppBar(title: "Punto de Encuentro"),
       body: myPosition == null
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -119,13 +120,16 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     widget.onLocationSelected(selectedPosition);
                     Navigator.pop(context, selectedPosition);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(45, 75, 115, 1),
+                    backgroundColor: yellowAccentColor,
                   ),
                   child: const Text(
                     'Confirmar ubicación',
@@ -135,6 +139,9 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                )
               ],
             ),
     );

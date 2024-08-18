@@ -15,26 +15,6 @@ class ViewStopsMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   title: const Text(
-      //     'Mapa de Paradas',
-      //     style: TextStyle(
-      //       fontSize: 20.0,
-      //       color: Color.fromRGBO(45, 75, 115, 1),
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   leading: IconButton(
-      //     icon: const Icon(
-      //       Icons.arrow_back,
-      //       color: Color.fromRGBO(45, 75, 115, 1),
-      //     ),
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //   ),
-      // ),
       appBar: const CustomAppBar(
         title: "Mapa de Paradas",
       ),

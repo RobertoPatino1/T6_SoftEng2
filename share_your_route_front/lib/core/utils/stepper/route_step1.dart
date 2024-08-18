@@ -14,7 +14,7 @@ class RouteStep1 extends StatefulWidget {
   final bool showPlaceInfo;
   final String alertSound;
   final bool publicRoute;
-  final List<RouteType> selectedRouteTypes; // Changed to a list of route types
+  final List<RouteType> selectedRouteTypes;
   final Function(String) onRouteNameChanged;
   final Function(String) onRouteDescriptionChanged;
   final Function(DateTime) onRouteDateChanged;
@@ -24,8 +24,7 @@ class RouteStep1 extends StatefulWidget {
   final Function(bool) onShowPlaceInfoChanged;
   final Function(String) onAlertSoundChanged;
   final Function(bool) onPublicRouteChanged;
-  final Function(List<RouteType>)
-      onRouteTypesChanged; // New callback for list of route types
+  final Function(List<RouteType>) onRouteTypesChanged;
 
   const RouteStep1({
     super.key,
@@ -38,7 +37,7 @@ class RouteStep1 extends StatefulWidget {
     required this.showPlaceInfo,
     required this.alertSound,
     required this.publicRoute,
-    required this.selectedRouteTypes, // New parameter
+    required this.selectedRouteTypes,
     required this.onRouteNameChanged,
     required this.onRouteDescriptionChanged,
     required this.onRouteDateChanged,
@@ -48,7 +47,7 @@ class RouteStep1 extends StatefulWidget {
     required this.onShowPlaceInfoChanged,
     required this.onAlertSoundChanged,
     required this.onPublicRouteChanged,
-    required this.onRouteTypesChanged, // New parameter
+    required this.onRouteTypesChanged,
   });
 
   @override
@@ -59,7 +58,6 @@ class _RouteStep1State extends State<RouteStep1> {
   late double currentRangeAlert;
   late DateTime selectedDate;
 
-  // Define route types
   final List<RouteType> routeTypes = RouteType.values;
 
   @override
@@ -118,9 +116,7 @@ class _RouteStep1State extends State<RouteStep1> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
-    final textColor = isDarkMode ? Colors.white : Colors.black;
+    final theme = Theme.of(context);
 
     return SingleChildScrollView(
       child: Column(
@@ -128,7 +124,10 @@ class _RouteStep1State extends State<RouteStep1> {
         children: [
           const SizedBox(height: 20),
           buildRouteNameField(
-              context, widget.routeName, widget.onRouteNameChanged),
+            context,
+            widget.routeName,
+            widget.onRouteNameChanged,
+          ),
           const SizedBox(height: 15),
           buildRouteDescriptionField(
             context,
@@ -137,26 +136,30 @@ class _RouteStep1State extends State<RouteStep1> {
           ),
           const SizedBox(height: 15),
           buildLabeledControl(
+            context,
             'Cantidad de personas',
             buildNumberChanger(
+              context,
               widget.numberOfPeople,
               _handleNumberOfPeopleChange,
             ),
           ),
           buildLabeledControl(
+            context,
             'Número de guías',
             buildNumberChanger(
+              context,
               widget.numberOfGuides,
               _handleNumberOfGuidesChange,
             ),
           ),
           const SizedBox(height: 15),
-          const Text('Rango de alerta', style: titlelabelTextStyle),
+          Text('Rango de alerta', style: theme.textTheme.headlineSmall),
           const SizedBox(height: 8),
           Row(
             children: [
               Expanded(
-                child: buildRangeSlider(currentRangeAlert, (value) {
+                child: buildRangeSlider(context, currentRangeAlert, (value) {
                   setState(() {
                     currentRangeAlert = value;
                   });
@@ -164,7 +167,10 @@ class _RouteStep1State extends State<RouteStep1> {
                 }),
               ),
               const SizedBox(width: 8),
-              Text('${currentRangeAlert.round()} m', style: labelTextStyle),
+              Text(
+                '${currentRangeAlert.round()} m',
+                style: theme.textTheme.bodyLarge,
+              ),
             ],
           ),
           const SizedBox(height: 15),
@@ -172,11 +178,7 @@ class _RouteStep1State extends State<RouteStep1> {
             contentPadding: EdgeInsets.zero,
             title: Text(
               'Mostrar información del lugar',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: textColor,
-              ),
+              style: theme.textTheme.headlineSmall,
             ),
             value: widget.showPlaceInfo,
             onChanged: widget.onShowPlaceInfoChanged,
@@ -184,47 +186,55 @@ class _RouteStep1State extends State<RouteStep1> {
           ),
           const SizedBox(height: 15),
           buildLabeledControl(
+            context,
             'Sonido de alerta',
-            buildDropdown(widget.alertSound, widget.onAlertSoundChanged),
+            buildDropdown(
+              context,
+              widget.alertSound,
+              widget.onAlertSoundChanged,
+            ),
           ),
           const SizedBox(height: 15),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(
               'Ruta pública',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: textColor,
-              ),
+              style: theme.textTheme.headlineSmall,
             ),
             value: widget.publicRoute,
             onChanged: widget.onPublicRouteChanged,
             activeColor: yellowAccentColor,
           ),
           const SizedBox(height: 15),
-          const Text('Fecha de la ruta', style: titlelabelTextStyle),
-          const SizedBox(height: 8),
-          buildDatePicker(selectedDate, (date) {
-            setState(() {
-              selectedDate = date;
-            });
-            widget.onRouteDateChanged(date);
-          }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Fecha de la ruta', style: theme.textTheme.headlineSmall),
+              buildDatePicker(context, selectedDate, (date) {
+                setState(() {
+                  selectedDate = date;
+                });
+                widget.onRouteDateChanged(date);
+              }),
+            ],
+          ),
           const SizedBox(height: 15),
-          const Text('Tipo de ruta', style: titlelabelTextStyle),
+          Text('Tipo de ruta', style: theme.textTheme.headlineSmall),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8.0,
             runSpacing: 4.0,
             children: routeTypes.map((type) {
               return ChoiceChip(
-                label: Text(type.toString().split('.').last),
+                label: Text(
+                  type.toString().split('.').last,
+                  style: theme.textTheme.bodyMedium,
+                ),
                 selected: widget.selectedRouteTypes.contains(type),
                 onSelected: (selected) {
                   _handleRouteTypeChanged(type, selected);
                 },
-                selectedColor: const Color.fromRGBO(91, 125, 170, 1),
+                selectedColor: theme.colorScheme.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
@@ -237,24 +247,43 @@ class _RouteStep1State extends State<RouteStep1> {
   }
 
   Widget buildDatePicker(
+    BuildContext context,
     DateTime initialDate,
     Function(DateTime) onDateChanged,
   ) {
-    return TextButton(
-      onPressed: () async {
-        final DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: initialDate,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2100),
-        );
-        if (pickedDate != null) {
-          onDateChanged(pickedDate);
-        }
-      },
-      child: Text(
-        '${initialDate.day}/${initialDate.month}/${initialDate.year}',
-        style: const TextStyle(fontSize: 16),
+    final theme = Theme.of(context);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: yellowAccentColor.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(15.0),
+        border: Border.all(
+          color: yellowAccentColor,
+          width: 1.5,
+        ),
+      ),
+      child: TextButton(
+        onPressed: () async {
+          final DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: initialDate,
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+          );
+          if (pickedDate != null) {
+            onDateChanged(pickedDate);
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              vertical: 8.0, horizontal: 12.0), // Reduce el padding
+          child: Text(
+            '${initialDate.day}/${initialDate.month}/${initialDate.year}',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontSize: 14.0, // Reduce el tamaño de la fuente
+            ),
+          ),
+        ),
       ),
     );
   }
