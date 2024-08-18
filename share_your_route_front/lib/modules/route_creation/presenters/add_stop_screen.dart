@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_place/google_place.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -18,12 +19,22 @@ class AddStopScreen extends StatefulWidget {
 }
 
 class _AddStopScreenState extends State<AddStopScreen> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
   LatLng? myPosition;
   LatLng? selectedPosition;
-  final TextEditingController _searchController = TextEditingController();
   final TextEditingController _stopNameController = TextEditingController();
   TimeOfDay? selectedStartTime;
   TimeOfDay? selectedEndTime;
+  late GooglePlace googlePlace;
+  List<AutocompletePrediction> predictions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+    googlePlace = GooglePlace(dotenv.env['GOOGLE_API_KEY']!);
+  }
 
   Future<void> getCurrentLocation() async {
     final LatLng position = await LocationService.determinePosition();
@@ -31,27 +42,36 @@ class _AddStopScreenState extends State<AddStopScreen> {
       myPosition = position;
       selectedPosition = myPosition;
     });
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newLatLng(myPosition!));
   }
 
-  Future<void> searchLocation(String query) async {
-    try {
-      final List<Location> locations = await locationFromAddress(query);
-      if (locations.isNotEmpty) {
-        final location = locations.first;
+  Future<void> onSearchChanged(String value) async {
+    if (value.isNotEmpty) {
+      final result = await googlePlace.autocomplete.get(value);
+      if (result != null && result.predictions != null) {
         setState(() {
-          selectedPosition = LatLng(location.latitude, location.longitude);
+          predictions = result.predictions!;
         });
       }
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error searching location: $e');
+    } else {
+      setState(() {
+        predictions = [];
+      });
     }
   }
 
-  @override
-  void initState() {
-    getCurrentLocation();
-    super.initState();
+  Future<void> onPlaceSelected(String placeId) async {
+    final details = await googlePlace.details.get(placeId);
+    if (details != null && details.result != null) {
+      final location = details.result!.geometry!.location!;
+      setState(() async {
+        selectedPosition = LatLng(location.lat!, location.lng!);
+        predictions = [];
+        final GoogleMapController controller = await _controller.future;
+        controller.animateCamera(CameraUpdate.newLatLng(selectedPosition!));
+      });
+    }
   }
 
   Future<void> selectTime(BuildContext context, bool isStartTime) async {
@@ -101,64 +121,58 @@ class _AddStopScreenState extends State<AddStopScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Buscar ubicación',
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {
-                          searchLocation(_searchController.text);
-                        },
+                  child: Column(
+                    children: [
+                      TextField(
+                        onChanged: onSearchChanged,
+                        decoration: InputDecoration(
+                          hintText: 'Buscar ubicación',
+                          suffixIcon: const Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    onSubmitted: (value) {
-                      searchLocation(value);
-                    },
+                      if (predictions.isNotEmpty)
+                        SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                            itemCount: predictions.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(predictions[index].description!),
+                                onTap: () {
+                                  onPlaceSelected(predictions[index].placeId!);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                    ],
                   ),
                 ),
                 Expanded(
-                  child: FlutterMap(
-                    options: MapOptions(
-                      center: selectedPosition ?? myPosition!,
-                      minZoom: 5,
-                      maxZoom: 25,
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: myPosition!,
                       zoom: 18,
-                      onTap: (tapPosition, point) {
-                        setState(() {
-                          selectedPosition = point;
-                        });
-                      },
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
-                        additionalOptions: {
-                          'accessToken':
-                              dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? "",
-                          'id': 'mapbox/streets-v12',
-                        },
-                      ),
-                      if (selectedPosition != null)
-                        MarkerLayer(
-                          markers: [
+                    onMapCreated: (controller) {
+                      _controller.complete(controller);
+                    },
+                    markers: selectedPosition != null
+                        ? {
                             Marker(
-                              width: 80.0,
-                              height: 80.0,
-                              point: selectedPosition!,
-                              builder: (ctx) => const Icon(
-                                Icons.location_pin,
-                                size: 40,
-                                color: Color.fromARGB(255, 230, 31, 17),
-                              ),
-                            ),
-                          ],
-                        ),
-                    ],
+                              markerId: const MarkerId('selectedPosition'),
+                              position: selectedPosition!,
+                            )
+                          }
+                        : {},
+                    onTap: (LatLng position) {
+                      setState(() {
+                        selectedPosition = position;
+                      });
+                    },
                   ),
                 ),
                 Padding(

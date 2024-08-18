@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/location_picker_screen.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/add_stop_screen.dart';
@@ -162,28 +162,29 @@ class _RouteStep2State extends State<RouteStep2> {
               ),
               const SizedBox(height: 10),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ViewStopsMapScreen(stops: stops),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: yellowAccentColor,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Text(
-                      'Ver todas las paradas en el mapa',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ViewStopsMapScreen(stops: stops),
                     ),
-                  ),),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: yellowAccentColor,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Ver todas las paradas en el mapa',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
       ],

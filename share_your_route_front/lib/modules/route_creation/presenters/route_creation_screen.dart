@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/core/constants/route_type.dart';
 import 'package:share_your_route_front/core/utils/stepper/route_step1.dart';
@@ -94,13 +94,22 @@ class _CreateRouteState extends State<CreateRoute> {
             setState(() {
               if (_currentStep == 0 && routeNameInput.isEmpty) {
                 showSnackbar(
-                    context, "Debe ingresar el nombre de la ruta", "error",);
+                  context,
+                  "Debe ingresar el nombre de la ruta",
+                  "error",
+                );
               } else if (_currentStep == 1 && stopsInput.isEmpty) {
                 showSnackbar(
-                    context, "Debe agregar al menos una parada", "error",);
+                  context,
+                  "Debe agregar al menos una parada",
+                  "error",
+                );
               } else if (_currentStep == 2 && meetingPointInput == null) {
                 showSnackbar(
-                    context, "Debe seleccionar un punto de encuentro", "error",);
+                  context,
+                  "Debe seleccionar un punto de encuentro",
+                  "error",
+                );
               } else if (_currentStep < 3) {
                 _currentStep++;
               } else {
@@ -148,8 +157,11 @@ class _CreateRouteState extends State<CreateRoute> {
                           if (routeNameInput.isNotEmpty) {
                             details.onStepContinue!();
                           } else {
-                            showSnackbar(context,
-                                "Debe ingresar el nombre de la ruta", "error",);
+                            showSnackbar(
+                              context,
+                              "Debe ingresar el nombre de la ruta",
+                              "error",
+                            );
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -169,14 +181,18 @@ class _CreateRouteState extends State<CreateRoute> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_currentStep == 1 && stopsInput.isEmpty) {
-                            showSnackbar(context,
-                                "Debe agregar al menos una parada", "error",);
+                            showSnackbar(
+                              context,
+                              "Debe agregar al menos una parada",
+                              "error",
+                            );
                           } else if (_currentStep == 2 &&
                               meetingPointInput == null) {
                             showSnackbar(
-                                context,
-                                "Debe seleccionar un punto de encuentro",
-                                "error",);
+                              context,
+                              "Debe seleccionar un punto de encuentro",
+                              "error",
+                            );
                           } else {
                             details.onStepContinue!();
                           }

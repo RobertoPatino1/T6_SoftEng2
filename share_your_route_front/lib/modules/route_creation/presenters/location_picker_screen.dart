@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -20,6 +18,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
   LatLng? myPosition;
   LatLng? selectedPosition;
   final TextEditingController _searchController = TextEditingController();
+  GoogleMapController? _mapController;
 
   Future<void> getCurrentLocation() async {
     final LatLng position = await LocationService.determinePosition();
@@ -27,6 +26,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
       myPosition = position;
       selectedPosition = myPosition;
     });
+    _mapController?.moveCamera(CameraUpdate.newLatLng(myPosition!));
   }
 
   Future<void> searchLocation(String query) async {
@@ -37,9 +37,10 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         setState(() {
           selectedPosition = LatLng(location.latitude, location.longitude);
         });
+        _mapController
+            ?.animateCamera(CameraUpdate.newLatLng(selectedPosition!));
       }
     } catch (e) {
-      // ignore: avoid_print
       print('Error searching location: $e');
     }
   }
@@ -80,44 +81,28 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                   ),
                 ),
                 Expanded(
-                  child: FlutterMap(
-                    options: MapOptions(
-                      center: selectedPosition ?? myPosition!,
-                      minZoom: 5,
-                      maxZoom: 25,
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: selectedPosition ?? myPosition!,
                       zoom: 18,
-                      onTap: (tapPosition, point) {
-                        setState(() {
-                          selectedPosition = point;
-                        });
-                      },
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
-                        additionalOptions: {
-                          'accessToken':
-                              dotenv.env['MAPBOX_ACCESS_TOKEN'] ?? "",
-                          'id': 'mapbox/streets-v12',
-                        },
-                      ),
-                      if (selectedPosition != null)
-                        MarkerLayer(
-                          markers: [
+                    onMapCreated: (GoogleMapController controller) {
+                      _mapController = controller;
+                    },
+                    markers: selectedPosition != null
+                        ? {
                             Marker(
-                              width: 80.0,
-                              height: 80.0,
-                              point: selectedPosition!,
-                              builder: (ctx) => const Icon(
-                                Icons.location_pin,
-                                size: 40,
-                                color: Color.fromARGB(255, 230, 31, 17),
-                              ),
+                              markerId: MarkerId('selected-location'),
+                              position: selectedPosition!,
+                              icon: BitmapDescriptor.defaultMarker,
                             ),
-                          ],
-                        ),
-                    ],
+                          }
+                        : {},
+                    onTap: (LatLng point) {
+                      setState(() {
+                        selectedPosition = point;
+                      });
+                    },
                   ),
                 ),
                 const SizedBox(

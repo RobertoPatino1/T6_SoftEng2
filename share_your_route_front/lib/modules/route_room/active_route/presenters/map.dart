@@ -44,12 +44,14 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   );
   List<Marker> markerList = [];
   final Marker _destinationMarker = Marker(
-      markerId: MarkerId(activeTouristRoute.name),
-      position: LatLng(
-          activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex]
-              .ubication.latitude,
-          activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex]
-              .ubication.longitude,),);
+    markerId: MarkerId(activeTouristRoute.name),
+    position: LatLng(
+      activeTouristRoute
+          .placesList[activeTouristRoute.currentPlaceIndex].ubication.latitude,
+      activeTouristRoute
+          .placesList[activeTouristRoute.currentPlaceIndex].ubication.longitude,
+    ),
+  );
   Position? _currentPosition;
   List<Polyline> myRouteList = [];
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
@@ -61,6 +63,9 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    _directions = ""; // Inicializa _directions
+    _duration = ""; // Inicializa _duration
+    _distance = ""; // Inicializa _distance
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       markerList.add(_destinationMarker);
@@ -82,130 +87,136 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: !PermissionProvider.isServiceOn ||
-                PermissionProvider.locationPermission !=
-                    PermissionStatus.granted ||
-                mapStyle.isEmpty
-            ? Container(
-                color: Colors.grey[700],
-                child: const Center(child: CircularProgressIndicator()),)
-            : Stack(
-                children: [
-                  Positioned.fill(
-                    child: GoogleMap(
-                      polylines: Set<Polyline>.from(myRouteList),
-                      initialCameraPosition: _cameraPos,
-                      markers: Set<Marker>.from(markerList),
-                      onMapCreated: (GoogleMapController controller) {
-                        if (!_controller.isCompleted) {
-                          _controller.complete(controller);
-                        }
-                      },
+      body: !PermissionProvider.isServiceOn ||
+              PermissionProvider.locationPermission !=
+                  PermissionStatus.granted ||
+              mapStyle.isEmpty
+          ? Container(
+              color: Colors.grey[700],
+              child: const Center(child: CircularProgressIndicator()),
+            )
+          : Stack(
+              children: [
+                Positioned.fill(
+                  child: GoogleMap(
+                    polylines: Set<Polyline>.from(myRouteList),
+                    initialCameraPosition: _cameraPos,
+                    markers: Set<Marker>.from(markerList),
+                    onMapCreated: (GoogleMapController controller) {
+                      if (!_controller.isCompleted) {
+                        _controller.complete(controller);
+                      }
+                    },
+                  ),
+                ),
+                Positioned(
+                  bottom: 30,
+                  right: 16,
+                  child: FloatingActionButton.extended(
+                    backgroundColor: Colors.grey[850],
+                    onPressed: () {
+                      getNewRouteFromAPI();
+                    },
+                    label: Text(
+                      "Get Route",
+                      style: TextStyle(color: Colors.grey[300]),
                     ),
                   ),
-                  Positioned(
-                    bottom: 30,
-                    right: 16,
-                    child: FloatingActionButton.extended(
-                      backgroundColor: Colors.grey[850],
-                      onPressed: () {
-                        getNewRouteFromAPI();
-                      },
-                      label: Text(
-                        "Get Route",
-                        style: TextStyle(color: Colors.grey[300]),
-                      ),
+                ),
+                Positioned(
+                  top: 40,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(191, 141, 48, 1),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  Positioned(
-                    top: 40,
-                    left: 16,
-                    right: 16,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(191, 141, 48, 1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        activeTouristRoute.name,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: ui.FontWeight.bold,),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 70,
-                    left: 16,
-                    right: 16,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        "Proxima parada: ${activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name}",
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: ui.FontWeight.bold,),
+                    child: Text(
+                      activeTouristRoute.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: ui.FontWeight.bold,
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 100,
-                    left: 16,
-                    right: 16,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.95),
-                        borderRadius: BorderRadius.circular(8),
+                ),
+                Positioned(
+                  top: 70,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      "Proxima parada: ${activeTouristRoute.placesList[activeTouristRoute.currentPlaceIndex].name}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: ui.FontWeight.bold,
                       ),
-                      child: Row(
-                        children: [
-                          // Direction arrow and distance
-                          Column(
-                            children: [
-                              const Icon(Icons.arrow_forward,
-                                  size: 32, color: Colors.black,),
-                              Text(
-                                _distance,
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 8),
-                          // Directions text
-                          Expanded(
-                            child: Text(
-                              _directions,
-                              style: Theme.of(context).textTheme.headlineSmall,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 100,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.95),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        // Direction arrow and distance
+                        Column(
+                          children: [
+                            const Icon(
+                              Icons.arrow_forward,
+                              size: 32,
+                              color: Colors.black,
                             ),
+                            Text(
+                              _distance,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 8),
+                        // Directions text
+                        Expanded(
+                          child: Text(
+                            _directions,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  // Back button
-                  Positioned(
-                    bottom: 30,
-                    left: 16,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
+                ),
+                // Back button
+                Positioned(
+                  bottom: 30,
+                  left: 16,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
-                ],
-              ),);
+                ),
+              ],
+            ),
+    );
   }
 
   List<TextSpan> _parseDirectionsToTextSpans(String htmlString) {
@@ -251,8 +262,10 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   void setCustomIconForUserLocation() {
     Future<Uint8List> getBytesFromAsset(String path, int width) async {
       final ByteData data = await rootBundle.load(path);
-      final ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-          targetWidth: width,);
+      final ui.Codec codec = await ui.instantiateImageCodec(
+        data.buffer.asUint8List(),
+        targetWidth: width,
+      );
       final ui.FrameInfo fi = await codec.getNextFrame();
       return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
           .buffer
@@ -276,8 +289,12 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
 
     final mtk.LatLng myPosition =
         mtk.LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-    final int x = mtk.PolygonUtil.locationIndexOnPath(myPosition, myLatLngList, true,
-        tolerance: 12,);
+    final int x = mtk.PolygonUtil.locationIndexOnPath(
+      myPosition,
+      myLatLngList,
+      true,
+      tolerance: 12,
+    );
 
     if (x == -1) {
       getNewRouteFromAPI();
@@ -326,12 +343,14 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     final apiKey = MapConstants.googleApiKey;
 
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$apiKey&mode=walking&language=es',);
+      'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$apiKey&mode=walking&language=es',
+    );
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final Map<String,dynamic> data = jsonDecode(response.body) as Map<String,dynamic>;
+      final Map<String, dynamic> data =
+          jsonDecode(response.body) as Map<String, dynamic>;
 
       if (data['status'] == 'OK') {
         final routeData = data['routes'][0];
@@ -340,21 +359,27 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
         _duration = legs['duration']['text'] as String;
         final distance = legs['distance']['text'];
         final steps = legs['steps']
-            .map<String>((step) => _parseHtml(
-                step['html_instructions'] as String,),) // Limpia las etiquetas HTML
+            .map<String>(
+              (step) => _parseHtml(
+                step['html_instructions'] as String,
+              ),
+            ) // Limpia las etiquetas HTML
             .toList();
 
         setState(() {
-          myRouteList.add(Polyline(
-            polylineId: const PolylineId('route'),
-            points: _decodePoly(polyline as String)
-                .map((e) => LatLng(e.latitude, e.longitude))
-                .toList(),
-            color: const Color.fromARGB(255, 33, 155, 255),
-            width: 5,
-          ),);
+          myRouteList.add(
+            Polyline(
+              polylineId: const PolylineId('route'),
+              points: _decodePoly(polyline as String)
+                  .map((e) => LatLng(e.latitude, e.longitude))
+                  .toList(),
+              color: const Color.fromARGB(255, 33, 155, 255),
+              width: 5,
+            ),
+          );
           _directions = steps.join(
-              '<br>',) as String; // Guarda todas las instrucciones sin etiquetas HTML
+            '<br>',
+          ) as String; // Guarda todas las instrucciones sin etiquetas HTML
           _distance = distance as String;
         });
       } else {
@@ -396,10 +421,12 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
       final int dlng = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
       lng += dlng;
 
-      poly.add(mtk.LatLng(
-        lat / 1E5,
-        lng / 1E5,
-      ),);
+      poly.add(
+        mtk.LatLng(
+          lat / 1E5,
+          lng / 1E5,
+        ),
+      );
     }
     return poly;
   }
@@ -461,14 +488,15 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
       });
       moveCameraToCurrentPosition();
       navigationProcess();
-        });
+    });
   }
 
   Future<void> moveCameraToCurrentPosition() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(
       CameraUpdate.newLatLng(
-          LatLng(_currentPosition!.latitude, _currentPosition!.longitude),),
+        LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+      ),
     );
   }
 
