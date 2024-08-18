@@ -166,6 +166,7 @@ class _MainPageState extends State<MainPage> {
         Modular.to.navigate('/auth/');
       });
     } catch (error) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al obtener la ubicación: $error')),
       );

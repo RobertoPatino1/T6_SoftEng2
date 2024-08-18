@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
@@ -52,8 +54,9 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   List<Polyline> myRouteList = [];
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
   Marker? myLocationMarker;
-  String _directions = '';
-  String _distance = '';
+  late String _directions;
+  late String _duration;
+  late String _distance;
 
   @override
   void initState() {
@@ -258,7 +261,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
 
     getBytesFromAsset('asset/user_location.png', 64).then((onValue) {
       setState(() {
-        markerIcon = BitmapDescriptor.fromBytes(onValue);
+        markerIcon = BitmapDescriptor.bytes(onValue);
       });
     }).catchError((error) {
       log("Error loading marker icon: $error");
@@ -328,32 +331,31 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final Map<String,dynamic> data = jsonDecode(response.body) as Map<String,dynamic>;
 
       if (data['status'] == 'OK') {
         final routeData = data['routes'][0];
         final legs = routeData['legs'][0];
         final polyline = routeData['overview_polyline']['points'];
-        final duration = legs['duration']['text'];
+        _duration = legs['duration']['text'] as String;
         final distance = legs['distance']['text'];
         final steps = legs['steps']
             .map<String>((step) => _parseHtml(
-                step['html_instructions'],),) // Limpia las etiquetas HTML
+                step['html_instructions'] as String,),) // Limpia las etiquetas HTML
             .toList();
 
         setState(() {
           myRouteList.add(Polyline(
             polylineId: const PolylineId('route'),
-            points: _decodePoly(polyline)
+            points: _decodePoly(polyline as String)
                 .map((e) => LatLng(e.latitude, e.longitude))
                 .toList(),
             color: const Color.fromARGB(255, 33, 155, 255),
             width: 5,
           ),);
           _directions = steps.join(
-              '<br>',); // Guarda todas las instrucciones sin etiquetas HTML
-          _duration = duration;
-          _distance = distance;
+              '<br>',) as String; // Guarda todas las instrucciones sin etiquetas HTML
+          _distance = distance as String;
         });
       } else {
         log("Error in API response: ${data['status']}");
