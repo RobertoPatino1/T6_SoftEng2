@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class LocationPickerScreen extends StatefulWidget {
   final Function(LatLng?) onLocationSelected;
@@ -51,26 +52,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Seleccionar Ubicación',
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Color.fromRGBO(45, 75, 115, 1),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Color.fromRGBO(45, 75, 115, 1),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: const CustomAppBar(title: "Seleccionar Ubicación"),
       body: myPosition == null
           ? const Center(child: CircularProgressIndicator())
           : Column(
