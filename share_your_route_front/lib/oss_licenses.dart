@@ -166,7 +166,7 @@ const allDependencies = <Package>[
   _win32,
   _wkt_parser,
   _xdg_directories,
-  _yaml
+  _yaml,
 ];
 
 /// Direct `dependencies`.
@@ -200,7 +200,7 @@ const dependencies = <Package>[
   _path_provider,
   _permission_handler,
   _provider,
-  _shared_preferences
+  _shared_preferences,
 ];
 
 /// Direct `dev_dependencies`.
@@ -208,7 +208,7 @@ const devDependencies = <Package>[
   _build_runner,
   _json_annotation,
   _json_serializable,
-  _lint
+  _lint,
 ];
 
 /// Package license definition.
@@ -304,7 +304,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// _flutterfire_internals 1.3.40
 const __flutterfire_internals = Package(
@@ -350,8 +350,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('firebase_core'),
       PackageRef('firebase_core_platform_interface'),
       PackageRef('flutter'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// analyzer 5.13.0
 const _analyzer = Package(
@@ -403,8 +403,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('pub_semver'),
       PackageRef('source_span'),
       PackageRef('watcher'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// args 2.5.0
 const _args = Package(
@@ -444,7 +444,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// async 2.11.0
 const _async = Package(
@@ -484,7 +484,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection'), PackageRef('meta')]);
+    dependencies: [PackageRef('collection'), PackageRef('meta')],);
 
 /// auto_injector 2.0.4
 const _auto_injector = Package(
@@ -508,7 +508,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 End license text.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta'), PackageRef('uuid')]);
+    dependencies: [PackageRef('meta'), PackageRef('uuid')],);
 
 /// badges 3.1.2
 const _badges = Package(
@@ -542,7 +542,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// bloc 8.1.4
 const _bloc = Package(
@@ -577,7 +577,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 USE OR OTHER DEALINGS IN THE SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// boolean_selector 2.1.1
 const _boolean_selector = Package(
@@ -617,7 +617,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('source_span'), PackageRef('string_scanner')]);
+    dependencies: [PackageRef('source_span'), PackageRef('string_scanner')],);
 
 /// build 2.4.1
 const _build = Package(
@@ -666,8 +666,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('logging'),
       PackageRef('meta'),
       PackageRef('package_config'),
-      PackageRef('path')
-    ]);
+      PackageRef('path'),
+    ],);
 
 /// build_config 1.1.1
 const _build_config = Package(
@@ -712,8 +712,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('json_annotation'),
       PackageRef('path'),
       PackageRef('pubspec_parse'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// build_daemon 4.0.2
 const _build_daemon = Package(
@@ -764,8 +764,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('shelf_web_socket'),
       PackageRef('stream_transform'),
       PackageRef('watcher'),
-      PackageRef('web_socket_channel')
-    ]);
+      PackageRef('web_socket_channel'),
+    ],);
 
 /// build_resolvers 2.0.10
 const _build_resolvers = Package(
@@ -817,8 +817,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('pool'),
       PackageRef('pub_semver'),
       PackageRef('stream_transform'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// build_runner 2.4.11
 const _build_runner = Package(
@@ -892,8 +892,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('timing'),
       PackageRef('watcher'),
       PackageRef('web_socket_channel'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// build_runner_core 7.2.8
 const _build_runner_core = Package(
@@ -952,8 +952,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('pool'),
       PackageRef('timing'),
       PackageRef('watcher'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// built_collection 5.1.1
 const _built_collection = Package(
@@ -995,7 +995,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// built_value 8.9.2
 const _built_value = Package(
@@ -1042,8 +1042,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('built_collection'),
       PackageRef('collection'),
       PackageRef('fixnum'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// characters 1.3.0
 const _characters = Package(
@@ -1083,7 +1083,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// checked_yaml 2.0.3
 const _checked_yaml = Package(
@@ -1126,8 +1126,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('json_annotation'),
       PackageRef('source_span'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// clock 1.1.1
 const _clock = Package(
@@ -1340,7 +1340,7 @@ Apache License
    limitations under the License.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// code_builder 4.10.0
 const _code_builder = Package(
@@ -1385,8 +1385,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('built_value'),
       PackageRef('collection'),
       PackageRef('matcher'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// collection 1.18.0
 const _collection = Package(
@@ -1426,7 +1426,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// convert 3.1.1
 const _convert = Package(
@@ -1466,7 +1466,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('typed_data')]);
+    dependencies: [PackageRef('typed_data')],);
 
 /// cross_file 0.3.4+2
 const _cross_file = Package(
@@ -1505,7 +1505,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta'), PackageRef('web')]);
+    dependencies: [PackageRef('meta'), PackageRef('web')],);
 
 /// crypto 3.0.3
 const _crypto = Package(
@@ -1545,7 +1545,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('typed_data')]);
+    dependencies: [PackageRef('typed_data')],);
 
 /// cupertino_icons 1.0.8
 const _cupertino_icons = Package(
@@ -1579,7 +1579,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// dart_pubspec_licenses 3.0.1
 const _dart_pubspec_licenses = Package(
@@ -1618,8 +1618,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('yaml'),
       PackageRef('path'),
-      PackageRef('json_annotation')
-    ]);
+      PackageRef('json_annotation'),
+    ],);
 
 /// dart_style 2.2.4
 const _dart_style = Package(
@@ -1664,8 +1664,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('args'),
       PackageRef('path'),
       PackageRef('pub_semver'),
-      PackageRef('source_span')
-    ]);
+      PackageRef('source_span'),
+    ],);
 
 /// dotenv 4.2.0
 const _dotenv = Package(
@@ -1698,7 +1698,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('args'), PackageRef('meta')]);
+    dependencies: [PackageRef('args'), PackageRef('meta')],);
 
 /// fake_async 1.3.1
 const _fake_async = Package(
@@ -1912,7 +1912,7 @@ Apache License
    limitations under the License.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// ffi 2.1.2
 const _ffi = Package(
@@ -1952,7 +1952,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// file 7.0.0
 const _file = Package(
@@ -1991,7 +1991,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta'), PackageRef('path')]);
+    dependencies: [PackageRef('meta'), PackageRef('path')],);
 
 /// file_selector_linux 0.9.2+1
 const _file_selector_linux = Package(
@@ -2032,8 +2032,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('cross_file'),
       PackageRef('file_selector_platform_interface'),
-      PackageRef('flutter')
-    ]);
+      PackageRef('flutter'),
+    ],);
 
 /// file_selector_macos 0.9.4
 const _file_selector_macos = Package(
@@ -2074,8 +2074,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('cross_file'),
       PackageRef('file_selector_platform_interface'),
-      PackageRef('flutter')
-    ]);
+      PackageRef('flutter'),
+    ],);
 
 /// file_selector_platform_interface 2.6.2
 const _file_selector_platform_interface = Package(
@@ -2117,8 +2117,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('cross_file'),
       PackageRef('flutter'),
       PackageRef('http'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// file_selector_windows 0.9.3+2
 const _file_selector_windows = Package(
@@ -2159,8 +2159,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('cross_file'),
       PackageRef('file_selector_platform_interface'),
-      PackageRef('flutter')
-    ]);
+      PackageRef('flutter'),
+    ],);
 
 /// firebase_auth 5.1.4
 const _firebase_auth = Package(
@@ -2208,8 +2208,8 @@ const _firebase_auth = Package(
       PackageRef('firebase_core'),
       PackageRef('firebase_core_platform_interface'),
       PackageRef('flutter'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// firebase_auth_platform_interface 7.4.3
 const _firebase_auth_platform_interface = Package(
@@ -2257,8 +2257,8 @@ const _firebase_auth_platform_interface = Package(
       PackageRef('firebase_core'),
       PackageRef('flutter'),
       PackageRef('meta'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// firebase_auth_web 5.12.5
 const _firebase_auth_web = Package(
@@ -2307,8 +2307,8 @@ const _firebase_auth_web = Package(
       PackageRef('flutter'),
       PackageRef('http_parser'),
       PackageRef('meta'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// firebase_core 3.3.0
 const _firebase_core = Package(
@@ -2354,8 +2354,8 @@ const _firebase_core = Package(
       PackageRef('firebase_core_platform_interface'),
       PackageRef('firebase_core_web'),
       PackageRef('flutter'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// firebase_core_platform_interface 5.2.0
 const _firebase_core_platform_interface = Package(
@@ -2401,8 +2401,8 @@ const _firebase_core_platform_interface = Package(
       PackageRef('collection'),
       PackageRef('flutter'),
       PackageRef('meta'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// firebase_core_web 2.17.4
 const _firebase_core_web = Package(
@@ -2448,8 +2448,8 @@ const _firebase_core_web = Package(
       PackageRef('firebase_core_platform_interface'),
       PackageRef('flutter'),
       PackageRef('meta'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// fixnum 1.1.0
 const _fixnum = Package(
@@ -2489,7 +2489,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// flutter 3.22.3
 const _flutter = Package(
@@ -2531,8 +2531,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('collection'),
       PackageRef('material_color_utilities'),
       PackageRef('meta'),
-      PackageRef('vector_math')
-    ]);
+      PackageRef('vector_math'),
+    ],);
 
 /// flutter_bloc 8.1.6
 const _flutter_bloc = Package(
@@ -2571,8 +2571,8 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.''',
     dependencies: [
       PackageRef('bloc'),
       PackageRef('flutter'),
-      PackageRef('provider')
-    ]);
+      PackageRef('provider'),
+    ],);
 
 /// flutter_dotenv 5.1.0
 const _flutter_dotenv = Package(
@@ -2606,7 +2606,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// flutter_map 5.0.0
 const _flutter_map = Package(
@@ -2656,8 +2656,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.""",
       PackageRef('meta'),
       PackageRef('polylabel'),
       PackageRef('proj4dart'),
-      PackageRef('vector_math')
-    ]);
+      PackageRef('vector_math'),
+    ],);
 
 /// flutter_modular 6.3.4
 const _flutter_modular = Package(
@@ -2687,8 +2687,8 @@ End license text.''',
       PackageRef('modular_core'),
       PackageRef('meta'),
       PackageRef('result_dart'),
-      PackageRef('flutter')
-    ]);
+      PackageRef('flutter'),
+    ],);
 
 /// flutter_oss_licenses 3.0.2
 const _flutter_oss_licenses = Package(
@@ -2729,8 +2729,8 @@ SOFTWARE.''',
       PackageRef('meta'),
       PackageRef('yaml'),
       PackageRef('dart_pubspec_licenses'),
-      PackageRef('args')
-    ]);
+      PackageRef('args'),
+    ],);
 
 /// flutter_plugin_android_lifecycle 2.0.21
 const _flutter_plugin_android_lifecycle = Package(
@@ -2769,7 +2769,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// flutter_pw_validator 1.6.0
 const _flutter_pw_validator = Package(
@@ -2803,7 +2803,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// flutter_riverpod 2.5.1
 const _flutter_riverpod = Package(
@@ -2844,8 +2844,8 @@ SOFTWARE.''',
       PackageRef('flutter'),
       PackageRef('meta'),
       PackageRef('riverpod'),
-      PackageRef('state_notifier')
-    ]);
+      PackageRef('state_notifier'),
+    ],);
 
 /// flutter_vibrate 1.3.0
 const _flutter_vibrate = Package(
@@ -2879,7 +2879,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// fluttertoast 8.2.6
 const _fluttertoast = Package(
@@ -2913,7 +2913,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter'), PackageRef('web')]);
+    dependencies: [PackageRef('flutter'), PackageRef('web')],);
 
 /// freezed_annotation 2.4.1
 const _freezed_annotation = Package(
@@ -2951,8 +2951,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('collection'),
       PackageRef('json_annotation'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// frontend_server_client 4.0.0
 const _frontend_server_client = Package(
@@ -2993,7 +2993,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async'), PackageRef('path')]);
+    dependencies: [PackageRef('async'), PackageRef('path')],);
 
 /// geocoding 3.0.0
 const _geocoding = Package(
@@ -3032,8 +3032,8 @@ SOFTWARE.''',
       PackageRef('flutter'),
       PackageRef('geocoding_platform_interface'),
       PackageRef('geocoding_android'),
-      PackageRef('geocoding_ios')
-    ]);
+      PackageRef('geocoding_ios'),
+    ],);
 
 /// geocoding_android 3.3.1
 const _geocoding_android = Package(
@@ -3070,8 +3070,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('geocoding_platform_interface')
-    ]);
+      PackageRef('geocoding_platform_interface'),
+    ],);
 
 /// geocoding_ios 3.0.1
 const _geocoding_ios = Package(
@@ -3108,8 +3108,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('geocoding_platform_interface')
-    ]);
+      PackageRef('geocoding_platform_interface'),
+    ],);
 
 /// geocoding_platform_interface 3.2.0
 const _geocoding_platform_interface = Package(
@@ -3146,8 +3146,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('flutter'),
       PackageRef('meta'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// geolocator 12.0.0
 const _geolocator = Package(
@@ -3188,8 +3188,8 @@ SOFTWARE.''',
       PackageRef('geolocator_android'),
       PackageRef('geolocator_apple'),
       PackageRef('geolocator_web'),
-      PackageRef('geolocator_windows')
-    ]);
+      PackageRef('geolocator_windows'),
+    ],);
 
 /// geolocator_android 4.6.0
 const _geolocator_android = Package(
@@ -3228,8 +3228,8 @@ SOFTWARE.''',
       PackageRef('flutter'),
       PackageRef('geolocator_platform_interface'),
       PackageRef('meta'),
-      PackageRef('uuid')
-    ]);
+      PackageRef('uuid'),
+    ],);
 
 /// geolocator_apple 2.3.7
 const _geolocator_apple = Package(
@@ -3266,8 +3266,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('geolocator_platform_interface')
-    ]);
+      PackageRef('geolocator_platform_interface'),
+    ],);
 
 /// geolocator_platform_interface 4.2.4
 const _geolocator_platform_interface = Package(
@@ -3305,8 +3305,8 @@ SOFTWARE.''',
       PackageRef('flutter'),
       PackageRef('plugin_platform_interface'),
       PackageRef('vector_math'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// geolocator_web 4.0.0
 const _geolocator_web = Package(
@@ -3343,8 +3343,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('flutter'),
       PackageRef('geolocator_platform_interface'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// geolocator_windows 0.2.3
 const _geolocator_windows = Package(
@@ -3380,8 +3380,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('geolocator_platform_interface')
-    ]);
+      PackageRef('geolocator_platform_interface'),
+    ],);
 
 /// glob 2.1.2
 const _glob = Package(
@@ -3425,8 +3425,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('collection'),
       PackageRef('file'),
       PackageRef('path'),
-      PackageRef('string_scanner')
-    ]);
+      PackageRef('string_scanner'),
+    ],);
 
 /// google_fonts 6.2.1
 const _google_fonts = Package(
@@ -3645,8 +3645,8 @@ Apache License
       PackageRef('flutter'),
       PackageRef('http'),
       PackageRef('path_provider'),
-      PackageRef('crypto')
-    ]);
+      PackageRef('crypto'),
+    ],);
 
 /// graphs 2.3.1
 const _graphs = Package(
@@ -3686,7 +3686,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection')]);
+    dependencies: [PackageRef('collection')],);
 
 /// http 1.2.1
 const _http = Package(
@@ -3730,8 +3730,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('async'),
       PackageRef('http_parser'),
       PackageRef('meta'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// http_multi_server 3.2.1
 const _http_multi_server = Package(
@@ -3771,7 +3771,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async')]);
+    dependencies: [PackageRef('async')],);
 
 /// http_parser 4.0.2
 const _http_parser = Package(
@@ -3815,8 +3815,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('collection'),
       PackageRef('source_span'),
       PackageRef('string_scanner'),
-      PackageRef('typed_data')
-    ]);
+      PackageRef('typed_data'),
+    ],);
 
 /// image_picker 1.1.2
 const _image_picker = Package(
@@ -4069,8 +4069,8 @@ aFileChooser
       PackageRef('image_picker_linux'),
       PackageRef('image_picker_macos'),
       PackageRef('image_picker_platform_interface'),
-      PackageRef('image_picker_windows')
-    ]);
+      PackageRef('image_picker_windows'),
+    ],);
 
 /// image_picker_android 0.8.12+11
 const _image_picker_android = Package(
@@ -4317,8 +4317,8 @@ aFileChooser
     dependencies: [
       PackageRef('flutter'),
       PackageRef('flutter_plugin_android_lifecycle'),
-      PackageRef('image_picker_platform_interface')
-    ]);
+      PackageRef('image_picker_platform_interface'),
+    ],);
 
 /// image_picker_for_web 3.0.5
 const _image_picker_for_web = Package(
@@ -4360,8 +4360,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('flutter'),
       PackageRef('image_picker_platform_interface'),
       PackageRef('mime'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// image_picker_ios 0.8.12
 const _image_picker_ios = Package(
@@ -4607,8 +4607,8 @@ aFileChooser
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('image_picker_platform_interface')
-    ]);
+      PackageRef('image_picker_platform_interface'),
+    ],);
 
 /// image_picker_linux 0.2.1+1
 const _image_picker_linux = Package(
@@ -4650,8 +4650,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('file_selector_linux'),
       PackageRef('file_selector_platform_interface'),
       PackageRef('flutter'),
-      PackageRef('image_picker_platform_interface')
-    ]);
+      PackageRef('image_picker_platform_interface'),
+    ],);
 
 /// image_picker_macos 0.2.1+1
 const _image_picker_macos = Package(
@@ -4693,8 +4693,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('file_selector_macos'),
       PackageRef('file_selector_platform_interface'),
       PackageRef('flutter'),
-      PackageRef('image_picker_platform_interface')
-    ]);
+      PackageRef('image_picker_platform_interface'),
+    ],);
 
 /// image_picker_platform_interface 2.10.0
 const _image_picker_platform_interface = Package(
@@ -4736,8 +4736,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('cross_file'),
       PackageRef('flutter'),
       PackageRef('http'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// image_picker_windows 0.2.1+1
 const _image_picker_windows = Package(
@@ -4779,8 +4779,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('file_selector_platform_interface'),
       PackageRef('file_selector_windows'),
       PackageRef('flutter'),
-      PackageRef('image_picker_platform_interface')
-    ]);
+      PackageRef('image_picker_platform_interface'),
+    ],);
 
 /// intl 0.19.0
 const _intl = Package(
@@ -4823,8 +4823,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('clock'),
       PackageRef('meta'),
-      PackageRef('path')
-    ]);
+      PackageRef('path'),
+    ],);
 
 /// io 1.0.4
 const _io = Package(
@@ -4867,8 +4867,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('meta'),
       PackageRef('path'),
-      PackageRef('string_scanner')
-    ]);
+      PackageRef('string_scanner'),
+    ],);
 
 /// js 0.7.1
 const _js = Package(
@@ -4908,7 +4908,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// json_annotation 4.9.0
 const _json_annotation = Package(
@@ -4948,7 +4948,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// json_serializable 6.8.0
 const _json_serializable = Package(
@@ -5000,8 +5000,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('pub_semver'),
       PackageRef('pubspec_parse'),
       PackageRef('source_gen'),
-      PackageRef('source_helper')
-    ]);
+      PackageRef('source_helper'),
+    ],);
 
 /// latlong2 0.9.1
 const _latlong2 = Package(
@@ -5028,7 +5028,7 @@ either express or implied. See the License for the specific language
 governing permissions and limitations under the License.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('intl')]);
+    dependencies: [PackageRef('intl')],);
 
 /// leak_tracker 10.0.4
 const _leak_tracker = Package(
@@ -5069,7 +5069,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// leak_tracker_flutter_testing 3.0.3
 const _leak_tracker_flutter_testing = Package(
@@ -5109,7 +5109,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// leak_tracker_testing 3.0.1
 const _leak_tracker_testing = Package(
@@ -5149,7 +5149,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// lint 2.3.0
 const _lint = Package(
@@ -5363,7 +5363,7 @@ Apache License
    limitations under the License.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// lists 1.0.1
 const _lists = Package(
@@ -5403,7 +5403,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// logging 1.2.0
 const _logging = Package(
@@ -5443,7 +5443,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// matcher 0.12.16+1
 const _matcher = Package(
@@ -5488,8 +5488,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('meta'),
       PackageRef('stack_trace'),
       PackageRef('term_glyph'),
-      PackageRef('test_api')
-    ]);
+      PackageRef('test_api'),
+    ],);
 
 /// material_color_utilities 0.8.0
 const _material_color_utilities = Package(
@@ -5693,7 +5693,7 @@ Apache License
    limitations under the License.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection')]);
+    dependencies: [PackageRef('collection')],);
 
 /// meta 1.12.0
 const _meta = Package(
@@ -5733,7 +5733,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// mgrs_dart 2.0.0
 const _mgrs_dart = Package(
@@ -5767,7 +5767,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('unicode')]);
+    dependencies: [PackageRef('unicode')],);
 
 /// mime 1.0.5
 const _mime = Package(
@@ -5807,7 +5807,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// modular_core 3.3.3
 const _modular_core = Package(
@@ -5836,8 +5836,8 @@ End license text.''',
     dependencies: [
       PackageRef('auto_injector'),
       PackageRef('characters'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// nested 1.0.0
 const _nested = Package(
@@ -5871,7 +5871,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// open_location_picker 1.1.0
 const _open_location_picker = Package(
@@ -6089,8 +6089,8 @@ Apache License
       PackageRef('flutter_map'),
       PackageRef('freezed_annotation'),
       PackageRef('http'),
-      PackageRef('latlong2')
-    ]);
+      PackageRef('latlong2'),
+    ],);
 
 /// package_config 2.1.0
 const _package_config = Package(
@@ -6130,7 +6130,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('path')]);
+    dependencies: [PackageRef('path')],);
 
 /// password_strength_checker 1.2.3
 const _password_strength_checker = Package(
@@ -6165,7 +6165,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('flutter')]);
+    dependencies: [PackageRef('flutter')],);
 
 /// path 1.9.0
 const _path = Package(
@@ -6205,7 +6205,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// path_provider 2.1.3
 const _path_provider = Package(
@@ -6250,8 +6250,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('path_provider_foundation'),
       PackageRef('path_provider_linux'),
       PackageRef('path_provider_platform_interface'),
-      PackageRef('path_provider_windows')
-    ]);
+      PackageRef('path_provider_windows'),
+    ],);
 
 /// path_provider_android 2.2.6
 const _path_provider_android = Package(
@@ -6291,8 +6291,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('path_provider_platform_interface')
-    ]);
+      PackageRef('path_provider_platform_interface'),
+    ],);
 
 /// path_provider_foundation 2.4.0
 const _path_provider_foundation = Package(
@@ -6332,8 +6332,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('path_provider_platform_interface')
-    ]);
+      PackageRef('path_provider_platform_interface'),
+    ],);
 
 /// path_provider_linux 2.2.1
 const _path_provider_linux = Package(
@@ -6376,8 +6376,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('flutter'),
       PackageRef('path'),
       PackageRef('path_provider_platform_interface'),
-      PackageRef('xdg_directories')
-    ]);
+      PackageRef('xdg_directories'),
+    ],);
 
 /// path_provider_platform_interface 2.1.2
 const _path_provider_platform_interface = Package(
@@ -6418,8 +6418,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('flutter'),
       PackageRef('platform'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// path_provider_windows 2.2.1
 const _path_provider_windows = Package(
@@ -6462,8 +6462,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('flutter'),
       PackageRef('path'),
       PackageRef('path_provider_platform_interface'),
-      PackageRef('win32')
-    ]);
+      PackageRef('win32'),
+    ],);
 
 /// permission_handler 11.3.1
 const _permission_handler = Package(
@@ -6504,8 +6504,8 @@ SOFTWARE.''',
       PackageRef('permission_handler_apple'),
       PackageRef('permission_handler_html'),
       PackageRef('permission_handler_windows'),
-      PackageRef('permission_handler_platform_interface')
-    ]);
+      PackageRef('permission_handler_platform_interface'),
+    ],);
 
 /// permission_handler_android 12.0.7
 const _permission_handler_android = Package(
@@ -6541,8 +6541,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('permission_handler_platform_interface')
-    ]);
+      PackageRef('permission_handler_platform_interface'),
+    ],);
 
 /// permission_handler_apple 9.4.5
 const _permission_handler_apple = Package(
@@ -6578,8 +6578,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('permission_handler_platform_interface')
-    ]);
+      PackageRef('permission_handler_platform_interface'),
+    ],);
 
 /// permission_handler_html 0.1.1
 const _permission_handler_html = Package(
@@ -6615,8 +6615,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('permission_handler_platform_interface')
-    ]);
+      PackageRef('permission_handler_platform_interface'),
+    ],);
 
 /// permission_handler_platform_interface 4.2.1
 const _permission_handler_platform_interface = Package(
@@ -6654,8 +6654,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('flutter'),
       PackageRef('meta'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// permission_handler_windows 0.2.1
 const _permission_handler_windows = Package(
@@ -6691,8 +6691,8 @@ SOFTWARE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('permission_handler_platform_interface')
-    ]);
+      PackageRef('permission_handler_platform_interface'),
+    ],);
 
 /// platform 3.1.5
 const _platform = Package(
@@ -6731,7 +6731,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// plugin_platform_interface 2.1.8
 const _plugin_platform_interface = Package(
@@ -6770,7 +6770,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// polylabel 1.0.1
 const _polylabel = Package(
@@ -6794,7 +6794,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection')]);
+    dependencies: [PackageRef('collection')],);
 
 /// pool 1.5.1
 const _pool = Package(
@@ -6834,7 +6834,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async'), PackageRef('stack_trace')]);
+    dependencies: [PackageRef('async'), PackageRef('stack_trace')],);
 
 /// proj4dart 2.1.0
 const _proj4dart = Package(
@@ -6871,8 +6871,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('mgrs_dart'),
       PackageRef('wkt_parser'),
-      PackageRef('meta')
-    ]);
+      PackageRef('meta'),
+    ],);
 
 /// provider 6.1.2
 const _provider = Package(
@@ -6909,8 +6909,8 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('collection'),
       PackageRef('flutter'),
-      PackageRef('nested')
-    ]);
+      PackageRef('nested'),
+    ],);
 
 /// pub_semver 2.1.4
 const _pub_semver = Package(
@@ -6950,7 +6950,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection'), PackageRef('meta')]);
+    dependencies: [PackageRef('collection'), PackageRef('meta')],);
 
 /// pubspec_parse 1.2.1
 const _pubspec_parse = Package(
@@ -6995,8 +6995,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('collection'),
       PackageRef('json_annotation'),
       PackageRef('pub_semver'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// result_dart 1.1.1
 const _result_dart = Package(
@@ -7030,7 +7030,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// riverpod 2.5.1
 const _riverpod = Package(
@@ -7070,8 +7070,8 @@ SOFTWARE.''',
       PackageRef('collection'),
       PackageRef('meta'),
       PackageRef('stack_trace'),
-      PackageRef('state_notifier')
-    ]);
+      PackageRef('state_notifier'),
+    ],);
 
 /// shared_preferences 2.3.1
 const _shared_preferences = Package(
@@ -7117,8 +7117,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('shared_preferences_linux'),
       PackageRef('shared_preferences_platform_interface'),
       PackageRef('shared_preferences_web'),
-      PackageRef('shared_preferences_windows')
-    ]);
+      PackageRef('shared_preferences_windows'),
+    ],);
 
 /// shared_preferences_android 2.3.0
 const _shared_preferences_android = Package(
@@ -7158,8 +7158,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('shared_preferences_platform_interface')
-    ]);
+      PackageRef('shared_preferences_platform_interface'),
+    ],);
 
 /// shared_preferences_foundation 2.5.0
 const _shared_preferences_foundation = Package(
@@ -7200,8 +7200,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('shared_preferences_platform_interface')
-    ]);
+      PackageRef('shared_preferences_platform_interface'),
+    ],);
 
 /// shared_preferences_linux 2.4.0
 const _shared_preferences_linux = Package(
@@ -7245,8 +7245,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('path'),
       PackageRef('path_provider_linux'),
       PackageRef('path_provider_platform_interface'),
-      PackageRef('shared_preferences_platform_interface')
-    ]);
+      PackageRef('shared_preferences_platform_interface'),
+    ],);
 
 /// shared_preferences_platform_interface 2.4.1
 const _shared_preferences_platform_interface = Package(
@@ -7287,8 +7287,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isSdk: false,
     dependencies: [
       PackageRef('flutter'),
-      PackageRef('plugin_platform_interface')
-    ]);
+      PackageRef('plugin_platform_interface'),
+    ],);
 
 /// shared_preferences_web 2.4.1
 const _shared_preferences_web = Package(
@@ -7329,8 +7329,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('flutter'),
       PackageRef('shared_preferences_platform_interface'),
-      PackageRef('web')
-    ]);
+      PackageRef('web'),
+    ],);
 
 /// shared_preferences_windows 2.4.0
 const _shared_preferences_windows = Package(
@@ -7374,8 +7374,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('path'),
       PackageRef('path_provider_platform_interface'),
       PackageRef('path_provider_windows'),
-      PackageRef('shared_preferences_platform_interface')
-    ]);
+      PackageRef('shared_preferences_platform_interface'),
+    ],);
 
 /// shelf 1.4.1
 const _shelf = Package(
@@ -7422,8 +7422,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('http_parser'),
       PackageRef('path'),
       PackageRef('stack_trace'),
-      PackageRef('stream_channel')
-    ]);
+      PackageRef('stream_channel'),
+    ],);
 
 /// shelf_web_socket 2.0.0
 const _shelf_web_socket = Package(
@@ -7468,8 +7468,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('shelf'),
       PackageRef('stream_channel'),
-      PackageRef('web_socket_channel')
-    ]);
+      PackageRef('web_socket_channel'),
+    ],);
 
 /// source_gen 1.5.0
 const _source_gen = Package(
@@ -7518,8 +7518,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('glob'),
       PackageRef('path'),
       PackageRef('source_span'),
-      PackageRef('yaml')
-    ]);
+      PackageRef('yaml'),
+    ],);
 
 /// source_helper 1.3.3
 const _source_helper = Package(
@@ -7736,8 +7736,8 @@ Apache License
     dependencies: [
       PackageRef('analyzer'),
       PackageRef('collection'),
-      PackageRef('source_gen')
-    ]);
+      PackageRef('source_gen'),
+    ],);
 
 /// source_span 1.10.0
 const _source_span = Package(
@@ -7780,8 +7780,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     dependencies: [
       PackageRef('collection'),
       PackageRef('path'),
-      PackageRef('term_glyph')
-    ]);
+      PackageRef('term_glyph'),
+    ],);
 
 /// sprintf 7.0.0
 const _sprintf = Package(
@@ -7816,7 +7816,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// stack_trace 1.11.1
 const _stack_trace = Package(
@@ -7856,7 +7856,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('path')]);
+    dependencies: [PackageRef('path')],);
 
 /// state_notifier 1.0.0
 const _state_notifier = Package(
@@ -7889,7 +7889,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta')]);
+    dependencies: [PackageRef('meta')],);
 
 /// stream_channel 2.1.2
 const _stream_channel = Package(
@@ -7929,7 +7929,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async')]);
+    dependencies: [PackageRef('async')],);
 
 /// stream_transform 2.1.0
 const _stream_transform = Package(
@@ -7969,7 +7969,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// string_scanner 1.2.0
 const _string_scanner = Package(
@@ -8008,7 +8008,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('source_span')]);
+    dependencies: [PackageRef('source_span')],);
 
 /// term_glyph 1.2.1
 const _term_glyph = Package(
@@ -8047,7 +8047,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// test_api 0.7.0
 const _test_api = Package(
@@ -8096,8 +8096,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('stack_trace'),
       PackageRef('stream_channel'),
       PackageRef('string_scanner'),
-      PackageRef('term_glyph')
-    ]);
+      PackageRef('term_glyph'),
+    ],);
 
 /// timing 1.0.1
 const _timing = Package(
@@ -8137,7 +8137,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('json_annotation')]);
+    dependencies: [PackageRef('json_annotation')],);
 
 /// typed_data 1.3.2
 const _typed_data = Package(
@@ -8177,7 +8177,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('collection')]);
+    dependencies: [PackageRef('collection')],);
 
 /// unicode 0.3.1
 const _unicode = Package(
@@ -8217,7 +8217,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('lists')]);
+    dependencies: [PackageRef('lists')],);
 
 /// uuid 4.4.0
 const _uuid = Package(
@@ -8242,8 +8242,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       PackageRef('crypto'),
       PackageRef('sprintf'),
       PackageRef('meta'),
-      PackageRef('fixnum')
-    ]);
+      PackageRef('fixnum'),
+    ],);
 
 /// vector_math 2.1.4
 const _vector_math = Package(
@@ -8301,7 +8301,7 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// vm_service 14.2.1
 const _vm_service = Package(
@@ -8341,7 +8341,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// watcher 1.1.0
 const _watcher = Package(
@@ -8381,7 +8381,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('async'), PackageRef('path')]);
+    dependencies: [PackageRef('async'), PackageRef('path')],);
 
 /// web 0.5.1
 const _web = Package(
@@ -8420,7 +8420,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// web_socket 0.1.5
 const _web_socket = Package(
@@ -8460,7 +8460,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('web')]);
+    dependencies: [PackageRef('web')],);
 
 /// web_socket_channel 3.0.0
 const _web_socket_channel = Package(
@@ -8505,8 +8505,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
       PackageRef('crypto'),
       PackageRef('stream_channel'),
       PackageRef('web'),
-      PackageRef('web_socket')
-    ]);
+      PackageRef('web_socket'),
+    ],);
 
 /// win32 5.5.1
 const _win32 = Package(
@@ -8547,7 +8547,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('ffi')]);
+    dependencies: [PackageRef('ffi')],);
 
 /// wkt_parser 2.0.0
 const _wkt_parser = Package(
@@ -8581,7 +8581,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: []);
+    dependencies: [],);
 
 /// xdg_directories 1.0.4
 const _xdg_directories = Package(
@@ -8620,7 +8620,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
     isMarkdown: false,
     isSdk: false,
-    dependencies: [PackageRef('meta'), PackageRef('path')]);
+    dependencies: [PackageRef('meta'), PackageRef('path')],);
 
 /// yaml 3.1.2
 const _yaml = Package(
@@ -8656,5 +8656,5 @@ SOFTWARE.''',
     dependencies: [
       PackageRef('collection'),
       PackageRef('source_span'),
-      PackageRef('string_scanner')
-    ]);
+      PackageRef('string_scanner'),
+    ],);

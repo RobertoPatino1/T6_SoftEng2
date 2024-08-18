@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
+import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
 class NotificationPage extends StatefulWidget {
   final ValueChanged<int> onUnreadCountChanged;
   final List<NotificationItem> notifications;
 
-  const NotificationPage(
-      {super.key,
-      required this.notifications,
-      required this.onUnreadCountChanged});
+  const NotificationPage({
+    super.key,
+    required this.notifications,
+    required this.onUnreadCountChanged,
+  });
 
   @override
   _NotificationPageState createState() => _NotificationPageState();
@@ -25,10 +28,16 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardBackgroundColor =
+        isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+    final unviewedNotificationBackgroundColor = Colors.blue.shade50;
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Notificaciones"),
       body: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.only(top: 20),
         child: ListView.builder(
           itemCount: notifications.length,
           itemBuilder: (context, index) {
@@ -49,37 +58,58 @@ class _NotificationPageState extends State<NotificationPage> {
                 width: screenWidth * 0.9,
                 decoration: BoxDecoration(
                   color: notification.isRead
-                      ? const Color.fromARGB(255, 230, 229, 229)
-                      : const Color.fromARGB(255, 200, 230, 201),
+                      ? cardBackgroundColor
+                      : unviewedNotificationBackgroundColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      notification.title,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color:
-                            notification.isRead ? Colors.black : Colors.green,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            notification.title,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: notification.isRead
+                                  ? textColor
+                                  : Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            notification.details,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: notification.isRead
+                                  ? textColor
+                                  : Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "${notification.date.hour}:${notification.date.minute} ${notification.date.day}/${notification.date.month}/${notification.date.year}",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      notification.details,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "${notification.date.hour}:${notification.date.minute} ${notification.date.day}/${notification.date.month}/${notification.date.year}",
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Colors.grey,
-                      ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          notifications.removeAt(index);
+                          widget.onUnreadCountChanged(
+                              notifications.where((n) => !n.isRead).length);
+                        });
+                      },
                     ),
                   ],
                 ),

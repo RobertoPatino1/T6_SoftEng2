@@ -117,7 +117,7 @@ class LicenseScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                          )
+                          ),
 
                           // child: Container(
                           //   height: 50,

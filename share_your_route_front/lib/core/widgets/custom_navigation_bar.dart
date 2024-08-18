@@ -54,7 +54,7 @@ class CustomNavigationBar extends StatelessWidget {
               icon: const Icon(
                 Icons.notifications_outlined,
                 size: 30,
-                color: textColor,
+                //color: textColor,
               ),
               label: 'Notificaciones',
             ),
