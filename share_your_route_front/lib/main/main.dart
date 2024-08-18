@@ -23,8 +23,6 @@ Future<void> loadFirebase() async {
 }
 
 void main() async {
-
-  
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "lib/core/configs/.env");
   runApp(
@@ -48,7 +46,8 @@ void _setupLogging() {
   Logger.root.onRecord.listen((LogRecord record) {
     // ignore: avoid_print
     print(
-        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}',);
+      '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}',
+    );
   });
 }
 
@@ -160,10 +159,12 @@ class _MainPageState extends State<MainPage> {
 
   Future<void> _determinePositionAndNavigate() async {
     try {
-      await determinePosition();
-      //aqui va lo que coloque en la linea 61
-      Timer(const Duration(seconds: 3), () {
-        Modular.to.navigate('/auth/');
+      await determinePosition().then((value) {
+        if (FirebaseAuth.instance.currentUser != null) {
+          Modular.to.navigate('auth/home/');
+        } else {
+          Modular.to.navigate('/auth/');
+        }
       });
     } catch (error) {
       // ignore: use_build_context_synchronously
