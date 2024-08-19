@@ -1,5 +1,6 @@
 // ignore_for_file: use_super_parameters, use_key_in_widget_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
@@ -10,14 +11,16 @@ import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
 
+late Map<String,dynamic> activeTouristRouteDic;
 late TouristRoute activeTouristRoute;
 
 class RouteItineraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    activeTouristRoute =
+    activeTouristRouteDic =
         // ignore: cast_nullable_to_non_nullable
-        TouristRouteService().getCurrentTouristRoute() as TouristRoute;
+        TouristRouteService().getCurrentTouristRoute() as Map<String,dynamic>;
+    activeTouristRoute= activeTouristRouteDic['route'];
     return Scaffold(
       appBar: CustomAppBar(title: activeTouristRoute.name),
       body: SingleChildScrollView(
@@ -134,10 +137,17 @@ class RouteItineraryPage extends StatelessWidget {
                                       Theme.of(context).textTheme.displayLarge,
                                 ),
                                 onPressed: () {
+                                  if(FirebaseAuth.instance.currentUser!.uid==activeTouristRouteDic['creator']){
                                   Modular.to.pushNamed(
-                                    '/auth/home/room/active',
+                                    '/auth/home/room/activeAdmin',
+                                    arguments: activeTouristRoute,
+                                  );}
+                                  else {
+                                    Modular.to.pushNamed(
+                                    '/auth/home/room/activeUser',
                                     arguments: activeTouristRoute,
                                   );
+                                  }
                                 },
                               ),
                             ],

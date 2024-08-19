@@ -10,7 +10,7 @@ import 'package:share_your_route_front/models/tourist_route.dart';
 import 'package:logging/logging.dart';
 import 'package:http/http.dart' as http;
 
-const apiUrl = "https://shareyourroute-back.onrender.com/api/routes";
+const apiUrl = "https://t6-softeng2-back.onrender.com/api/routes";
 
 Future<List<Map<String, dynamic>>> fetchAPIData(String url) async {
   final response = await http.get(Uri.parse(apiUrl + url));
@@ -50,7 +50,7 @@ class RouteService {
   List<TouristRoute> touristRouteList = [];
 
   RouteService._();
-
+/*
   static Future<RouteService> create() async {
     final service = RouteService._();
     await service.loadInitialRouteData();
@@ -77,7 +77,7 @@ class RouteService {
       // ignore: avoid_print
       print('Error al leer o parsear el archivo: $e');
     }
-  }
+  }*/
 
   //obtain data from database
   Future<List<Map<String, dynamic>>> getPublicRoutes() {

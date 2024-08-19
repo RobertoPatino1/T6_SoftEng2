@@ -9,7 +9,7 @@ import 'package:share_your_route_front/modules/shared/helpers/route_type_helper.
 import 'package:share_your_route_front/modules/shared/providers/tourist_route_provider.dart';
 
 class RouteCardBuilder {
-  Widget buildRouteCard(BuildContext context, List<TouristRoute> routesList) {
+  Widget buildRouteCard(BuildContext context, List<Map<String,dynamic>> routesList) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final cardBackgroundColor =
         isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
@@ -23,14 +23,14 @@ class RouteCardBuilder {
         scrollDirection: Axis.horizontal,
         itemCount: routesList.length,
         itemBuilder: (context, index) {
-          final TouristRoute touristRoute = routesList[index];
+          final TouristRoute touristRoute = routesList[index]['route'];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    TouristRouteService().setCurrentTouristRoute(touristRoute);
+                    TouristRouteService().setCurrentTouristRoute(routesList[index]);
                     Modular.to.pushNamed(
                       '/auth/home/room/',
                       arguments: touristRoute,

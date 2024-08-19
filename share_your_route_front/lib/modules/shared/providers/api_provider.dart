@@ -17,6 +17,15 @@ Future<List<Map<String, dynamic>>> getAllRoutes() async {
   return data;
 }
 
+Future<Map<String, dynamic>?> getRouteById(String routeId) async {
+
+  final getRouteUrl = "routes/${routeId}";
+  final data = await getRequest("$apiUrl$getRouteUrl") as Map<String, dynamic>?;
+  print("$apiUrl$getRouteUrl");
+  
+  return data;
+}
+
 Future getPublicRoutes() {
   const getRoutesUrl = "routes/all/public";
   return getRequest("$apiUrl$getRoutesUrl");

@@ -17,7 +17,7 @@ import 'package:share_your_route_front/modules/shared/providers/tourist_route_pr
 import 'package:share_your_route_front/modules/shared/services/route_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
 
-List<TouristRoute> routeList = [];
+late List<Map<String, dynamic>> routeList;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -107,7 +107,7 @@ class HomeState extends State<Home> {
         isDarkMode ? darkButtonBackgroundColor : lightButtonBackgroundColor;
 
     Theme.of(context);
-    final TouristRoute? currentRoute =
+    Map<String, dynamic>? currentRouteDic =
         _touristRouteService.getCurrentTouristRoute();
     return Scaffold(
       bottomNavigationBar: CustomNavigationBar(
@@ -122,7 +122,7 @@ class HomeState extends State<Home> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              if (currentRoute == null) ...[
+              if (currentRouteDic?['route']== null) ...[
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(
@@ -191,7 +191,7 @@ class HomeState extends State<Home> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        currentRoute.name,
+                        currentRouteDic?['route'].name,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -221,10 +221,10 @@ class HomeState extends State<Home> {
                     future: getAllRoutes(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        final List<TouristRoute> routeList =
+                       routeList =
                             listFromJson(snapshot.data!);
                         final todayRoutes = routeList.where((ruta) {
-                          return DateComparator(ruta.routeDate);
+                          return DateComparator(ruta['route']!.routeDate);
                         }).toList();
                         return Column(
                           children: <Widget>[
@@ -250,7 +250,7 @@ class HomeState extends State<Home> {
                               context,
                               routeList
                                   .where(
-                                    (ruta) => ruta.routeType
+                                    (ruta) => ruta['route'].routeType
                                         .contains(RouteType.Ciudad),
                                   )
                                   .toList(),
@@ -264,7 +264,7 @@ class HomeState extends State<Home> {
                               context,
                               routeList
                                   .where(
-                                    (ruta) => ruta.routeType
+                                    (ruta) => ruta['route'].routeType
                                         .contains(RouteType.Naturaleza),
                                   )
                                   .toList(),
@@ -278,7 +278,7 @@ class HomeState extends State<Home> {
                               context,
                               routeList
                                   .where(
-                                    (ruta) => ruta.routeType
+                                    (ruta) => ruta['route'].routeType
                                         .contains(RouteType.Cultura),
                                   )
                                   .toList(),

@@ -7,11 +7,11 @@ class TouristRouteService {
 
   TouristRouteService._internal();
 
-  ValueNotifier<TouristRoute?> currentTouristRouteNotifier =
-      ValueNotifier<TouristRoute?>(null);
+  ValueNotifier<Map<String,dynamic>?> currentTouristRouteNotifier =
+      ValueNotifier<Map<String,dynamic>?>(null);
 
   // ignore: use_setters_to_change_properties
-  void setCurrentTouristRoute(TouristRoute? route) {
+  void setCurrentTouristRoute(Map<String,dynamic> route) {
     currentTouristRouteNotifier.value = route;
   }
 
@@ -19,7 +19,7 @@ class TouristRouteService {
     currentTouristRouteNotifier.value = null;
   }
 
-  TouristRoute? getCurrentTouristRoute() {
+  Map<String,dynamic>? getCurrentTouristRoute() {
     return currentTouristRouteNotifier.value;
   }
 }

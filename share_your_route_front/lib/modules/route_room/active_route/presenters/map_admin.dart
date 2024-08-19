@@ -16,21 +16,21 @@ import 'package:share_your_route_front/modules/shared/services/permission_provid
 import 'package:html/parser.dart' as html_parser;
 import 'package:html/dom.dart' as html;
 
-class MapPage extends StatelessWidget {
+class MapAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Map();
+    return const MapAdmin();
   }
 }
 
-class Map extends StatefulWidget {
-  const Map({super.key});
+class MapAdmin extends StatefulWidget {
+  const MapAdmin({super.key});
 
   @override
-  State<Map> createState() => MapState();
+  State<MapAdmin> createState() => MapAdminState();
 }
 
-class MapState extends State<Map> with WidgetsBindingObserver {
+class MapAdminState extends State<MapAdmin> with WidgetsBindingObserver {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
   String mapStyle = "";

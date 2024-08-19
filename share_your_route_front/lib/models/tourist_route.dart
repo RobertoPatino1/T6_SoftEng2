@@ -39,47 +39,7 @@ class TouristRoute {
     required this.routeType,
   });
 
-  factory TouristRoute.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> decodedPlacesList = json['placesList'] as List<dynamic>;
-
-    final List<Place> placesList = decodedPlacesList.map((placeMap) {
-      return Place.fromJson(placeMap as Map<String, dynamic>);
-    }).toList();
-
-    return TouristRoute(
-      name: json['name'] as String,
-      placesList: placesList,
-      currentPlaceIndex: json['currentPlaceIndex'] as int,
-      numberPeople: json['numberPeople'] as int,
-      numberGuides: json['numberGuides'] as int,
-      routeIsPublic: json['routeIsPublic'] as bool,
-      routeDate: DateTime.parse(json['routeDate'] as String),
-      startingPoint: LatLng(
-        json['startingPoint']['latitude'] as double,
-        json['startingPoint']['longitude'] as double,
-      ),
-      startTime: TimeOfDay(
-        hour: json['startTime']['hour'] as int,
-        minute: json['startTime']['minute'] as int,
-      ),
-      endTime: TimeOfDay(
-        hour: json['endTime']['hour'] as int,
-        minute: json['endTime']['minute'] as int,
-      ),
-      image: json['image'] as String,
-      description: json['description'] as String,
-      hasStarted: json['hasStarted'] as bool,
-      routeType: (json['routeType'] as List<dynamic>)
-          .map(
-            (e) => RouteType.values.firstWhere(
-              (element) => element.toString().split('.')[1] == e,
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
+   Map<String, dynamic> toJson() {
     final List<Map<String, dynamic>> encodedPlacesList =
         placesList.map((place) => place.toJson()).toList();
 
@@ -116,3 +76,56 @@ class TouristRoute {
     saveRoute(toJson());
   }
 }
+
+  Map<String,dynamic> getRouteWithId(Map<String, dynamic> json) {
+    Map<String,dynamic> routeWithId;
+    final List<dynamic> decodedPlacesList = json['placesList'] as List<dynamic>;
+
+    final List<Place> placesList = decodedPlacesList.map((placeMap) {
+      return Place.fromJson(placeMap as Map<String, dynamic>);
+    }).toList();
+
+     TouristRoute touristRoute= new TouristRoute(
+      name: json['name'] as String,
+      placesList: placesList,
+      currentPlaceIndex: json['currentPlaceIndex'] as int,
+      numberPeople: json['numberPeople'] as int,
+      numberGuides: json['numberGuides'] as int,
+      routeIsPublic: json['routeIsPublic'] as bool,
+      routeDate: DateTime.parse(json['routeDate'] as String),
+      startingPoint: LatLng(
+        json['startingPoint']['latitude'] as double,
+        json['startingPoint']['longitude'] as double,
+      ),
+      startTime: TimeOfDay(
+        hour: json['startTime']['hour'] as int,
+        minute: json['startTime']['minute'] as int,
+      ),
+      endTime: TimeOfDay(
+        hour: json['endTime']['hour'] as int,
+        minute: json['endTime']['minute'] as int,
+      ),
+      image: json['image'] as String,
+      description: json['description'] as String,
+      hasStarted: json['hasStarted'] as bool,
+      routeType: (json['routeType'] as List<dynamic>)
+          .map(
+            (e) => RouteType.values.firstWhere(
+              (element) => element.toString().split('.')[1] == e,
+            ),
+          )
+          .toList(),
+    );
+
+    routeWithId = {
+      "id" : json['id'],
+      "creator" : json['ownerUid'],
+      "route" : touristRoute
+    };
+
+    return routeWithId;
+
+  }
+
+  
+

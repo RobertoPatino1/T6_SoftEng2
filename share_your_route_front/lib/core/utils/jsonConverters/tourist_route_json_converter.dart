@@ -23,10 +23,10 @@ void addPrivateRoute(TouristRoute route) {
   privateRoutes.add(route.toJson());
 }
 
-List<TouristRoute> listFromJson(List<Map<String, dynamic>> jsonList) {
-  final List<TouristRoute> routesList = [];
+List<Map<String, dynamic>>listFromJson(List<Map<String, dynamic>> jsonList) {
+  final List<Map<String, dynamic>> routesList = [];
   for (final json in jsonList) {
-    routesList.add(TouristRoute.fromJson(json));
+    routesList.add(getRouteWithId(json));
   }
   return routesList;
 }

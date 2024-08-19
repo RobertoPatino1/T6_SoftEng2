@@ -71,10 +71,10 @@ class _CreateRouteState extends State<CreateRoute> {
     });
   }
 
-  Future<void> createRouteData(TouristRoute newRoute) async {
+  /*Future<void> createRouteData(TouristRoute newRoute) async {
     routeService = await RouteService.create();
     await routeService.createData(newRoute);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
