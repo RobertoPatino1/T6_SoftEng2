@@ -24,7 +24,6 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
   LatLng? selectedPosition;
   GoogleMapController? _mapController;
   late GoogleMapsPlaces _places;
-  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -88,16 +87,16 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Buscar ubicación',
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: _handleSearch,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                  child: ElevatedButton(
+                    onPressed: _handleSearch,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: yellowAccentColor,
+                    ),
+                    child: const Text(
+                      'Buscar ubicación',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),

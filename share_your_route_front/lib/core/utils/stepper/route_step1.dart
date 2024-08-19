@@ -57,6 +57,8 @@ class RouteStep1 extends StatefulWidget {
 class _RouteStep1State extends State<RouteStep1> {
   late double currentRangeAlert;
   late DateTime selectedDate;
+  late TextEditingController _routeNameController;
+  late TextEditingController _routeDescriptionController;
 
   final List<RouteType> routeTypes = RouteType.values;
 
@@ -65,6 +67,16 @@ class _RouteStep1State extends State<RouteStep1> {
     super.initState();
     currentRangeAlert = widget.rangeAlert;
     selectedDate = widget.routeDate;
+    _routeNameController = TextEditingController(text: widget.routeName);
+    _routeDescriptionController =
+        TextEditingController(text: widget.routeDescription);
+  }
+
+  @override
+  void dispose() {
+    _routeNameController.dispose();
+    _routeDescriptionController.dispose();
+    super.dispose();
   }
 
   void _handleNumberOfPeopleChange(int value) {
@@ -114,6 +126,14 @@ class _RouteStep1State extends State<RouteStep1> {
     });
   }
 
+  Color _getChipTextColor(bool isSelected) {
+    if (isSelected && Theme.of(context).brightness == Brightness.light) {
+      return Colors.white;
+    } else {
+      return Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -125,13 +145,13 @@ class _RouteStep1State extends State<RouteStep1> {
           const SizedBox(height: 20),
           buildRouteNameField(
             context,
-            widget.routeName,
+            _routeNameController,
             widget.onRouteNameChanged,
           ),
           const SizedBox(height: 15),
           buildRouteDescriptionField(
             context,
-            widget.routeDescription,
+            _routeDescriptionController,
             widget.onRouteDescriptionChanged,
           ),
           const SizedBox(height: 15),
@@ -225,16 +245,24 @@ class _RouteStep1State extends State<RouteStep1> {
             spacing: 8.0,
             runSpacing: 4.0,
             children: routeTypes.map((type) {
+              final bool isSelected = widget.selectedRouteTypes.contains(type);
+
               return ChoiceChip(
                 label: Text(
                   type.toString().split('.').last,
-                  style: theme.textTheme.bodyMedium,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: _getChipTextColor(isSelected),
+                  ),
                 ),
-                selected: widget.selectedRouteTypes.contains(type),
+                selected: isSelected,
                 onSelected: (selected) {
                   _handleRouteTypeChanged(type, selected);
                 },
                 selectedColor: theme.colorScheme.primary,
+                checkmarkColor: isSelected &&
+                        Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : null,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
@@ -276,7 +304,9 @@ class _RouteStep1State extends State<RouteStep1> {
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: 8.0, horizontal: 12.0,), // Reduce el padding
+            vertical: 8.0,
+            horizontal: 12.0,
+          ), // Reduce el padding
           child: Text(
             '${initialDate.day}/${initialDate.month}/${initialDate.year}',
             style: theme.textTheme.bodyMedium?.copyWith(
