@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_place/google_place.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -26,14 +28,22 @@ class _AddStopScreenState extends State<AddStopScreen> {
   final TextEditingController _stopNameController = TextEditingController();
   TimeOfDay? selectedStartTime;
   TimeOfDay? selectedEndTime;
-  late GooglePlace googlePlace;
-  List<AutocompletePrediction> predictions = [];
+  late GoogleMapsPlaces _places;
+  Set<Marker> markersList = {};
 
   @override
   void initState() {
     super.initState();
     getCurrentLocation();
-    googlePlace = GooglePlace(dotenv.env['GOOGLE_API_KEY']!);
+    _initializePlaces();
+  }
+
+  Future<void> _initializePlaces() async {
+    final headers = await const GoogleApiHeaders().getHeaders();
+    _places = GoogleMapsPlaces(
+      apiKey: dotenv.env['GOOGLE_API_KEY']!,
+      apiHeaders: headers,
+    );
   }
 
   Future<void> getCurrentLocation() async {
@@ -41,37 +51,48 @@ class _AddStopScreenState extends State<AddStopScreen> {
     setState(() {
       myPosition = position;
       selectedPosition = myPosition;
+      markersList.add(Marker(
+        markerId: const MarkerId('currentLocation'),
+        position: myPosition!,
+      ));
     });
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newLatLng(myPosition!));
   }
 
-  Future<void> onSearchChanged(String value) async {
-    if (value.isNotEmpty) {
-      final result = await googlePlace.autocomplete.get(value);
-      if (result != null && result.predictions != null) {
-        setState(() {
-          predictions = result.predictions!;
-        });
-      }
-    } else {
-      setState(() {
-        predictions = [];
-      });
+  Future<void> _handleSearch() async {
+    final Prediction? p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: dotenv.env['GOOGLE_API_KEY'],
+      mode: Mode.overlay,
+      language: 'es',
+      components: [Component(Component.country, 'ec')],
+    );
+
+    if (p != null) {
+      _onPlaceSelected(p);
     }
   }
 
-  Future<void> onPlaceSelected(String placeId) async {
-    final details = await googlePlace.details.get(placeId);
-    if (details != null && details.result != null) {
-      final location = details.result!.geometry!.location!;
-      setState(() async {
-        selectedPosition = LatLng(location.lat!, location.lng!);
-        predictions = [];
-        final GoogleMapController controller = await _controller.future;
-        controller.animateCamera(CameraUpdate.newLatLng(selectedPosition!));
-      });
-    }
+  Future<void> _onPlaceSelected(Prediction p) async {
+    final PlacesDetailsResponse detail =
+        await _places.getDetailsByPlaceId(p.placeId!);
+    final lat = detail.result.geometry!.location.lat;
+    final lng = detail.result.geometry!.location.lng;
+
+    setState(() {
+      selectedPosition = LatLng(lat, lng);
+      markersList.clear();
+      markersList.add(Marker(
+        markerId: const MarkerId('selectedPosition'),
+        position: selectedPosition!,
+        infoWindow: InfoWindow(title: detail.result.name),
+      ));
+    });
+
+    final GoogleMapController controller = await _controller.future;
+    controller
+        .animateCamera(CameraUpdate.newLatLngZoom(selectedPosition!, 14.0));
   }
 
   Future<void> selectTime(BuildContext context, bool isStartTime) async {
@@ -121,34 +142,18 @@ class _AddStopScreenState extends State<AddStopScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextField(
-                        onChanged: onSearchChanged,
-                        decoration: InputDecoration(
-                          hintText: 'Buscar ubicación',
-                          suffixIcon: const Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
+                  child: ElevatedButton(
+                    onPressed: _handleSearch,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: yellowAccentColor,
+                    ),
+                    child: const Text(
+                      'Buscar ubicación',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
-                      if (predictions.isNotEmpty)
-                        SizedBox(
-                          height: 200,
-                          child: ListView.builder(
-                            itemCount: predictions.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(predictions[index].description!),
-                                onTap: () {
-                                  onPlaceSelected(predictions[index].placeId!);
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                    ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -160,17 +165,14 @@ class _AddStopScreenState extends State<AddStopScreen> {
                     onMapCreated: (controller) {
                       _controller.complete(controller);
                     },
-                    markers: selectedPosition != null
-                        ? {
-                            Marker(
-                              markerId: const MarkerId('selectedPosition'),
-                              position: selectedPosition!,
-                            )
-                          }
-                        : {},
+                    markers: markersList,
                     onTap: (LatLng position) {
                       setState(() {
                         selectedPosition = position;
+                        markersList.add(Marker(
+                          markerId: const MarkerId('selectedPosition'),
+                          position: selectedPosition!,
+                        ));
                       });
                     },
                   ),
