@@ -66,7 +66,6 @@ class _AddStopScreenState extends State<AddStopScreen> {
       apiKey: dotenv.env['GOOGLE_API_KEY'],
       mode: Mode.overlay,
       language: 'en',
-      components: [Component(Component.country, 'es')],
     );
 
     if (p != null) {
