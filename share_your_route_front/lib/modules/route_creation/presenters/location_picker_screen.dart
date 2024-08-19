@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/modules/shared/services/location_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -17,8 +22,24 @@ class LocationPickerScreen extends StatefulWidget {
 class _LocationPickerScreenState extends State<LocationPickerScreen> {
   LatLng? myPosition;
   LatLng? selectedPosition;
-  final TextEditingController _searchController = TextEditingController();
   GoogleMapController? _mapController;
+  late GoogleMapsPlaces _places;
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+    _initializePlaces();
+  }
+
+  Future<void> _initializePlaces() async {
+    final headers = await const GoogleApiHeaders().getHeaders();
+    _places = GoogleMapsPlaces(
+      apiKey: dotenv.env['GOOGLE_API_KEY']!,
+      apiHeaders: headers,
+    );
+  }
 
   Future<void> getCurrentLocation() async {
     final LatLng position = await LocationService.determinePosition();
@@ -29,26 +50,32 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
     _mapController?.moveCamera(CameraUpdate.newLatLng(myPosition!));
   }
 
-  Future<void> searchLocation(String query) async {
-    try {
-      final List<Location> locations = await locationFromAddress(query);
-      if (locations.isNotEmpty) {
-        final location = locations.first;
-        setState(() {
-          selectedPosition = LatLng(location.latitude, location.longitude);
-        });
-        _mapController
-            ?.animateCamera(CameraUpdate.newLatLng(selectedPosition!));
-      }
-    } catch (e) {
-      print('Error searching location: $e');
+  Future<void> _handleSearch() async {
+    final Prediction? p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: dotenv.env['GOOGLE_API_KEY'],
+      mode: Mode.overlay,
+      language: 'es',
+      components: [Component(Component.country, 'ec')],
+    );
+
+    if (p != null) {
+      _onPlaceSelected(p);
     }
   }
 
-  @override
-  void initState() {
-    getCurrentLocation();
-    super.initState();
+  Future<void> _onPlaceSelected(Prediction p) async {
+    final PlacesDetailsResponse detail =
+        await _places.getDetailsByPlaceId(p.placeId!);
+    final lat = detail.result.geometry!.location.lat;
+    final lng = detail.result.geometry!.location.lng;
+
+    setState(() {
+      selectedPosition = LatLng(lat, lng);
+    });
+
+    _mapController
+        ?.animateCamera(CameraUpdate.newLatLngZoom(selectedPosition!, 14.0));
   }
 
   @override
@@ -67,17 +94,12 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                       hintText: 'Buscar ubicación',
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.search),
-                        onPressed: () {
-                          searchLocation(_searchController.text);
-                        },
+                        onPressed: _handleSearch,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    onSubmitted: (value) {
-                      searchLocation(value);
-                    },
                   ),
                 ),
                 Expanded(
@@ -92,9 +114,8 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                     markers: selectedPosition != null
                         ? {
                             Marker(
-                              markerId: MarkerId('selected-location'),
+                              markerId: const MarkerId('selected-location'),
                               position: selectedPosition!,
-                              icon: BitmapDescriptor.defaultMarker,
                             ),
                           }
                         : {},
