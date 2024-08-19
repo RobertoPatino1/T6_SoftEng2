@@ -51,12 +51,10 @@ class _AddStopScreenState extends State<AddStopScreen> {
     setState(() {
       myPosition = position;
       selectedPosition = myPosition;
-      markersList.add(
-        Marker(
-          markerId: const MarkerId('currentLocation'),
-          position: myPosition!,
-        ),
-      );
+      markersList.add(Marker(
+        markerId: const MarkerId('currentLocation'),
+        position: myPosition!,
+      ));
     });
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newLatLng(myPosition!));
@@ -67,8 +65,8 @@ class _AddStopScreenState extends State<AddStopScreen> {
       context: context,
       apiKey: dotenv.env['GOOGLE_API_KEY'],
       mode: Mode.overlay,
-      language: 'es',
-      components: [Component(Component.country, 'ec')],
+      language: 'en',
+      components: [Component(Component.country, 'es')],
     );
 
     if (p != null) {
@@ -85,13 +83,11 @@ class _AddStopScreenState extends State<AddStopScreen> {
     setState(() {
       selectedPosition = LatLng(lat, lng);
       markersList.clear();
-      markersList.add(
-        Marker(
-          markerId: const MarkerId('selectedPosition'),
-          position: selectedPosition!,
-          infoWindow: InfoWindow(title: detail.result.name),
-        ),
-      );
+      markersList.add(Marker(
+        markerId: const MarkerId('selectedPosition'),
+        position: selectedPosition!,
+        infoWindow: InfoWindow(title: detail.result.name),
+      ));
     });
 
     final GoogleMapController controller = await _controller.future;
@@ -173,12 +169,10 @@ class _AddStopScreenState extends State<AddStopScreen> {
                     onTap: (LatLng position) {
                       setState(() {
                         selectedPosition = position;
-                        markersList.add(
-                          Marker(
-                            markerId: const MarkerId('selectedPosition'),
-                            position: selectedPosition!,
-                          ),
-                        );
+                        markersList.add(Marker(
+                          markerId: const MarkerId('selectedPosition'),
+                          position: selectedPosition!,
+                        ));
                       });
                     },
                   ),
