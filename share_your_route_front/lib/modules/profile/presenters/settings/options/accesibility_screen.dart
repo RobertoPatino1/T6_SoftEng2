@@ -37,6 +37,7 @@ class AccesibilityScreen extends ConsumerWidget {
               title: const Text('Tema Oscuro'),
               trailing: Switch(
                 value: isDarkMode,
+                activeColor: yellowAccentColor,
                 onChanged: (value) async {
                   Vibrate.vibrate();
 

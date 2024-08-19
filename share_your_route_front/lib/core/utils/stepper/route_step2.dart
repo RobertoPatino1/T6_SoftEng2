@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:share_your_route_front/core/constants/colors.dart';
 import 'package:share_your_route_front/models/place.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/add_stop_screen.dart';
 import 'package:share_your_route_front/modules/route_creation/presenters/view_stops_map_screen.dart';
@@ -82,7 +83,7 @@ class _RouteStep2State extends State<RouteStep2> {
           ElevatedButton(
             onPressed: _navigateToAddStopScreen,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
+              backgroundColor: yellowAccentColor,
             ),
             child: const Text(
               'Agregar una Parada',
@@ -101,7 +102,7 @@ class _RouteStep2State extends State<RouteStep2> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w900,
-                  color: Color.fromRGBO(0, 0, 0, 1),
+                  // color: Color.fromRGBO(0, 0, 0, 1),
                 ),
               ),
               const Divider(),
@@ -121,9 +122,7 @@ class _RouteStep2State extends State<RouteStep2> {
                       horizontal: 8.0,
                     ),
                     decoration: BoxDecoration(
-                      color: index.isEven
-                          ? const Color.fromRGBO(45, 75, 115, 1)
-                          : const Color.fromRGBO(37, 60, 89, 1),
+                      color: index.isEven ? stopEven : stopOdd,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
@@ -133,9 +132,9 @@ class _RouteStep2State extends State<RouteStep2> {
                           // ignore: avoid_dynamic_calls
                           '${startTime.format(context)} - ${endTime.format(context)}    $name',
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 10,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(255, 255, 255, 1),
+                            color: Colors.white,
                           ),
                         ),
                         IconButton(
@@ -151,7 +150,7 @@ class _RouteStep2State extends State<RouteStep2> {
               ElevatedButton(
                 onPressed: _navigateToAddStopScreen,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
+                  backgroundColor: yellowAccentColor,
                 ),
                 child: const Text(
                   'Agregar otra Parada',
@@ -172,13 +171,17 @@ class _RouteStep2State extends State<RouteStep2> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(191, 141, 48, 1),
+                  backgroundColor: yellowAccentColor,
                 ),
-                child: const Text(
-                  'Ver todas las paradas en el mapa',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
+                child: const Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Ver todas las paradas en el mapa',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

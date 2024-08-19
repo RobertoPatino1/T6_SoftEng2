@@ -22,8 +22,11 @@ class _ProfileViewState extends State<ProfileView> {
   int currentPageIndex = 2;
   final AuthService _authService = AuthService();
   Column buildUserDataColumn(UserData user) {
-    final String backgroundPhoto = (user.backgroundPhoto == "") ? stockBackgroundPictureURL: user.backgroundPhoto;
-    final String profilePhoto = (user.profilePhoto == "") ? stockProfilePictureURL: user.profilePhoto;
+    final String backgroundPhoto = (user.backgroundPhoto == "")
+        ? stockBackgroundPictureURL
+        : user.backgroundPhoto;
+    final String profilePhoto =
+        (user.profilePhoto == "") ? stockProfilePictureURL : user.profilePhoto;
     return Column(
       children: [
         ProfileHeader(
@@ -67,6 +70,9 @@ class _ProfileViewState extends State<ProfileView> {
                   title: 'Ajustes',
                   onTap: () async {
                     navigateWithSlideTransition(context, SettingsScreen());
+                    setState(
+                      () {},
+                    ); // Recargar la pantalla al regresar si hubo cambios
                   },
                 ),
                 OptionItem(
@@ -121,7 +127,8 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Text('Error al cargar los datos del usuario'),
                 );
               } else if (snapshot.data!.containsKey('user')) {
-                final Map<String,dynamic> user = snapshot.data!["user"] as Map<String,dynamic>;
+                final Map<String, dynamic> user =
+                    snapshot.data!["user"] as Map<String, dynamic>;
                 final UserData userData = UserData.fromJson(user);
                 return buildUserDataColumn(userData);
               }

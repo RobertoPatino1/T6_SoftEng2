@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_your_route_front/modules/shared/services/auth_service.dart';
 import 'package:share_your_route_front/modules/shared/ui/custom_app_bar.dart';
@@ -11,16 +12,27 @@ class DeleteAccountScreen extends StatefulWidget {
 class _DeleteAccountPageState extends State<DeleteAccountScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
   bool _isButtonEnabled = false;
 
   void _deleteAccount() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Lógica para eliminar la cuenta aquí
-      // Validar la contraseña ingresada con Firebase
-      _authService.logout(context);
+      FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(
+        EmailAuthProvider.credential(
+          email: FirebaseAuth.instance.currentUser!.email!,
+          password: passwordController.text,
+        ),
+      ).then((_) {
+        FirebaseAuth.instance.currentUser!.delete().then((_) {
+          AuthService().logout(context);
+        }).catchError((error) {
+          showSnackbar(context, error.toString(), "error");
+        });
+      }).catchError((error) {
+        showSnackbar(context, "Contraseña incorrecta!", "error");
+      });
     }
   }
+
 
   void _checkPasswordField(String value) {
     setState(() {

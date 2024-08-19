@@ -4,15 +4,15 @@ class RouteStop extends StatelessWidget {
   final String stopName; // Añadido para el nombre de la parada
 
   const RouteStop({
-    Key? key,
+    super.key,
     required this.stopName, // Añadido para el nombre de la parada
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alerta de Proximidad'),
+        title: const Text('Alerta de Proximidad'),
       ),
       body: Center(
         child: Padding(

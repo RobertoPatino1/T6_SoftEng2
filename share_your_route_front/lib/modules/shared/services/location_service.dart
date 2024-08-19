@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_final_locals
 
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class LocationService {

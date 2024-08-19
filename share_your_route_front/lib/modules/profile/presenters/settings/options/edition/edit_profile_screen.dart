@@ -133,8 +133,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Column formFields(UserData user) {
-    // final isDarkMode =
-    // MediaQuery.of(context).platformBrightness == Brightness.dark;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
@@ -216,7 +214,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               user.update(FirebaseAuth.instance.currentUser!.uid);
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             }
           },
           child: const Text('Guardar cambios'),

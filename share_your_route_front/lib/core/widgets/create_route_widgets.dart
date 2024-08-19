@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:share_your_route_front/modules/shared/ui/ui_utils.dart';
-
-const TextStyle labelTextStyle = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w500,
-  color: Color.fromRGBO(0, 0, 0, 1),
-);
-
-const TextStyle boldlabelTextStyle = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w600,
-  color: Color.fromRGBO(37, 60, 89, 1),
-);
-
-const TextStyle titlelabelTextStyle = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w700,
-  color: Color.fromRGBO(47, 77, 114, 1),
-);
+import 'package:share_your_route_front/core/constants/colors.dart';
 
 Widget buildRouteNameField(
-  String routeName,
+  BuildContext context,
+  TextEditingController controller,
   Function(String) onRouteNameChanged,
 ) {
+  final theme = Theme.of(context);
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text('Nombre de la Ruta', style: titlelabelTextStyle),
+      Text(
+        'Nombre de la Ruta',
+        style: theme.textTheme.headlineSmall,
+      ),
       const SizedBox(height: 8),
       TextField(
-        decoration:
-            buildInputDecoration(hintText: "Ingrese el nombre de la ruta"),
+        controller: controller,
+        decoration: InputDecoration(
+          hintStyle: theme.inputDecorationTheme.hintStyle,
+          labelStyle: theme.inputDecorationTheme.labelStyle,
+          enabledBorder: theme.inputDecorationTheme.enabledBorder,
+          focusedBorder: theme.inputDecorationTheme.focusedBorder,
+          fillColor: theme.inputDecorationTheme.fillColor,
+          filled: theme.inputDecorationTheme.filled,
+        ),
+        style: theme.textTheme.bodyLarge,
         onChanged: onRouteNameChanged,
       ),
     ],
@@ -38,50 +34,82 @@ Widget buildRouteNameField(
 }
 
 Widget buildRouteDescriptionField(
-  String routeDescription,
+  BuildContext context,
+  TextEditingController controller,
   Function(String) onRouteDescriptionChanged,
 ) {
+  final theme = Theme.of(context);
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text('Descripción de la Ruta', style: titlelabelTextStyle),
+      Text(
+        'Descripción de la Ruta',
+        style: theme.textTheme.headlineSmall,
+      ),
       const SizedBox(height: 8),
       TextField(
-        decoration:
-            buildInputDecoration(hintText: "Ingrese la descripción de la ruta"),
+        controller: controller,
+        decoration: InputDecoration(
+          hintStyle: theme.inputDecorationTheme.hintStyle,
+          labelStyle: theme.inputDecorationTheme.labelStyle,
+          enabledBorder: theme.inputDecorationTheme.enabledBorder,
+          focusedBorder: theme.inputDecorationTheme.focusedBorder,
+          fillColor: theme.inputDecorationTheme.fillColor,
+          filled: theme.inputDecorationTheme.filled,
+        ),
+        style: theme.textTheme.bodyLarge,
         onChanged: onRouteDescriptionChanged,
       ),
     ],
   );
 }
 
-Widget buildLabeledControl(String label, Widget control) {
+Widget buildLabeledControl(BuildContext context, String label, Widget control) {
+  final theme = Theme.of(context);
+
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(label, style: titlelabelTextStyle),
+      Text(label, style: theme.textTheme.headlineSmall),
       control,
     ],
   );
 }
 
-Widget buildNumberChanger(int value, Function(int) onChanged) {
+Widget buildNumberChanger(
+  BuildContext context,
+  int value,
+  Function(int) onChanged,
+) {
+  final theme = Theme.of(context);
+
   return Row(
     children: [
       IconButton(
-        icon: const Icon(Icons.remove, color: Color.fromRGBO(45, 75, 115, 1)),
+        icon: const Icon(Icons.remove, color: yellowAccentColor),
         onPressed: () => onChanged(value - 1),
       ),
-      Text('$value', style: labelTextStyle),
+      Text(
+        '$value',
+        style: theme.textTheme.headlineSmall,
+      ),
       IconButton(
-        icon: const Icon(Icons.add, color: Color.fromRGBO(45, 75, 115, 1)),
+        icon: const Icon(Icons.add, color: yellowAccentColor),
         onPressed: () => onChanged(value + 1),
       ),
     ],
   );
 }
 
-Widget buildRangeSlider(double value, Function(double) onChanged) {
+Widget buildRangeSlider(
+  BuildContext context,
+  double value,
+  Function(double) onChanged,
+) {
+  // Añadido contexto como parámetro
+  final theme = Theme.of(context); // Corrección: usar el contexto correcto
+
   return Slider(
     value: value,
     min: 1,
@@ -89,16 +117,23 @@ Widget buildRangeSlider(double value, Function(double) onChanged) {
     divisions: 9,
     label: value.round().toString(),
     onChanged: onChanged,
-    thumbColor: const Color.fromRGBO(191, 141, 48, 1),
-    secondaryActiveColor: const Color.fromRGBO(45, 75, 115, 1),
-    activeColor: const Color.fromRGBO(191, 141, 48, 1),
-    inactiveColor: const Color.fromARGB(255, 137, 137, 137),
+    thumbColor: yellowAccentColor,
+    activeColor: yellowAccentColor, // Usando color secundario del tema
+    inactiveColor: theme.disabledColor,
   );
 }
 
-Widget buildDropdown(String value, Function(String) onChanged) {
+Widget buildDropdown(
+  BuildContext context,
+  String value,
+  Function(String) onChanged,
+) {
+  // Añadido contexto como parámetro
+  final theme = Theme.of(context); // Corrección: usar el contexto correcto
+
   return DropdownButton<String>(
-    dropdownColor: const Color.fromRGBO(241, 241, 241, 1),
+    dropdownColor:
+        theme.colorScheme.surface, // Usando color de superficie del tema
     value: value,
     onChanged: (String? newValue) {
       if (newValue != null) {
@@ -109,7 +144,7 @@ Widget buildDropdown(String value, Function(String) onChanged) {
         .map<DropdownMenuItem<String>>((String value) {
       return DropdownMenuItem<String>(
         value: value,
-        child: Text(value, style: labelTextStyle),
+        child: Text(value, style: theme.textTheme.headlineSmall),
       );
     }).toList(),
   );
