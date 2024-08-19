@@ -168,6 +168,8 @@ class _AddStopScreenState extends State<AddStopScreen> {
                     onTap: (LatLng position) {
                       setState(() {
                         selectedPosition = position;
+                        // Limpiamos los marcadores anteriores
+                        markersList.clear();
                         markersList.add(Marker(
                           markerId: const MarkerId('selectedPosition'),
                           position: selectedPosition!,

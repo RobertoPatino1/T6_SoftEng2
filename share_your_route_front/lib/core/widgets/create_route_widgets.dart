@@ -3,7 +3,7 @@ import 'package:share_your_route_front/core/constants/colors.dart';
 
 Widget buildRouteNameField(
   BuildContext context,
-  String routeName,
+  TextEditingController controller,
   Function(String) onRouteNameChanged,
 ) {
   final theme = Theme.of(context);
@@ -17,6 +17,7 @@ Widget buildRouteNameField(
       ),
       const SizedBox(height: 8),
       TextField(
+        controller: controller,
         decoration: InputDecoration(
           hintStyle: theme.inputDecorationTheme.hintStyle,
           labelStyle: theme.inputDecorationTheme.labelStyle,
@@ -34,7 +35,7 @@ Widget buildRouteNameField(
 
 Widget buildRouteDescriptionField(
   BuildContext context,
-  String routeDescription,
+  TextEditingController controller,
   Function(String) onRouteDescriptionChanged,
 ) {
   final theme = Theme.of(context);
@@ -48,6 +49,7 @@ Widget buildRouteDescriptionField(
       ),
       const SizedBox(height: 8),
       TextField(
+        controller: controller,
         decoration: InputDecoration(
           hintStyle: theme.inputDecorationTheme.hintStyle,
           labelStyle: theme.inputDecorationTheme.labelStyle,
@@ -76,7 +78,10 @@ Widget buildLabeledControl(BuildContext context, String label, Widget control) {
 }
 
 Widget buildNumberChanger(
-    BuildContext context, int value, Function(int) onChanged,) {
+  BuildContext context,
+  int value,
+  Function(int) onChanged,
+) {
   final theme = Theme.of(context);
 
   return Row(
@@ -119,7 +124,10 @@ Widget buildRangeSlider(
 }
 
 Widget buildDropdown(
-    BuildContext context, String value, Function(String) onChanged,) {
+  BuildContext context,
+  String value,
+  Function(String) onChanged,
+) {
   // Añadido contexto como parámetro
   final theme = Theme.of(context); // Corrección: usar el contexto correcto
 
