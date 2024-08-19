@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:share_your_route_front/models/place.dart';
 
 class RouteStep4 extends StatelessWidget {
